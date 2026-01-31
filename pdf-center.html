@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Center - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Search and Filter */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 30px 0;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            background: #263548;
+            border-color: #475569;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-radius: 12px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .category-count {
+            margin-left: auto;
+            background: #1e293b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* PDF Grid */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* PDF Card */
+        .pdf-card {
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #2a2a4a;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-4px);
+            border-color: #6366f1;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .pdf-preview {
+            height: 140px;
+            background: linear-gradient(135deg, #12121f 0%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdf-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+
+        .pdf-preview-icon {
+            font-size: 3.5rem;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .pdf-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .badge-product {
+            background: rgba(99, 102, 241, 0.9);
+            color: #fff;
+        }
+
+        .badge-guide {
+            background: rgba(16, 185, 129, 0.9);
+            color: #fff;
+        }
+
+        .badge-presentation {
+            background: rgba(245, 158, 11, 0.9);
+            color: #fff;
+        }
+
+        .pdf-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .pdf-description {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+
+        .pdf-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .pdf-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pdf-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: #12121f;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #1a1a2e;
+            border-color: #475569;
+        }
+
+        .btn-copy {
+            flex: none;
+            width: 44px;
+            padding: 12px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .no-results-text {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a4a;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            header {
+                padding: 30px 0 16px;
+            }
+
+            .header-logo {
+                font-size: 2rem;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                gap: 16px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .filter-btn {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+
+            .pdf-actions {
+                flex-direction: column;
+            }
+
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">
+                ← Back to Sales Hub
+            </a>
+            <div class="header-logo">📄 PDF Center</div>
+            <p class="subtitle">Browse and share XBO documents with clients</p>
+            <span class="header-badge">Sales Resources</span>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="totalPdfs">7</div>
+                <div class="stat-label">Documents</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Ready</div>
+                <div class="stat-label">Status</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search PDFs by title, description..." autocomplete="off">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="product">Products</button>
+                <button class="filter-btn" data-filter="guide">Guides</button>
+                <button class="filter-btn" data-filter="presentation">Presentations</button>
+            </div>
+        </div>
+
+        <div id="pdfContainer">
+            <!-- Products Section -->
+            <div class="category-section" data-category="product">
+                <div class="category-header">
+                    <div class="category-icon">📦</div>
+                    <h2 class="category-title">Products</h2>
+                    <span class="category-count" id="productCount">4 documents</span>
+                </div>
+                <div class="pdf-grid">
+                    <!-- Corporate IBAN -->
+                    <div class="pdf-card" data-tags="iban banking corporate emoney fiat sepa swift" data-category="product">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">🏦</span>
+                            <span class="pdf-badge badge-product">Product</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">XBO Corporate IBAN</h3>
+                            <p class="pdf-description">E-Money corporate IBAN solutions for businesses. SEPA & SWIFT transfers, dedicated accounts, and full compliance.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">🏢 Corporate</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="https://cdn.xbo.com/files/com/XBO_Emoney_Corporate_IBAN.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink('https://cdn.xbo.com/files/com/XBO_Emoney_Corporate_IBAN.pdf')" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CryptoPayX -->
+                    <div class="pdf-card" data-tags="cryptopayx payment deposit crypto instant" data-category="product">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">💳</span>
+                            <span class="pdf-badge badge-product">Product</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">CryptoPayX</h3>
+                            <p class="pdf-description">Instant crypto deposit solution. Accept crypto payments globally with real-time processing and auto-conversion.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">💰 Payments</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/xbo-cryptopayx.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/xbo-cryptopayx.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Line -->
+                    <div class="pdf-card" data-tags="credit line trading leverage funds" data-category="product">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">💰</span>
+                            <span class="pdf-badge badge-product">Product</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">Credit Line</h3>
+                            <p class="pdf-description">Trade without upfront funds. Flexible credit solutions for institutional clients with competitive rates.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">📈 Trading</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/Credit-Line.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/Credit-Line.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crypto-as-a-Service -->
+                    <div class="pdf-card" data-tags="caas crypto service turnkey liquidity custody" data-category="product">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">💱</span>
+                            <span class="pdf-badge badge-product">Product</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">Crypto-as-a-Service (CaaS)</h3>
+                            <p class="pdf-description">Complete turnkey crypto infrastructure. Liquidity, custody, compliance, cards, and more in one solution.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">🔧 Infrastructure</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/Crypto-as-service.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/Crypto-as-service.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guides Section -->
+            <div class="category-section" data-category="guide">
+                <div class="category-header">
+                    <div class="category-icon">📚</div>
+                    <h2 class="category-title">Guides</h2>
+                    <span class="category-count" id="guideCount">2 documents</span>
+                </div>
+                <div class="pdf-grid">
+                    <!-- MFA Guide -->
+                    <div class="pdf-card" data-tags="mfa security authentication setup permissions" data-category="guide">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">🔐</span>
+                            <span class="pdf-badge badge-guide">Guide</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">MFA & Permissions Setup</h3>
+                            <p class="pdf-description">Multi-factor authentication setup guide. Secure your account with Google Authenticator and SMS verification.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">🔒 Security</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/MFA-Permissions.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/MFA-Permissions.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Referrals -->
+                    <div class="pdf-card" data-tags="referral partner commission program affiliate" data-category="guide">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">🤝</span>
+                            <span class="pdf-badge badge-guide">Guide</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">Corporate Referrals Program</h3>
+                            <p class="pdf-description">Partner referral program details. Commission structure, requirements, and how to join as a referral partner.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">💼 Partnership</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/corporate-referrals.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/corporate-referrals.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presentations Section -->
+            <div class="category-section" data-category="presentation">
+                <div class="category-header">
+                    <div class="category-icon">📊</div>
+                    <h2 class="category-title">Presentations</h2>
+                    <span class="category-count" id="presentationCount">1 document</span>
+                </div>
+                <div class="pdf-grid">
+                    <!-- Company Deck -->
+                    <div class="pdf-card" data-tags="deck presentation company overview pitch" data-category="presentation">
+                        <div class="pdf-preview">
+                            <span class="pdf-preview-icon">📊</span>
+                            <span class="pdf-badge badge-presentation">Presentation</span>
+                        </div>
+                        <div class="pdf-content">
+                            <h3 class="pdf-title">XBO Company Deck</h3>
+                            <p class="pdf-description">Main company presentation for client meetings. Overview of XBO services, products, and value proposition.</p>
+                            <div class="pdf-meta">
+                                <span class="pdf-meta-item">📄 PDF</span>
+                                <span class="pdf-meta-item">🎯 Sales</span>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="docs/xbo-deck.pdf" target="_blank" class="pdf-btn btn-primary">
+                                    👁️ View
+                                </a>
+                                <button class="pdf-btn btn-secondary btn-copy" onclick="copyLink(getAbsoluteUrl('docs/xbo-deck.pdf'))" title="Copy link">
+                                    📋
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <p class="no-results-text">No documents found matching your search.</p>
+        </div>
+
+        <div class="footer">
+            XBO PDF Center · Internal Sales Use<br>
+            Last updated: July 2025
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        ✅ Link copied to clipboard!
+    </div>
+
+    <script>
+        // Get absolute URL for relative paths
+        function getAbsoluteUrl(relativePath) {
+            const base = window.location.href.replace(/\/[^\/]*$/, '/');
+            return base + relativePath;
+        }
+
+        // Copy link to clipboard
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('✅ Link copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const input = document.createElement('input');
+                input.value = url;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showToast('✅ Link copied to clipboard!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const pdfCards = document.querySelectorAll('.pdf-card');
+        const categorySections = document.querySelectorAll('.category-section');
+        const noResults = document.getElementById('noResults');
+
+        function filterCards() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            let visibleCount = 0;
+
+            categorySections.forEach(section => {
+                const sectionCategory = section.dataset.category;
+                const cards = section.querySelectorAll('.pdf-card');
+                let sectionVisible = 0;
+
+                cards.forEach(card => {
+                    const cardCategory = card.dataset.category;
+                    const tags = card.dataset.tags.toLowerCase();
+                    const title = card.querySelector('.pdf-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.pdf-description').textContent.toLowerCase();
+
+                    const matchesFilter = activeFilter === 'all' || cardCategory === activeFilter;
+                    const matchesSearch = searchTerm === '' || 
+                        title.includes(searchTerm) || 
+                        desc.includes(searchTerm) || 
+                        tags.includes(searchTerm);
+
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = '';
+                        sectionVisible++;
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide category section
+                if (sectionVisible > 0 && (activeFilter === 'all' || sectionCategory === activeFilter)) {
+                    section.style.display = '';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            // Show no results message
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', filterCards);
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterCards();
+            });
+        });
+
+        // Keyboard shortcut for search
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

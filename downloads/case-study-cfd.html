@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: CFD Trading Broker | XBO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @page {
+            margin: 0.75in;
+            size: A4;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6366f1;
+        }
+        
+        .doc-type {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #10b981;
+            padding: 30px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 30px;
+        }
+        
+        .hero-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem;
+            color: #166534;
+            margin-bottom: 8px;
+        }
+        
+        .hero .subtitle {
+            color: #15803d;
+            font-size: 1rem;
+        }
+        
+        .hero-stat {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 15px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .overview-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .overview-item .icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .overview-item .label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .overview-item .value { font-weight: 600; color: #1e293b; }
+        
+        .section { margin-bottom: 30px; }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title.challenge { color: #dc2626; }
+        .section-title.solution { color: #6366f1; }
+        .section-title.results { color: #16a34a; }
+        
+        .challenge-list {
+            list-style: none;
+        }
+        
+        .challenge-list li {
+            padding: 12px 15px;
+            background: #fef2f2;
+            border-left: 3px solid #ef4444;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .challenge-list li strong {
+            color: #dc2626;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .solution-card {
+            background: #eef2ff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #c7d2fe;
+        }
+        
+        .solution-card h4 {
+            color: #4338ca;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .solution-card ul {
+            list-style: none;
+        }
+        
+        .solution-card li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .solution-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            text-align: center;
+            padding: 20px 15px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #16a34a;
+        }
+        
+        .result-label {
+            font-size: 0.8rem;
+            color: #166534;
+        }
+        
+        .quote {
+            background: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .quote-text {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+        
+        .quote-author {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        
+        @media print {
+            body { padding: 0; }
+            .hero { break-inside: avoid; }
+            .section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">XBO</div>
+        <div class="doc-type">Case Study</div>
+    </div>
+    
+    <div class="hero">
+        <div class="hero-icon">📈</div>
+        <h1>CFD Trading Broker</h1>
+        <p class="subtitle">Online Trading Platform • 50,000+ Traders</p>
+        <div class="hero-stat">+30% Deposit Approvals</div>
+    </div>
+    
+    <div class="overview-grid">
+        <div class="overview-item">
+            <div class="icon">📊</div>
+            <div class="label">Client Type</div>
+            <div class="value">CFD/FX Broker</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">👥</div>
+            <div class="label">Size</div>
+            <div class="value">50,000+ Traders</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">🌍</div>
+            <div class="label">Regions</div>
+            <div class="value">EU, Asia, LATAM</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">⏱️</div>
+            <div class="label">Deploy Time</div>
+            <div class="value">6 Weeks</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title challenge">⚠️ The Challenge</h2>
+        <ul class="challenge-list">
+            <li>
+                <strong>High card decline rates</strong>
+                Up to 40% of deposits failed due to bank restrictions on trading platforms
+            </li>
+            <li>
+                <strong>Fragmented PSP landscape</strong>
+                Managing 8+ payment providers with inconsistent APIs and reporting
+            </li>
+            <li>
+                <strong>Slow settlements</strong>
+                3-5 day delays tying up working capital and limiting growth
+            </li>
+            <li>
+                <strong>2.3% chargeback rate</strong>
+                Threatening merchant accounts and processor relationships
+            </li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title solution">💡 The Solution — PayX + Settlement</h2>
+        <div class="solution-grid">
+            <div class="solution-card">
+                <h4>💳 PayX Processing</h4>
+                <ul>
+                    <li>Smart Payment Routing with AI optimization</li>
+                    <li>Multi-Currency Acquiring (50+ methods)</li>
+                    <li>3DS2 Optimization for higher approvals</li>
+                    <li>Real-Time Monitoring Dashboard</li>
+                </ul>
+            </div>
+            <div class="solution-card">
+                <h4>🏦 Settlement & Conversion</h4>
+                <ul>
+                    <li>T+0 Same-Day Settlements</li>
+                    <li>Competitive FX Rates (0.8%)</li>
+                    <li>Automated Treasury Management</li>
+                    <li>Multi-Currency Wallets (30+)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title results">🎯 The Results</h2>
+        <div class="results-grid">
+            <div class="result-card">
+                <div class="result-value">+30%</div>
+                <div class="result-label">Card Approval Rate</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">4×</div>
+                <div class="result-label">APM Coverage</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">T+0</div>
+                <div class="result-label">Settlement Time</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">-61%</div>
+                <div class="result-label">Chargeback Rate</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quote">
+        <p class="quote-text">"We saw a 30% increase in deposit approvals within the first month. XBO transformed how we handle payments across all our regions."</p>
+        <p class="quote-author">— Head of Treasury, CFX Trading Platform</p>
+    </div>
+    
+    <div class="footer">
+        <p><strong>XBO</strong> — Enterprise Crypto & Payment Infrastructure</p>
+        <p>Contact: <a href="mailto:sales@xbo.com">sales@xbo.com</a> | <a href="https://xbo.com">xbo.com</a></p>
+    </div>
+</body>
+</html>

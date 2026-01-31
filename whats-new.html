@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .timeline {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #6366f1 0%, #334155 100%);
+        }
+
+        .update-card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            padding-left: 60px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .update-card:hover {
+            border-color: #6366f1;
+            transform: translateX(4px);
+        }
+
+        .update-dot {
+            position: absolute;
+            left: 12px;
+            top: 28px;
+            width: 18px;
+            height: 18px;
+            background: #6366f1;
+            border-radius: 50%;
+            border: 3px solid #0f0f1a;
+        }
+
+        .update-card.highlight .update-dot {
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+
+        .update-date {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .update-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .update-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+
+        .badge-new {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .badge-improvement {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+        }
+
+        .badge-fix {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .update-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .update-features {
+            list-style: none;
+        }
+
+        .update-features li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .update-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .section-divider {
+            text-align: center;
+            padding: 40px 0;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .section-divider span {
+            background: #0f0f1a;
+            padding: 0 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px dashed rgba(99, 102, 241, 0.5);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .coming-soon h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #a5b4fc;
+        }
+
+        .coming-soon p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .header-logo {
+                font-size: 2rem;
+            }
+
+            .update-card {
+                padding: 20px;
+                padding-left: 50px;
+            }
+
+            .timeline::before {
+                left: 16px;
+            }
+
+            .update-dot {
+                left: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Sales Hub</a>
+            <div class="header-logo">🆕 What's New</div>
+            <p class="subtitle">Latest updates, features, and improvements</p>
+        </header>
+
+        <div class="timeline">
+            <!-- January 2026 -->
+            <div class="update-card highlight">
+                <div class="update-dot"></div>
+                <div class="update-date">January 2026</div>
+                <div class="update-title">
+                    XBO Sales Hub v2.0
+                    <span class="update-badge badge-new">New</span>
+                </div>
+                <p class="update-description">
+                    Complete redesign of the Sales Hub with improved navigation, 
+                    new product pages, and better mobile experience.
+                </p>
+                <ul class="update-features">
+                    <li>New sidebar navigation with quick access to all sections</li>
+                    <li>Dedicated Products page with detailed information</li>
+                    <li>Improved Case Studies with real client examples</li>
+                    <li>Visual flowcharts for internal procedures</li>
+                    <li>PDF Center for all downloadable documents</li>
+                    <li>Mobile-optimized responsive design</li>
+                </ul>
+            </div>
+
+            <div class="update-card">
+                <div class="update-dot"></div>
+                <div class="update-date">January 2026</div>
+                <div class="update-title">
+                    Enhanced Credit Line Dashboard
+                    <span class="update-badge badge-improvement">Improvement</span>
+                </div>
+                <p class="update-description">
+                    New dashboard features for Credit Line management with real-time 
+                    balance tracking and improved settlement workflows.
+                </p>
+                <ul class="update-features">
+                    <li>Real-time balance and limit visualization</li>
+                    <li>One-click settlement initiation</li>
+                    <li>Transaction history with export options</li>
+                    <li>Automated low-balance alerts</li>
+                </ul>
+            </div>
+
+            <div class="update-card">
+                <div class="update-dot"></div>
+                <div class="update-date">December 2025</div>
+                <div class="update-title">
+                    New CryptoPayX Currencies
+                    <span class="update-badge badge-new">New</span>
+                </div>
+                <p class="update-description">
+                    Expanded cryptocurrency support for CryptoPayX with additional 
+                    networks and settlement options.
+                </p>
+                <ul class="update-features">
+                    <li>Added support for SOL (Solana)</li>
+                    <li>Added support for MATIC (Polygon)</li>
+                    <li>New stablecoin options: USDC on multiple chains</li>
+                    <li>Improved detection speed for all networks</li>
+                </ul>
+            </div>
+
+            <div class="update-card">
+                <div class="update-dot"></div>
+                <div class="update-date">December 2025</div>
+                <div class="update-title">
+                    API Documentation Refresh
+                    <span class="update-badge badge-improvement">Improvement</span>
+                </div>
+                <p class="update-description">
+                    Complete overhaul of API documentation with better examples, 
+                    interactive testing, and clearer specifications.
+                </p>
+                <ul class="update-features">
+                    <li>Interactive API explorer</li>
+                    <li>Code examples in 6 programming languages</li>
+                    <li>Improved error messages and troubleshooting</li>
+                    <li>Webhook documentation with payload examples</li>
+                </ul>
+            </div>
+
+            <div class="update-card">
+                <div class="update-dot"></div>
+                <div class="update-date">November 2025</div>
+                <div class="update-title">
+                    Mobile App Updates
+                    <span class="update-badge badge-improvement">Improvement</span>
+                </div>
+                <p class="update-description">
+                    Significant updates to the mobile trading experience with 
+                    new features and performance improvements.
+                </p>
+                <ul class="update-features">
+                    <li>Redesigned trading interface</li>
+                    <li>Biometric authentication support</li>
+                    <li>Push notifications for trades and settlements</li>
+                    <li>50% faster load times</li>
+                </ul>
+            </div>
+
+            <div class="update-card">
+                <div class="update-dot"></div>
+                <div class="update-date">November 2025</div>
+                <div class="update-title">
+                    MiCA Compliance Updates
+                    <span class="update-badge badge-fix">Compliance</span>
+                </div>
+                <p class="update-description">
+                    Updated compliance procedures and documentation to align 
+                    with the latest MiCA regulatory requirements.
+                </p>
+                <ul class="update-features">
+                    <li>Enhanced KYC/KYB processes</li>
+                    <li>Updated risk assessment frameworks</li>
+                    <li>New compliance reporting tools</li>
+                    <li>Travel Rule integration improvements</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <h3>🚀 Coming Soon</h3>
+            <p>ACH support for US transfers • Enhanced Cards program • New Earn products • Advanced analytics dashboard</p>
+        </div>
+
+        <div class="footer">
+            <a href="index.html" class="back-link">← Back to Sales Hub</a><br><br>
+            XBO Sales Hub · Internal Use Only<br>
+            Last updated: January 2026
+        </div>
+    </div>
+</body>
+</html>

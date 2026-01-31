@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Licensed EMI | XBO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @page {
+            margin: 0.75in;
+            size: A4;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6366f1;
+        }
+        
+        .doc-type {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            border-left: 4px solid #6366f1;
+            padding: 30px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 30px;
+        }
+        
+        .hero-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem;
+            color: #3730a3;
+            margin-bottom: 8px;
+        }
+        
+        .hero .subtitle {
+            color: #4338ca;
+            font-size: 1rem;
+        }
+        
+        .hero-stat {
+            display: inline-block;
+            background: #6366f1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 15px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .overview-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .overview-item .icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .overview-item .label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .overview-item .value { font-weight: 600; color: #1e293b; }
+        
+        .section { margin-bottom: 30px; }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title.challenge { color: #dc2626; }
+        .section-title.solution { color: #6366f1; }
+        .section-title.results { color: #16a34a; }
+        
+        .challenge-list {
+            list-style: none;
+        }
+        
+        .challenge-list li {
+            padding: 12px 15px;
+            background: #fef2f2;
+            border-left: 3px solid #ef4444;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .challenge-list li strong {
+            color: #dc2626;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .solution-card {
+            background: #eef2ff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #c7d2fe;
+        }
+        
+        .solution-card h4 {
+            color: #4338ca;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .solution-card ul {
+            list-style: none;
+        }
+        
+        .solution-card li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .solution-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            text-align: center;
+            padding: 20px 15px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #16a34a;
+        }
+        
+        .result-label {
+            font-size: 0.8rem;
+            color: #166534;
+        }
+        
+        .quote {
+            background: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .quote-text {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+        
+        .quote-author {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        
+        @media print {
+            body { padding: 0; }
+            .hero { break-inside: avoid; }
+            .section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">XBO</div>
+        <div class="doc-type">Case Study</div>
+    </div>
+    
+    <div class="hero">
+        <div class="hero-icon">🏦</div>
+        <h1>Licensed EMI</h1>
+        <p class="subtitle">Electronic Money Institution • EU Licensed</p>
+        <div class="hero-stat">8 Week Launch</div>
+    </div>
+    
+    <div class="overview-grid">
+        <div class="overview-item">
+            <div class="icon">🏛️</div>
+            <div class="label">Client Type</div>
+            <div class="value">EMI</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">📜</div>
+            <div class="label">License</div>
+            <div class="value">EU E-Money</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">🎯</div>
+            <div class="label">Segments</div>
+            <div class="value">B2B & B2C</div>
+        </div>
+        <div class="overview-item">
+            <div class="icon">🌍</div>
+            <div class="label">Region</div>
+            <div class="value">EEA</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title challenge">⚠️ The Challenge</h2>
+        <ul class="challenge-list">
+            <li>
+                <strong>67% customer demand</strong>
+                Customers wanted crypto buy/sell within existing accounts
+            </li>
+            <li>
+                <strong>No blockchain expertise</strong>
+                Zero in-house knowledge of wallets, nodes, or custody
+            </li>
+            <li>
+                <strong>Integration complexity</strong>
+                Would require 6+ vendor relationships to build in-house
+            </li>
+            <li>
+                <strong>12-18 month timeline</strong>
+                Traditional build too slow for market window
+            </li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title solution">💡 The Solution — XBO CaaS</h2>
+        <div class="solution-grid">
+            <div class="solution-card">
+                <h4>🔧 Core Capabilities</h4>
+                <ul>
+                    <li>Buy/Sell/Swap — 50+ cryptocurrencies</li>
+                    <li>Hosted Wallets — Segregated per user</li>
+                    <li>Fiat Rails — Seamless on/off ramp</li>
+                    <li>Portfolio View — Real-time P&L</li>
+                </ul>
+            </div>
+            <div class="solution-card">
+                <h4>⚖️ Compliance Built-In</h4>
+                <ul>
+                    <li>KYT — Chainalysis-powered monitoring</li>
+                    <li>Travel Rule Compliance</li>
+                    <li>Risk Scoring — Real-time alerts</li>
+                    <li>MiCA-ready Audit Trails</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title results">🎯 The Results</h2>
+        <div class="results-grid">
+            <div class="result-card">
+                <div class="result-value">8wks</div>
+                <div class="result-label">Time-to-Market</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">€1.2M</div>
+                <div class="result-label">New Revenue (Y1)</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">+18%</div>
+                <div class="result-label">Customer Retention</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">0</div>
+                <div class="result-label">New Hires Needed</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quote">
+        <p class="quote-text">"XBO's CaaS solution let us launch crypto services in 8 weeks instead of 18 months. No blockchain hires, no infrastructure headaches — just a clean API and full regulatory support."</p>
+        <p class="quote-author">— Chief Product Officer, European EMI</p>
+    </div>
+    
+    <div class="footer">
+        <p><strong>XBO</strong> — Enterprise Crypto & Payment Infrastructure</p>
+        <p>Contact: <a href="mailto:sales@xbo.com">sales@xbo.com</a> | <a href="https://xbo.com">xbo.com</a></p>
+    </div>
+</body>
+</html>

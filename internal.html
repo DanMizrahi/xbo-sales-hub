@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Resources | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #fff;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .print-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        /* Internal Banner */
+        .internal-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(234, 88, 12, 0.15) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 24px auto 0;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #fca5a5;
+        }
+
+        .internal-banner .icon {
+            font-size: 1.2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Section Card */
+        .section {
+            background: #1e293b;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .section-header:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section-title .icon {
+            font-size: 1.4rem;
+        }
+
+        .section-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #0f172a;
+            transition: transform 0.3s;
+        }
+
+        .section.open .section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 0 24px 24px;
+        }
+
+        .section.open .section-content {
+            display: block;
+        }
+
+        /* Subsection */
+        .subsection {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Flowchart Styles */
+        .flowchart {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        .flow-horizontal {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0;
+            min-width: max-content;
+        }
+
+        .flow-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+
+        .flow-box {
+            padding: 14px 16px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 110px;
+            position: relative;
+        }
+
+        .flow-box-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .flow-box-owner {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            background: rgba(0,0,0,0.3);
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            color: #475569;
+            font-size: 1.3rem;
+        }
+
+        /* Stage Colors */
+        .stage-sales { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff; }
+        .stage-onboarding { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: #fff; }
+        .stage-compliance { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: #fff; }
+        .stage-integration { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: #fff; }
+        .stage-support { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; }
+        .stage-success { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #fff; }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e293b;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist .check {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #475569;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist .check.filled {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-color: #22c55e;
+        }
+
+        /* Pipeline Stages */
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            min-width: 130px;
+            max-width: 160px;
+            background: #1e293b;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .pipeline-stage:hover {
+            transform: translateY(-2px);
+            border-color: #6366f1;
+        }
+
+        .pipeline-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin: 0 auto 10px;
+        }
+
+        .pipeline-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .pipeline-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        /* Reference Card */
+        .ref-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .ref-card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #a5b4fc;
+        }
+
+        .ref-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .ref-item:last-child {
+            border-bottom: none;
+        }
+
+        .ref-label {
+            color: #94a3b8;
+        }
+
+        .ref-value {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* SLA Badge */
+        .sla-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .sla-badge.green {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        /* Banking Table */
+        .banking-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .banking-table th,
+        .banking-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .banking-table th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .banking-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .banking-table tr:hover td {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-instant {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .badge-normal {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        /* Contacts Table */
+        .contacts-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .contacts-table th,
+        .contacts-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .contacts-table th {
+            background: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contacts-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .contacts-table tr:hover td {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .contact-name {
+            font-weight: 600;
+        }
+
+        .contact-role {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .contact-email {
+            color: #818cf8;
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #0f172a;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+        }
+
+        .quick-link .icon {
+            font-size: 1.5rem;
+        }
+
+        .quick-link-text {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Link Button */
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .header {
+                background: #fff !important;
+                border-bottom: 2px solid #000 !important;
+                position: relative !important;
+            }
+
+            .print-btn, .back-btn {
+                display: none !important;
+            }
+
+            .page-title {
+                background: none !important;
+                -webkit-text-fill-color: #000 !important;
+            }
+
+            .internal-banner {
+                background: #f3f4f6 !important;
+                border: 1px solid #000 !important;
+                color: #000 !important;
+            }
+
+            .section {
+                background: #fff !important;
+                border: 1px solid #000 !important;
+                break-inside: avoid;
+            }
+
+            .section-content {
+                display: block !important;
+            }
+
+            .section-header {
+                background: #f3f4f6 !important;
+            }
+
+            .section-title, .subsection-title {
+                color: #000 !important;
+            }
+
+            .section-toggle {
+                display: none !important;
+            }
+
+            .subsection, .flowchart {
+                background: #f9fafb !important;
+                border: 1px solid #d1d5db !important;
+            }
+
+            .flow-box {
+                background: #e5e7eb !important;
+                color: #000 !important;
+            }
+
+            .contacts-table th,
+            .banking-table th {
+                background: #e5e7eb !important;
+                color: #000 !important;
+            }
+
+            .contacts-table td,
+            .banking-table td {
+                color: #000 !important;
+            }
+
+            .quick-link {
+                background: #f3f4f6 !important;
+                border: 1px solid #000 !important;
+                color: #000 !important;
+            }
+
+            .ref-card {
+                background: #f3f4f6 !important;
+                border: 1px solid #000 !important;
+            }
+
+            .ref-card-title,
+            .ref-value {
+                color: #000 !important;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .print-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .flow-horizontal {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                padding: 8px 0;
+            }
+
+            .pipeline {
+                flex-direction: column;
+            }
+
+            .pipeline-stage {
+                max-width: 100%;
+            }
+
+            .contacts-table {
+                font-size: 0.8rem;
+            }
+
+            .contacts-table th,
+            .contacts-table td {
+                padding: 10px 8px;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">← Back to Hub</a>
+            <div>
+                <h1 class="page-title">Internal Resources</h1>
+                <p class="page-subtitle">For XBO Sales Team</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="print-btn" onclick="window.print()">
+                🖨️ Print
+            </button>
+        </div>
+    </header>
+
+    <!-- Internal Banner -->
+    <div class="internal-banner">
+        <span class="icon">🔒</span>
+        <span>This section contains internal procedures and contacts for the XBO Sales Team only.</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Section 1: Procedures & Flowcharts -->
+        <div class="section open" id="procedures">
+            <div class="section-header" onclick="toggleSection('procedures')">
+                <div class="section-title">
+                    <span class="icon">📋</span>
+                    Procedures & Flowcharts
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <!-- Client Lifecycle Flow -->
+                <div class="subsection">
+                    <h3 class="subsection-title">🔄 Client Lifecycle Flow</h3>
+                    <div class="flowchart">
+                        <div class="flow-horizontal">
+                            <div class="flow-stage">
+                                <div class="flow-box stage-sales">
+                                    <div class="flow-box-title">Lead</div>
+                                    <div class="flow-box-owner">Sales</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-sales">
+                                    <div class="flow-box-title">Meeting</div>
+                                    <div class="flow-box-owner">Sales</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-onboarding">
+                                    <div class="flow-box-title">KYB</div>
+                                    <div class="flow-box-owner">Onboarding</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-compliance">
+                                    <div class="flow-box-title">Review</div>
+                                    <div class="flow-box-owner">Compliance</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-integration">
+                                    <div class="flow-box-title">API Setup</div>
+                                    <div class="flow-box-owner">Integration</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-success">
+                                    <div class="flow-box-title">Live</div>
+                                    <div class="flow-box-owner">Support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meeting Booking Flow -->
+                <div class="subsection">
+                    <h3 class="subsection-title">📅 Meeting Booking Flow</h3>
+                    <div class="flowchart">
+                        <div class="flow-horizontal">
+                            <div class="flow-stage">
+                                <div class="flow-box stage-sales">
+                                    <div class="flow-box-title">Qualify Lead</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-sales">
+                                    <div class="flow-box-title">Share Cal Link</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-onboarding">
+                                    <div class="flow-box-title">Confirm Slot</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-integration">
+                                    <div class="flow-box-title">Send Agenda</div>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-stage">
+                                <div class="flow-box stage-success">
+                                    <div class="flow-box-title">Meeting</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telegram Group Setup Checklist -->
+                <div class="subsection">
+                    <h3 class="subsection-title">💬 Telegram Group Setup Checklist</h3>
+                    <ul class="checklist">
+                        <li><span class="check"></span> Create group with client name: "[Client] × XBO"</li>
+                        <li><span class="check"></span> Add @XBOADMIN as admin</li>
+                        <li><span class="check"></span> Add Regi (Sales Lead)</li>
+                        <li><span class="check"></span> Add assigned Onboarding contact</li>
+                        <li><span class="check"></span> Add Integration (Mark) when API stage</li>
+                        <li><span class="check"></span> Post welcome message with client context</li>
+                        <li><span class="check"></span> Pin relevant links (docs, Pipedrive deal)</li>
+                    </ul>
+                </div>
+
+                <a href="procedures.html" class="link-btn">📖 View Full Procedures Guide →</a>
+            </div>
+        </div>
+
+        <!-- Section 2: Pipedrive Guide -->
+        <div class="section" id="pipedrive">
+            <div class="section-header" onclick="toggleSection('pipedrive')">
+                <div class="section-title">
+                    <span class="icon">📊</span>
+                    Pipedrive Guide
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <!-- Mandatory Fields Checklist -->
+                <div class="subsection">
+                    <h3 class="subsection-title">✅ Mandatory Fields (14/14)</h3>
+                    <ul class="checklist">
+                        <li><span class="check"></span> Company Name</li>
+                        <li><span class="check"></span> Contact Person</li>
+                        <li><span class="check"></span> Email</li>
+                        <li><span class="check"></span> Phone</li>
+                        <li><span class="check"></span> Country</li>
+                        <li><span class="check"></span> Business Type</li>
+                        <li><span class="check"></span> Website</li>
+                        <li><span class="check"></span> Expected Volume (Monthly)</li>
+                        <li><span class="check"></span> Product Interest</li>
+                        <li><span class="check"></span> Lead Source</li>
+                        <li><span class="check"></span> First Contact Date</li>
+                        <li><span class="check"></span> Assigned Owner</li>
+                        <li><span class="check"></span> Deal Value</li>
+                        <li><span class="check"></span> Notes/Context</li>
+                    </ul>
+                </div>
+
+                <!-- Pipeline Stages -->
+                <div class="subsection">
+                    <h3 class="subsection-title">📈 Pipeline Stages</h3>
+                    <div class="pipeline">
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">1</div>
+                            <div class="pipeline-name">New Lead</div>
+                            <div class="pipeline-desc">Inbound/outbound contact</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">2</div>
+                            <div class="pipeline-name">Qualified</div>
+                            <div class="pipeline-desc">Fits ICP, ready for call</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">3</div>
+                            <div class="pipeline-name">Meeting Set</div>
+                            <div class="pipeline-desc">Call/demo scheduled</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">4</div>
+                            <div class="pipeline-name">Proposal</div>
+                            <div class="pipeline-desc">Terms sent</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">5</div>
+                            <div class="pipeline-name">KYB</div>
+                            <div class="pipeline-desc">Docs submitted</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">6</div>
+                            <div class="pipeline-name">Integration</div>
+                            <div class="pipeline-desc">API setup</div>
+                        </div>
+                        <div class="pipeline-stage">
+                            <div class="pipeline-number">7</div>
+                            <div class="pipeline-name">Live</div>
+                            <div class="pipeline-desc">Processing ✓</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLA Rules -->
+                <div class="subsection">
+                    <h3 class="subsection-title">⏱️ SLA Rules</h3>
+                    <div class="ref-card">
+                        <div class="ref-card-title">7-Day SLA Policy</div>
+                        <div class="ref-item">
+                            <span class="ref-label">Max time in any stage</span>
+                            <span class="ref-value">7 days</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">Action required if stale</span>
+                            <span class="ref-value">Update notes or escalate</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">Compliance review target</span>
+                            <span class="ref-value">48-72 hours</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">Response to client queries</span>
+                            <span class="ref-value">Same business day</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Banking Rails -->
+        <div class="section" id="banking">
+            <div class="section-header" onclick="toggleSection('banking')">
+                <div class="section-title">
+                    <span class="icon">🏦</span>
+                    Banking Rails
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <!-- SEPA Partners -->
+                <div class="subsection">
+                    <h3 class="subsection-title">💶 SEPA Partners</h3>
+                    <table class="banking-table">
+                        <thead>
+                            <tr>
+                                <th>Partner</th>
+                                <th>Type</th>
+                                <th>Speed</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ClearBank</td>
+                                <td><span class="badge badge-instant">Instant</span></td>
+                                <td>&lt;10 seconds</td>
+                                <td>Primary for EU</td>
+                            </tr>
+                            <tr>
+                                <td>Banking Circle</td>
+                                <td><span class="badge badge-instant">Instant</span></td>
+                                <td>&lt;10 seconds</td>
+                                <td>Backup instant</td>
+                            </tr>
+                            <tr>
+                                <td>LHV</td>
+                                <td><span class="badge badge-normal">Normal</span></td>
+                                <td>Same day / T+1</td>
+                                <td>Baltic focus</td>
+                            </tr>
+                            <tr>
+                                <td>Modulr</td>
+                                <td><span class="badge badge-normal">Normal</span></td>
+                                <td>Same day</td>
+                                <td>UK/EU</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- VIBAN Timing -->
+                <div class="subsection">
+                    <h3 class="subsection-title">⏰ VIBAN Timing Rules</h3>
+                    <div class="ref-card">
+                        <div class="ref-card-title">Virtual IBAN Allocation</div>
+                        <div class="ref-item">
+                            <span class="ref-label">VIBAN creation</span>
+                            <span class="ref-value">Instant (post-KYB)</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">First payment activation</span>
+                            <span class="ref-value">24-48 hours</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">Batch VIBAN requests</span>
+                            <span class="ref-value">Up to 1000/day</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">SEPA Instant cutoff</span>
+                            <span class="ref-value">24/7 (no cutoff)</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-label">SEPA Normal cutoff</span>
+                            <span class="ref-value">14:00 CET</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Team Contacts -->
+        <div class="section" id="contacts">
+            <div class="section-header" onclick="toggleSection('contacts')">
+                <div class="section-title">
+                    <span class="icon">👥</span>
+                    Team Contacts
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <table class="contacts-table">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="contact-role">Sales Lead</span></td>
+                            <td><span class="contact-name">Regi Kosova</span></td>
+                            <td><a href="mailto:regi.k@xbo.com" class="contact-email">regi.k@xbo.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><span class="contact-role">Business Development</span></td>
+                            <td><span class="contact-name">Benedikt van Lengerich</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="contact-role">Onboarding</span></td>
+                            <td><span class="contact-name">Vladislav Khramov</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="contact-role">Compliance</span></td>
+                            <td><span class="contact-name">Elina Ntamotseva</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="contact-role">Integration</span></td>
+                            <td><span class="contact-name">Mark Dragunov</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><span class="contact-role">Support</span></td>
+                            <td><span class="contact-name">Eirini Stylianou</span></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 5: Quick Links -->
+        <div class="section" id="links">
+            <div class="section-header" onclick="toggleSection('links')">
+                <div class="section-title">
+                    <span class="icon">🔗</span>
+                    Quick Links
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="quick-links">
+                    <a href="#" class="quick-link">
+                        <span class="icon">📅</span>
+                        <span class="quick-link-text">Calendar Sharing Instructions</span>
+                    </a>
+                    <a href="https://app.pipedrive.com" target="_blank" class="quick-link">
+                        <span class="icon">📊</span>
+                        <span class="quick-link-text">Pipedrive Login</span>
+                    </a>
+                    <a href="https://t.me/XBOADMIN" target="_blank" class="quick-link">
+                        <span class="icon">💬</span>
+                        <span class="quick-link-text">Telegram @XBOADMIN</span>
+                    </a>
+                    <a href="procedures.html" class="quick-link">
+                        <span class="icon">📋</span>
+                        <span class="quick-link-text">Full Procedures</span>
+                    </a>
+                    <a href="products.html" class="quick-link">
+                        <span class="icon">💳</span>
+                        <span class="quick-link-text">Product Info</span>
+                    </a>
+                    <a href="index.html" class="quick-link">
+                        <span class="icon">🏠</span>
+                        <span class="quick-link-text">Back to Sales Hub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            section.classList.toggle('open');
+        }
+
+        // Open all sections by default on page load for easy viewing
+        document.addEventListener('DOMContentLoaded', function() {
+            // First section already open, keep others closed for cleaner look
+        });
+    </script>
+</body>
+</html>

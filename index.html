@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 24px 40px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px 18px 56px;
+            border-radius: 16px;
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .section-link {
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .section-link:hover {
+            color: #8b5cf6;
+        }
+
+        /* Topic Cards Grid */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .topic-card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            position: relative;
+            display: block;
+        }
+
+        .topic-card:hover {
+            background: #263548;
+            border-color: #334155;
+            transform: translateY(-4px);
+        }
+
+        .topic-card:active {
+            transform: translateY(-2px);
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .topic-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .copy-link-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            color: #475569;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .topic-card:hover .copy-link-btn {
+            opacity: 1;
+        }
+
+        .copy-link-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+        }
+
+        .copy-link-btn.copied {
+            color: #10b981;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: #0f172a;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .copy-link-btn:hover .copy-tooltip,
+        .copy-link-btn.copied .copy-tooltip {
+            opacity: 1;
+        }
+
+        /* Recent Updates */
+        .updates-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .update-item {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .update-item:hover {
+            background: #263548;
+            border-color: #334155;
+        }
+
+        .update-badge {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .update-badge.feature {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .update-badge.improvement {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .update-content {
+            flex: 1;
+        }
+
+        .update-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .update-date {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .update-arrow {
+            color: #475569;
+            font-size: 1.2rem;
+        }
+
+        /* Quick Links Bar */
+        .quick-links-bar {
+            background: #12121f;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            background: #1e293b;
+            color: #e2e8f0;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-link:hover {
+            background: #6366f1;
+            border-color: #6366f1;
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 900px) {
+            .topic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #12121f;
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid #2a2a4a;
+                gap: 4px;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 40px 20px 30px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .topic-card {
+                padding: 20px;
+            }
+
+            .topic-icon {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+
+            .copy-link-btn {
+                opacity: 1;
+            }
+
+            .quick-links-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .quick-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Search Results */
+        .search-results {
+            display: none;
+            max-width: 600px;
+            margin: 16px auto 0;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            overflow: hidden;
+        }
+
+        .search-results.visible {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 14px 20px;
+            border-bottom: 1px solid #2a2a4a;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .search-result-icon {
+            font-size: 1.2rem;
+        }
+
+        .search-result-text {
+            flex: 1;
+        }
+
+        .search-result-title {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .search-result-category {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="case-studies.html" class="nav-link">Case Studies</a>
+                <a href="pdf-center.html" class="nav-link">Link Center</a>
+                <a href="procedures.html" class="nav-link">Internal</a>
+                <a href="whats-new.html" class="nav-link">What's New</a>
+            </nav>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">XBO Sales Hub</h1>
+        <p class="hero-subtitle">Find anything about XBO products and services</p>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search products, documents, case studies..." autocomplete="off">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Popular Topics -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Topics</h2>
+                <a href="products.html" class="section-link">View all products →</a>
+            </div>
+            
+            <div class="topic-grid">
+                <a href="products.html#credit-line" class="topic-card" data-link="products.html#credit-line">
+                    <span class="topic-icon">💳</span>
+                    <h3 class="topic-title">Credit Line</h3>
+                    <p class="topic-desc">Trade without upfront funds. Flexible credit solutions for institutional clients.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#credit-line')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#caas" class="topic-card" data-link="products.html#caas">
+                    <span class="topic-icon">⚙️</span>
+                    <h3 class="topic-title">CaaS</h3>
+                    <p class="topic-desc">Crypto-as-a-Service. Turnkey infrastructure for launching crypto services.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#caas')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#cryptopayx" class="topic-card" data-link="products.html#cryptopayx">
+                    <span class="topic-icon">💰</span>
+                    <h3 class="topic-title">CryptoPayX</h3>
+                    <p class="topic-desc">Instant crypto payment processing. Accept crypto deposits globally.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#cryptopayx')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#iban" class="topic-card" data-link="products.html#iban">
+                    <span class="topic-icon">🏦</span>
+                    <h3 class="topic-title">eMoney / IBAN</h3>
+                    <p class="topic-desc">Dedicated IBANs and banking rails. SEPA, SWIFT, and more.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#iban')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#cards" class="topic-card" data-link="products.html#cards">
+                    <span class="topic-icon">💎</span>
+                    <h3 class="topic-title">Cards</h3>
+                    <p class="topic-desc">Branded card programs. Let your clients spend crypto anywhere.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#cards')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#custody" class="topic-card" data-link="products.html#custody">
+                    <span class="topic-icon">🔒</span>
+                    <h3 class="topic-title">Custody</h3>
+                    <p class="topic-desc">Institutional-grade custody. Secure storage with insurance coverage.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#custody')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent Updates -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Recent Updates</h2>
+                <a href="whats-new.html" class="section-link">View all →</a>
+            </div>
+            
+            <div class="updates-list">
+                <a href="whats-new.html#credit-line-dashboard" class="update-item">
+                    <span class="update-badge feature">New</span>
+                    <div class="update-content">
+                        <div class="update-title">Enhanced Credit Line Dashboard</div>
+                        <div class="update-date">July 2025</div>
+                    </div>
+                    <span class="update-arrow">→</span>
+                </a>
+                
+                <a href="whats-new.html#cryptopayx-currencies" class="update-item">
+                    <span class="update-badge improvement">Update</span>
+                    <div class="update-content">
+                        <div class="update-title">New CryptoPayX Currencies Added</div>
+                        <div class="update-date">July 2025</div>
+                    </div>
+                    <span class="update-arrow">→</span>
+                </a>
+                
+                <a href="whats-new.html#api-docs" class="update-item">
+                    <span class="update-badge">Docs</span>
+                    <div class="update-content">
+                        <div class="update-title">Improved API Documentation</div>
+                        <div class="update-date">June 2025</div>
+                    </div>
+                    <span class="update-arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Quick Links Bar -->
+        <section class="section">
+            <div class="quick-links-bar">
+                <a href="pdf-center.html" class="quick-link">
+                    📄 Link Center
+                </a>
+                <a href="case-studies.html" class="quick-link">
+                    📊 Case Studies
+                </a>
+                <a href="procedures.html" class="quick-link">
+                    🔧 Internal Tools
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        XBO Sales Hub · Internal Use Only<br>
+        Last updated: July 2025
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('nav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            mobileMenuBtn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+        });
+
+        // Copy link functionality
+        function copyLink(event, path) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const fullUrl = window.location.origin + '/' + path;
+            navigator.clipboard.writeText(fullUrl).then(() => {
+                const btn = event.currentTarget;
+                const tooltip = btn.querySelector('.copy-tooltip');
+                btn.classList.add('copied');
+                tooltip.textContent = 'Copied!';
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    tooltip.textContent = 'Copy link';
+                }, 2000);
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        const searchData = [
+            { title: 'Credit Line', category: 'Products', icon: '💳', link: 'products.html#credit-line' },
+            { title: 'Crypto-as-a-Service (CaaS)', category: 'Products', icon: '⚙️', link: 'products.html#caas' },
+            { title: 'CryptoPayX', category: 'Products', icon: '💰', link: 'products.html#cryptopayx' },
+            { title: 'eMoney / IBAN', category: 'Products', icon: '🏦', link: 'products.html#iban' },
+            { title: 'Cards', category: 'Products', icon: '💎', link: 'products.html#cards' },
+            { title: 'Custody', category: 'Products', icon: '🔒', link: 'products.html#custody' },
+            { title: 'CFD Broker Case Study', category: 'Case Studies', icon: '📈', link: 'case-studies.html#cfd' },
+            { title: 'EMI Case Study', category: 'Case Studies', icon: '🏛️', link: 'case-studies.html#emi' },
+            { title: 'iGaming Case Study', category: 'Case Studies', icon: '🎮', link: 'case-studies.html#igaming' },
+            { title: 'Creator Platform Case Study', category: 'Case Studies', icon: '🎨', link: 'case-studies.html#creator' },
+            { title: 'XBO Company Deck', category: 'Documents', icon: '📊', link: 'pdf-center.html#pitch' },
+            { title: 'Product Documentation', category: 'Documents', icon: '📄', link: 'pdf-center.html#products' },
+            { title: 'Client Lifecycle', category: 'Procedures', icon: '🔄', link: 'procedures.html#client-lifecycle' },
+            { title: 'Pipedrive Pipeline', category: 'Procedures', icon: '📊', link: 'procedures.html#pipedrive' },
+            { title: 'Meeting Booking', category: 'Procedures', icon: '📅', link: 'procedures.html#meetings' },
+            { title: 'Telegram Groups', category: 'Procedures', icon: '💬', link: 'procedures.html#telegram' },
+            { title: 'Release Notes', category: "What's New", icon: '📝', link: 'whats-new.html' },
+            { title: 'MFA Setup Guide', category: 'Training', icon: '🔐', link: 'pdf-center.html#training' },
+            { title: 'Corporate Referrals', category: 'Pricing', icon: '🤝', link: 'pdf-center.html#pricing' },
+            { title: 'API Documentation', category: 'Technical', icon: '🔧', link: 'products.html#api' },
+            { title: 'OTC Trading', category: 'Products', icon: '💱', link: 'products.html#trading' },
+            { title: 'Compliance & MiCA', category: 'Legal', icon: '⚖️', link: 'products.html#compliance' },
+        ];
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                searchResults.classList.remove('visible');
+                return;
+            }
+
+            const filtered = searchData.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.category.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">No results found</div>';
+            } else {
+                searchResults.innerHTML = filtered.slice(0, 6).map(item => `
+                    <a href="${item.link}" class="search-result-item">
+                        <span class="search-result-icon">${item.icon}</span>
+                        <div class="search-result-text">
+                            <div class="search-result-title">${item.title}</div>
+                            <div class="search-result-category">${item.category}</div>
+                        </div>
+                    </a>
+                `).join('');
+            }
+
+            searchResults.classList.add('visible');
+        });
+
+        // Hide search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('visible');
+            }
+        });
+
+        // Focus search on / key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+            if (e.key === 'Escape') {
+                searchResults.classList.remove('visible');
+                searchInput.blur();
+            }
+        });
+    </script>
+</body>
+</html>

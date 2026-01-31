@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 30px;
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 24px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #6366f1;
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Case Study Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .case-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .case-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-card.trading { --accent-color: #10b981; --accent-gradient: linear-gradient(90deg, #10b981, #34d399); }
+        .case-card.finance { --accent-color: #6366f1; --accent-gradient: linear-gradient(90deg, #6366f1, #8b5cf6); }
+        .case-card.gaming { --accent-color: #f59e0b; --accent-gradient: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .case-card.creator { --accent-color: #ec4899; --accent-gradient: linear-gradient(90deg, #ec4899, #f472b6); }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .case-card.trading .card-icon { background: rgba(16, 185, 129, 0.15); }
+        .case-card.finance .card-icon { background: rgba(99, 102, 241, 0.15); }
+        .case-card.gaming .card-icon { background: rgba(245, 158, 11, 0.15); }
+        .case-card.creator .card-icon { background: rgba(236, 72, 153, 0.15); }
+
+        .card-industry {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .card-metric {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .card-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .card-cta::after {
+            content: '→';
+            transition: transform 0.2s;
+        }
+
+        .case-card:hover .card-cta::after {
+            transform: translateX(4px);
+        }
+
+        /* Hidden state for filtering */
+        .case-card.hidden {
+            display: none;
+        }
+
+        /* ============================================
+           EXPANDED CASE STUDY SECTIONS
+           ============================================ */
+
+        .case-study-full {
+            display: none;
+            padding-top: 40px;
+        }
+
+        .case-study-full.active {
+            display: block;
+        }
+
+        /* Back to all button */
+        .back-to-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 30px;
+        }
+
+        .back-to-all:hover {
+            background: #334155;
+            color: #fff;
+        }
+
+        /* Case Study Hero */
+        .cs-hero {
+            border-radius: 24px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .cs-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--hero-gradient);
+            opacity: 0.15;
+        }
+
+        .cs-hero.trading { --hero-gradient: linear-gradient(135deg, #10b981, #34d399); background: #0f172a; border: 1px solid #10b981; }
+        .cs-hero.finance { --hero-gradient: linear-gradient(135deg, #6366f1, #8b5cf6); background: #0f172a; border: 1px solid #6366f1; }
+        .cs-hero.gaming { --hero-gradient: linear-gradient(135deg, #f59e0b, #fbbf24); background: #0f172a; border: 1px solid #f59e0b; }
+        .cs-hero.creator { --hero-gradient: linear-gradient(135deg, #ec4899, #f472b6); background: #0f172a; border: 1px solid #ec4899; }
+
+        .cs-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .cs-hero-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .cs-hero-text h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .cs-hero-text .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .cs-hero-stat {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            color: #10b981;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+
+        /* Client Overview */
+        .client-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .overview-item {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .overview-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .overview-label {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .overview-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* Section Styles */
+        .cs-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .section-icon.challenge { background: rgba(239, 68, 68, 0.15); }
+        .section-icon.solution { background: rgba(99, 102, 241, 0.15); }
+        .section-icon.results { background: rgba(16, 185, 129, 0.15); }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* Challenge Section (Red/Warning) */
+        .challenge-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .challenge-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 18px;
+            background: rgba(239, 68, 68, 0.08);
+            border-radius: 12px;
+            border-left: 4px solid #ef4444;
+        }
+
+        .challenge-item .icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .challenge-item strong {
+            color: #f87171;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .challenge-item p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Solution Section (Blue) */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .solution-card {
+            background: rgba(99, 102, 241, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(99, 102, 241, 0.25);
+        }
+
+        .solution-card h4 {
+            color: #818cf8;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .solution-card li {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .solution-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        /* Results Section (Green/Success) */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .result-card {
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #10b981;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Quote/Testimonial */
+        .quote-block {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-left: 4px solid #6366f1;
+            padding: 28px 32px;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 40px;
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #e2e8f0;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .quote-author {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 32px;
+            background: #1e293b;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            margin-top: 40px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: #0f172a;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+        }
+
+        .action-btn.secondary:hover {
+            background: #334155;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #10b981;
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Hide cards section when viewing a case study */
+        .cards-section.hidden {
+            display: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            
+            .header, .back-to-all, .action-buttons, .filter-tabs {
+                display: none !important;
+            }
+            
+            .cs-hero {
+                background: #f8f9fa !important;
+                border: 2px solid #333 !important;
+            }
+            
+            .cs-hero::before {
+                opacity: 0.05 !important;
+            }
+            
+            .case-study-full {
+                padding-top: 0 !important;
+            }
+            
+            * {
+                color: #000 !important;
+            }
+            
+            .result-value {
+                color: #059669 !important;
+            }
+            
+            .challenge-item strong {
+                color: #dc2626 !important;
+            }
+            
+            .solution-card h4 {
+                color: #4f46e5 !important;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cs-hero {
+                padding: 32px 24px;
+            }
+            
+            .cs-hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cs-hero-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .result-value {
+                font-size: 2.2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo-img">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            <a href="index.html" class="back-link">
+                ← Back to Hub
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Case Studies</h1>
+        <p>Real results from real clients</p>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="trading">Trading</button>
+        <button class="filter-btn" data-filter="finance">Finance</button>
+        <button class="filter-btn" data-filter="gaming">Gaming</button>
+        <button class="filter-btn" data-filter="creator">Creator Economy</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Cards Section -->
+        <section class="cards-section" id="cardsSection">
+            <div class="cards-grid">
+                <!-- CFD Broker Card -->
+                <div class="case-card trading" data-case="cfd" data-industry="trading">
+                    <div class="card-icon">📈</div>
+                    <div class="card-industry">Trading</div>
+                    <h3 class="card-title">CFD Trading Broker</h3>
+                    <div class="card-metric">+30% Deposits</div>
+                    <div class="card-cta">Read More</div>
+                </div>
+
+                <!-- EMI Card -->
+                <div class="case-card finance" data-case="emi" data-industry="finance">
+                    <div class="card-icon">🏦</div>
+                    <div class="card-industry">Finance</div>
+                    <h3 class="card-title">Licensed EMI</h3>
+                    <div class="card-metric">8 Week Launch</div>
+                    <div class="card-cta">Read More</div>
+                </div>
+
+                <!-- iGaming Card -->
+                <div class="case-card gaming" data-case="igaming" data-industry="gaming">
+                    <div class="card-icon">🎰</div>
+                    <div class="card-industry">Gaming</div>
+                    <h3 class="card-title">Tier-1 iGaming Group</h3>
+                    <div class="card-metric">+26% Conversion</div>
+                    <div class="card-cta">Read More</div>
+                </div>
+
+                <!-- Creator Card -->
+                <div class="case-card creator" data-case="creator" data-industry="creator">
+                    <div class="card-icon">📸</div>
+                    <div class="card-industry">Creator Economy</div>
+                    <h3 class="card-title">Creator Platform</h3>
+                    <div class="card-metric">+51% Revenue</div>
+                    <div class="card-cta">Read More</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FULL CASE STUDY: CFD BROKER
+             ============================================ -->
+        <section class="case-study-full" id="cfd">
+            <button class="back-to-all" onclick="showCards()">← Back to all case studies</button>
+            
+            <!-- Hero -->
+            <div class="cs-hero trading">
+                <div class="cs-hero-content">
+                    <div class="cs-hero-icon">📈</div>
+                    <div class="cs-hero-text">
+                        <h2>CFD Trading Broker</h2>
+                        <p class="subtitle">Online Trading Platform • 50,000+ Traders</p>
+                        <div class="cs-hero-stat">+30% Deposit Approvals</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Overview -->
+            <div class="client-overview">
+                <div class="overview-item">
+                    <div class="overview-icon">📊</div>
+                    <div class="overview-label">Client Type</div>
+                    <div class="overview-value">CFD/FX Broker</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">👥</div>
+                    <div class="overview-label">Size</div>
+                    <div class="overview-value">50,000+ Traders</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🌍</div>
+                    <div class="overview-label">Regions</div>
+                    <div class="overview-value">EU, Asia, LATAM</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">⏱️</div>
+                    <div class="overview-label">Deploy Time</div>
+                    <div class="overview-value">6 Weeks</div>
+                </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon challenge">⚠️</div>
+                    <h3 class="section-title">The Challenge</h3>
+                </div>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <span class="icon">💳</span>
+                        <div>
+                            <strong>High card decline rates</strong>
+                            <p>Up to 40% of deposits failed due to bank restrictions on trading platforms</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">🔀</span>
+                        <div>
+                            <strong>Fragmented PSP landscape</strong>
+                            <p>Managing 8+ payment providers with inconsistent APIs and reporting</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⏱️</span>
+                        <div>
+                            <strong>Slow settlements</strong>
+                            <p>3-5 day delays tying up working capital and limiting growth</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⚡</span>
+                        <div>
+                            <strong>2.3% chargeback rate</strong>
+                            <p>Threatening merchant accounts and processor relationships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon solution">💡</div>
+                    <h3 class="section-title">The Solution — PayX + Settlement</h3>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <h4>💳 PayX Processing</h4>
+                        <ul>
+                            <li>Smart Payment Routing with AI optimization</li>
+                            <li>Multi-Currency Acquiring (50+ methods)</li>
+                            <li>3DS2 Optimization for higher approvals</li>
+                            <li>Real-Time Monitoring Dashboard</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <h4>🏦 Settlement & Conversion</h4>
+                        <ul>
+                            <li>T+0 Same-Day Settlements</li>
+                            <li>Competitive FX Rates (0.8%)</li>
+                            <li>Automated Treasury Management</li>
+                            <li>Multi-Currency Wallets (30+)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon results">🎯</div>
+                    <h3 class="section-title">The Results</h3>
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value">+30%</div>
+                        <div class="result-label">Card Approval Rate</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">4×</div>
+                        <div class="result-label">APM Coverage</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">T+0</div>
+                        <div class="result-label">Settlement Time</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">-61%</div>
+                        <div class="result-label">Chargeback Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-block">
+                <p class="quote-text">"We saw a 30% increase in deposit approvals within the first month. XBO transformed how we handle payments across all our regions."</p>
+                <p class="quote-author">— Head of Treasury, CFX Trading Platform</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary" onclick="copyLink('cfd')">📋 Copy Link</button>
+                <a href="downloads/case-study-cfd.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FULL CASE STUDY: EMI
+             ============================================ -->
+        <section class="case-study-full" id="emi">
+            <button class="back-to-all" onclick="showCards()">← Back to all case studies</button>
+            
+            <!-- Hero -->
+            <div class="cs-hero finance">
+                <div class="cs-hero-content">
+                    <div class="cs-hero-icon">🏦</div>
+                    <div class="cs-hero-text">
+                        <h2>Licensed EMI</h2>
+                        <p class="subtitle">Electronic Money Institution • EU Licensed</p>
+                        <div class="cs-hero-stat">8 Week Launch</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Overview -->
+            <div class="client-overview">
+                <div class="overview-item">
+                    <div class="overview-icon">🏛️</div>
+                    <div class="overview-label">Client Type</div>
+                    <div class="overview-value">EMI</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">📜</div>
+                    <div class="overview-label">License</div>
+                    <div class="overview-value">EU E-Money</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🎯</div>
+                    <div class="overview-label">Segments</div>
+                    <div class="overview-value">B2B & B2C</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🌍</div>
+                    <div class="overview-label">Region</div>
+                    <div class="overview-value">EEA</div>
+                </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon challenge">⚠️</div>
+                    <h3 class="section-title">The Challenge</h3>
+                </div>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <span class="icon">📊</span>
+                        <div>
+                            <strong>67% customer demand</strong>
+                            <p>Customers wanted crypto buy/sell within existing accounts</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">👨‍💻</span>
+                        <div>
+                            <strong>No blockchain expertise</strong>
+                            <p>Zero in-house knowledge of wallets, nodes, or custody</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">🔌</span>
+                        <div>
+                            <strong>Integration complexity</strong>
+                            <p>Would require 6+ vendor relationships to build in-house</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⏳</span>
+                        <div>
+                            <strong>12-18 month timeline</strong>
+                            <p>Traditional build too slow for market window</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon solution">💡</div>
+                    <h3 class="section-title">The Solution — XBO CaaS</h3>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <h4>🔧 Core Capabilities</h4>
+                        <ul>
+                            <li>Buy/Sell/Swap — 50+ cryptocurrencies</li>
+                            <li>Hosted Wallets — Segregated per user</li>
+                            <li>Fiat Rails — Seamless on/off ramp</li>
+                            <li>Portfolio View — Real-time P&L</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <h4>⚖️ Compliance Built-In</h4>
+                        <ul>
+                            <li>KYT — Chainalysis-powered monitoring</li>
+                            <li>Travel Rule Compliance</li>
+                            <li>Risk Scoring — Real-time alerts</li>
+                            <li>MiCA-ready Audit Trails</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon results">🎯</div>
+                    <h3 class="section-title">The Results</h3>
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value">8wks</div>
+                        <div class="result-label">Time-to-Market</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">€1.2M</div>
+                        <div class="result-label">New Revenue (Year 1)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">+18%</div>
+                        <div class="result-label">Customer Retention</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">0</div>
+                        <div class="result-label">New Hires Needed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-block">
+                <p class="quote-text">"XBO's CaaS solution let us launch crypto services in 8 weeks instead of 18 months. No blockchain hires, no infrastructure headaches — just a clean API and full regulatory support."</p>
+                <p class="quote-author">— Chief Product Officer, European EMI</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary" onclick="copyLink('emi')">📋 Copy Link</button>
+                <a href="downloads/case-study-emi.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FULL CASE STUDY: iGAMING
+             ============================================ -->
+        <section class="case-study-full" id="igaming">
+            <button class="back-to-all" onclick="showCards()">← Back to all case studies</button>
+            
+            <!-- Hero -->
+            <div class="cs-hero gaming">
+                <div class="cs-hero-content">
+                    <div class="cs-hero-icon">🎰</div>
+                    <div class="cs-hero-text">
+                        <h2>Tier-1 iGaming Group</h2>
+                        <p class="subtitle">Online Casino & Sportsbook • 200+ Brands</p>
+                        <div class="cs-hero-stat">$29M Annual Impact</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Overview -->
+            <div class="client-overview">
+                <div class="overview-item">
+                    <div class="overview-icon">🎰</div>
+                    <div class="overview-label">Client Type</div>
+                    <div class="overview-value">iGaming Operator</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🏢</div>
+                    <div class="overview-label">Scale</div>
+                    <div class="overview-value">200+ Brands</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">👥</div>
+                    <div class="overview-label">Players</div>
+                    <div class="overview-value">Millions</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">📜</div>
+                    <div class="overview-label">Licenses</div>
+                    <div class="overview-value">MGA, Curaçao</div>
+                </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon challenge">⚠️</div>
+                    <h3 class="section-title">The Challenge</h3>
+                </div>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <span class="icon">🚫</span>
+                        <div>
+                            <strong>Card blocks</strong>
+                            <p>Major issuers declining 35-50% of gaming transactions</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⏱️</span>
+                        <div>
+                            <strong>Slow payouts</strong>
+                            <p>24-72 hour withdrawal times frustrating VIP players</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">🔀</span>
+                        <div>
+                            <strong>PSP fragmentation</strong>
+                            <p>15+ payment providers across different brands</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">📊</span>
+                        <div>
+                            <strong>No unified view</strong>
+                            <p>Impossible to get group-wide payment analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon solution">💡</div>
+                    <h3 class="section-title">The Solution — CryptoPayX</h3>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <h4>💰 CryptoPayX Pay-In</h4>
+                        <ul>
+                            <li>50+ Cryptocurrencies Supported</li>
+                            <li>Instant Deposits — No card auth wait</li>
+                            <li>Zero Declines — Crypto doesn't get blocked</li>
+                            <li>70% Lower Fees vs. Card Processing</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <h4>⚡ CryptoPayX Pay-Out</h4>
+                        <ul>
+                            <li>Instant Processing — Seconds, not days</li>
+                            <li>Player Choice — Any crypto wallet</li>
+                            <li>Batch Processing — Mass payouts</li>
+                            <li>Zero Chargeback Risk</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon results">🎯</div>
+                    <h3 class="section-title">The Results</h3>
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value">+26%</div>
+                        <div class="result-label">Overall Conversion</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">4min</div>
+                        <div class="result-label">Avg Payout Time</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">-99%</div>
+                        <div class="result-label">Chargeback Reduction</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">$29M</div>
+                        <div class="result-label">Net Annual Impact</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-block">
+                <p class="quote-text">"CryptoPayX unified payments across all 200+ brands. Higher conversion, faster withdrawals, and finally — one dashboard to rule them all."</p>
+                <p class="quote-author">— VP of Payments, Global Casino Group</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary" onclick="copyLink('igaming')">📋 Copy Link</button>
+                <a href="downloads/case-study-igaming.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FULL CASE STUDY: CREATOR PLATFORM
+             ============================================ -->
+        <section class="case-study-full" id="creator">
+            <button class="back-to-all" onclick="showCards()">← Back to all case studies</button>
+            
+            <!-- Hero -->
+            <div class="cs-hero creator">
+                <div class="cs-hero-content">
+                    <div class="cs-hero-icon">📸</div>
+                    <div class="cs-hero-text">
+                        <h2>Creator Platform</h2>
+                        <p class="subtitle">Adult/Creator Economy • 5M+ MAU</p>
+                        <div class="cs-hero-stat">+51% Monthly Revenue</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Overview -->
+            <div class="client-overview">
+                <div class="overview-item">
+                    <div class="overview-icon">🎭</div>
+                    <div class="overview-label">Client Type</div>
+                    <div class="overview-value">Creator Platform</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">👥</div>
+                    <div class="overview-label">Scale</div>
+                    <div class="overview-value">5M+ MAU</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🎨</div>
+                    <div class="overview-label">Creators</div>
+                    <div class="overview-value">200,000+</div>
+                </div>
+                <div class="overview-item">
+                    <div class="overview-icon">🌍</div>
+                    <div class="overview-label">Reach</div>
+                    <div class="overview-value">Global</div>
+                </div>
+            </div>
+
+            <!-- Challenge -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon challenge">⚠️</div>
+                    <h3 class="section-title">The Challenge</h3>
+                </div>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <span class="icon">🚫</span>
+                        <div>
+                            <strong>40-60% decline rates</strong>
+                            <p>Banks blocking adult MCC codes in MENA, Asia</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">😰</span>
+                        <div>
+                            <strong>Payment shame</strong>
+                            <p>Users avoiding cards due to statement exposure</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⏳</span>
+                        <div>
+                            <strong>14-30 day creator payouts</strong>
+                            <p>Slow payments hurting creator retention</p>
+                        </div>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="icon">⚡</span>
+                        <div>
+                            <strong>3.5% chargeback rate</strong>
+                            <p>High "buyer's remorse" disputes threatening accounts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon solution">💡</div>
+                    <h3 class="section-title">The Solution — CryptoPayX</h3>
+                </div>
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <h4>💰 User Pay-In</h4>
+                        <ul>
+                            <li>BTC, ETH, USDT + 50 coins</li>
+                            <li>Instant Credit on Confirmation</li>
+                            <li>Zero Declines — Bypass card blocks</li>
+                            <li>Privacy-Friendly — No statement exposure</li>
+                        </ul>
+                    </div>
+                    <div class="solution-card">
+                        <h4>⚡ Creator Pay-Out</h4>
+                        <ul>
+                            <li>Daily Automated Payouts</li>
+                            <li>Instant On-Demand Withdrawals</li>
+                            <li>Multi-Currency — Crypto or local fiat</li>
+                            <li>$10 Minimum, Zero Fees</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="cs-section">
+                <div class="section-header">
+                    <div class="section-icon results">🎯</div>
+                    <h3 class="section-title">The Results</h3>
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value">+48%</div>
+                        <div class="result-label">Global Completion</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">+154%</div>
+                        <div class="result-label">MENA Completion</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">4min</div>
+                        <div class="result-label">Creator Payout Time</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">+51%</div>
+                        <div class="result-label">Monthly Revenue</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-block">
+                <p class="quote-text">"Card declines were killing us in our biggest growth markets. CryptoPayX unlocked MENA, SEA, and LATAM — regions where we'd basically given up. Now they're our fastest-growing segments."</p>
+                <p class="quote-author">— Chief Revenue Officer, Creator Platform</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary" onclick="copyLink('creator')">📋 Copy Link</button>
+                <a href="downloads/case-study-creator.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Link copied to clipboard!</div>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                document.querySelectorAll('.case-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.industry === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Card click handlers
+        document.querySelectorAll('.case-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const caseType = card.dataset.case;
+                showCaseStudy(caseType);
+            });
+        });
+
+        function showCaseStudy(caseType) {
+            // Hide cards section
+            document.getElementById('cardsSection').classList.add('hidden');
+            document.querySelector('.filter-tabs').style.display = 'none';
+            
+            // Hide all case studies first
+            document.querySelectorAll('.case-study-full').forEach(cs => cs.classList.remove('active'));
+            
+            // Show the selected case study
+            const caseStudy = document.getElementById(caseType);
+            if (caseStudy) {
+                caseStudy.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                history.pushState(null, '', `#${caseType}`);
+            }
+        }
+
+        function showCards() {
+            // Hide all case studies
+            document.querySelectorAll('.case-study-full').forEach(cs => cs.classList.remove('active'));
+            
+            // Show cards section
+            document.getElementById('cardsSection').classList.remove('hidden');
+            document.querySelector('.filter-tabs').style.display = 'flex';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            history.pushState(null, '', window.location.pathname);
+        }
+
+        // Copy link function
+        function copyLink(caseType) {
+            const url = `${window.location.origin}${window.location.pathname}#${caseType}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Link copied to clipboard!');
+            });
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Check URL hash on load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['cfd', 'emi', 'igaming', 'creator'].includes(hash)) {
+                showCaseStudy(hash);
+            }
+        });
+
+        // Handle back button
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['cfd', 'emi', 'igaming', 'creator'].includes(hash)) {
+                showCaseStudy(hash);
+            } else {
+                showCards();
+            }
+        });
+    </script>
+</body>
+</html>

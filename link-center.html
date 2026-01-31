@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Center - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --bg-input: #1a1a25;
+            --border: #2a2a3a;
+            --border-hover: #3a3a4a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --success: #22c55e;
+            --success-bg: rgba(34, 197, 94, 0.15);
+            --gold: #f59e0b;
+            --purple: #a855f7;
+            --cyan: #06b6d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-back:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        /* Hero Header */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 20px 60px var(--accent-glow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            font-size: 1.1rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+        }
+
+        .search-hint kbd {
+            background: var(--bg-card);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 0.8rem;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        .category-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .category-tab:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .category-tab.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .category-tab .count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .category-tab:not(.active) .count {
+            background: var(--bg-input);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Link Categories */
+        .link-category {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .link-category.hidden {
+            display: none;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, var(--bg-card-hover), var(--bg-card));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .category-icon.products { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .category-icon.cases { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .category-icon.docs { background: linear-gradient(135deg, #22c55e, #4ade80); }
+
+        .category-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .category-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .copy-all-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-all-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Link Items */
+        .link-list {
+            padding: 0.5rem;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            gap: 1rem;
+        }
+
+        .link-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .link-item.hidden {
+            display: none;
+        }
+
+        .link-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .link-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-badge {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .link-badge.new {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .link-badge.popular {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold);
+        }
+
+        .link-url {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .copy-btn .icon {
+            font-size: 1.1rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--success);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--success-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-results-text {
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.75rem;
+            }
+
+            .category-tabs {
+                padding: 0.75rem;
+            }
+
+            .category-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+
+            .link-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .copy-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .category-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .copy-all-btn {
+                justify-content: center;
+            }
+        }
+
+        /* Keyboard Focus Styles */
+        .copy-btn:focus-visible,
+        .category-tab:focus-visible,
+        .search-input:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-logo">X</div>
+                <span class="nav-title">XBO Sales Hub</span>
+            </a>
+            <a href="index.html" class="nav-back">
+                ← Back to Hub
+            </a>
+        </nav>
+
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="hero-icon">🔗</div>
+            <h1>Link Center</h1>
+            <p class="hero-subtitle">Copy any link with one click</p>
+            
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search links..." autofocus>
+                <p class="search-hint">Press <kbd>/</kbd> to focus search</p>
+            </div>
+        </header>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="category-tab active" data-category="all">
+                📋 All Links <span class="count" id="countAll">12</span>
+            </button>
+            <button class="category-tab" data-category="products">
+                📦 Products <span class="count">6</span>
+            </button>
+            <button class="category-tab" data-category="cases">
+                📊 Case Studies <span class="count">4</span>
+            </button>
+            <button class="category-tab" data-category="docs">
+                📄 Documents <span class="count">2</span>
+            </button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value" id="totalLinks">12</div>
+                <div class="stat-label">Total Links</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="copiedToday">0</div>
+                <div class="stat-label">Copied Today</div>
+            </div>
+        </div>
+
+        <!-- Product Pages -->
+        <section class="link-category" data-category="products">
+            <div class="category-header">
+                <div class="category-title">
+                    <div class="category-icon products">📦</div>
+                    <div>
+                        <div class="category-name">Product Pages</div>
+                        <div class="category-count">6 links</div>
+                    </div>
+                </div>
+                <button class="copy-all-btn" data-category="products">
+                    📋 Copy All Links
+                </button>
+            </div>
+            <div class="link-list">
+                <div class="link-item" data-name="Credit Line" data-url="/products.html#credit-line">
+                    <div class="link-info">
+                        <div class="link-name">
+                            Credit Line
+                            <span class="link-badge popular">Popular</span>
+                        </div>
+                        <div class="link-url">/products.html#credit-line</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#credit-line">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="CaaS (Crypto-as-a-Service)" data-url="/products.html#caas">
+                    <div class="link-info">
+                        <div class="link-name">CaaS (Crypto-as-a-Service)</div>
+                        <div class="link-url">/products.html#caas</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#caas">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="CryptoPayX" data-url="/products.html#cryptopayx">
+                    <div class="link-info">
+                        <div class="link-name">
+                            CryptoPayX
+                            <span class="link-badge new">New</span>
+                        </div>
+                        <div class="link-url">/products.html#cryptopayx</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#cryptopayx">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="eMoney / IBAN" data-url="/products.html#emoney">
+                    <div class="link-info">
+                        <div class="link-name">eMoney / IBAN</div>
+                        <div class="link-url">/products.html#emoney</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#emoney">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="Cards" data-url="/products.html#cards">
+                    <div class="link-info">
+                        <div class="link-name">Cards</div>
+                        <div class="link-url">/products.html#cards</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#cards">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="Custody" data-url="/products.html#custody">
+                    <div class="link-info">
+                        <div class="link-name">Custody</div>
+                        <div class="link-url">/products.html#custody</div>
+                    </div>
+                    <button class="copy-btn" data-url="/products.html#custody">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section class="link-category" data-category="cases">
+            <div class="category-header">
+                <div class="category-title">
+                    <div class="category-icon cases">📊</div>
+                    <div>
+                        <div class="category-name">Case Studies</div>
+                        <div class="category-count">4 links</div>
+                    </div>
+                </div>
+                <button class="copy-all-btn" data-category="cases">
+                    📋 Copy All Links
+                </button>
+            </div>
+            <div class="link-list">
+                <div class="link-item" data-name="CFD Broker" data-url="/case-studies.html#cfd">
+                    <div class="link-info">
+                        <div class="link-name">CFD Broker</div>
+                        <div class="link-url">/case-studies.html#cfd</div>
+                    </div>
+                    <button class="copy-btn" data-url="/case-studies.html#cfd">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="EMI (Electronic Money Institution)" data-url="/case-studies.html#emi">
+                    <div class="link-info">
+                        <div class="link-name">EMI (Electronic Money Institution)</div>
+                        <div class="link-url">/case-studies.html#emi</div>
+                    </div>
+                    <button class="copy-btn" data-url="/case-studies.html#emi">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="iGaming Platform" data-url="/case-studies.html#igaming">
+                    <div class="link-info">
+                        <div class="link-name">
+                            iGaming Platform
+                            <span class="link-badge popular">Popular</span>
+                        </div>
+                        <div class="link-url">/case-studies.html#igaming</div>
+                    </div>
+                    <button class="copy-btn" data-url="/case-studies.html#igaming">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="Creator Platform" data-url="/case-studies.html#creator">
+                    <div class="link-info">
+                        <div class="link-name">Creator Platform</div>
+                        <div class="link-url">/case-studies.html#creator</div>
+                    </div>
+                    <button class="copy-btn" data-url="/case-studies.html#creator">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- External Documents -->
+        <section class="link-category" data-category="docs">
+            <div class="category-header">
+                <div class="category-title">
+                    <div class="category-icon docs">📄</div>
+                    <div>
+                        <div class="category-name">External Documents</div>
+                        <div class="category-count">2 links</div>
+                    </div>
+                </div>
+                <button class="copy-all-btn" data-category="docs">
+                    📋 Copy All Links
+                </button>
+            </div>
+            <div class="link-list">
+                <div class="link-item" data-name="Corporate IBAN PDF" data-url="https://cdn.xbo.com/docs/corporate-iban-overview.pdf">
+                    <div class="link-info">
+                        <div class="link-name">
+                            Corporate IBAN PDF
+                            <span class="link-badge new">New</span>
+                        </div>
+                        <div class="link-url">https://cdn.xbo.com/docs/corporate-iban-overview.pdf</div>
+                    </div>
+                    <button class="copy-btn" data-url="https://cdn.xbo.com/docs/corporate-iban-overview.pdf">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+                <div class="link-item" data-name="XBO Deck" data-url="https://cdn.xbo.com/docs/xbo-sales-deck-2024.pdf">
+                    <div class="link-info">
+                        <div class="link-name">
+                            XBO Deck
+                            <span class="link-badge popular">Popular</span>
+                        </div>
+                        <div class="link-url">https://cdn.xbo.com/docs/xbo-sales-deck-2024.pdf</div>
+                    </div>
+                    <button class="copy-btn" data-url="https://cdn.xbo.com/docs/xbo-sales-deck-2024.pdf">
+                        <span class="icon">📋</span> Copy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <div class="no-results-icon">🔍</div>
+            <div class="no-results-text">No links found matching your search</div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✓</div>
+        <span id="toastMessage">Link copied!</span>
+    </div>
+
+    <script>
+        // State
+        let copiedToday = parseInt(localStorage.getItem('xbo-copied-today') || '0');
+        let lastCopyDate = localStorage.getItem('xbo-copy-date');
+        const today = new Date().toDateString();
+
+        // Reset counter if new day
+        if (lastCopyDate !== today) {
+            copiedToday = 0;
+            localStorage.setItem('xbo-copied-today', '0');
+            localStorage.setItem('xbo-copy-date', today);
+        }
+
+        updateCopiedCount();
+
+        // Toast function
+        function showToast(message = 'Link copied!') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Update copied count
+        function updateCopiedCount() {
+            document.getElementById('copiedToday').textContent = copiedToday;
+        }
+
+        // Increment copy counter
+        function incrementCopyCount() {
+            copiedToday++;
+            localStorage.setItem('xbo-copied-today', copiedToday.toString());
+            updateCopiedCount();
+        }
+
+        // Copy to clipboard
+        async function copyToClipboard(text, button = null) {
+            try {
+                await navigator.clipboard.writeText(text);
+                
+                if (button) {
+                    const originalHTML = button.innerHTML;
+                    button.innerHTML = '<span class="icon">✓</span> Copied!';
+                    button.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalHTML;
+                        button.classList.remove('copied');
+                    }, 1500);
+                }
+                
+                incrementCopyCount();
+                showToast('Link copied!');
+                return true;
+            } catch (err) {
+                console.error('Copy failed:', err);
+                showToast('Copy failed - try again');
+                return false;
+            }
+        }
+
+        // Copy all links in category
+        function copyAllInCategory(category) {
+            const categorySection = document.querySelector(`.link-category[data-category="${category}"]`);
+            const items = categorySection.querySelectorAll('.link-item:not(.hidden)');
+            const urls = [];
+            
+            items.forEach(item => {
+                urls.push(item.dataset.url);
+            });
+            
+            if (urls.length > 0) {
+                copyToClipboard(urls.join('\n'));
+                showToast(`${urls.length} links copied!`);
+            }
+        }
+
+        // Search/filter functionality
+        function filterLinks(query) {
+            const normalizedQuery = query.toLowerCase().trim();
+            const categories = document.querySelectorAll('.link-category');
+            let totalVisible = 0;
+
+            categories.forEach(category => {
+                const items = category.querySelectorAll('.link-item');
+                let categoryVisible = 0;
+
+                items.forEach(item => {
+                    const name = item.dataset.name.toLowerCase();
+                    const url = item.dataset.url.toLowerCase();
+                    const matches = normalizedQuery === '' || 
+                                   name.includes(normalizedQuery) || 
+                                   url.includes(normalizedQuery);
+                    
+                    item.classList.toggle('hidden', !matches);
+                    if (matches) categoryVisible++;
+                });
+
+                // Update category count
+                const countEl = category.querySelector('.category-count');
+                countEl.textContent = `${categoryVisible} links`;
+
+                totalVisible += categoryVisible;
+            });
+
+            // Show/hide no results
+            document.getElementById('noResults').classList.toggle('show', totalVisible === 0 && normalizedQuery !== '');
+            document.getElementById('countAll').textContent = totalVisible;
+        }
+
+        // Category tab filtering
+        function setActiveCategory(category) {
+            // Update tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.category === category);
+            });
+
+            // Show/hide categories
+            document.querySelectorAll('.link-category').forEach(cat => {
+                if (category === 'all') {
+                    cat.classList.remove('hidden');
+                } else {
+                    cat.classList.toggle('hidden', cat.dataset.category !== category);
+                }
+            });
+        }
+
+        // Event Listeners
+
+        // Copy buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                copyToClipboard(btn.dataset.url, btn);
+            });
+        });
+
+        // Copy all buttons
+        document.querySelectorAll('.copy-all-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                copyAllInCategory(btn.dataset.category);
+            });
+        });
+
+        // Category tabs
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                setActiveCategory(tab.dataset.category);
+            });
+        });
+
+        // Search input
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            filterLinks(e.target.value);
+        });
+
+        // Keyboard shortcut for search
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+            }
+            
+            if (e.key === 'Escape') {
+                searchInput.blur();
+                searchInput.value = '';
+                filterLinks('');
+            }
+        });
+
+        // Make link items clickable (copy on click anywhere)
+        document.querySelectorAll('.link-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Don't trigger if clicking the button itself
+                if (e.target.closest('.copy-btn')) return;
+                
+                const btn = item.querySelector('.copy-btn');
+                copyToClipboard(item.dataset.url, btn);
+            });
+            
+            item.style.cursor = 'pointer';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedures & Flows | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #fff;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .print-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Section Card */
+        .section {
+            background: #1e293b;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .section-header:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .section-title .icon {
+            font-size: 1.4rem;
+        }
+
+        .section-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #0f172a;
+            transition: transform 0.3s;
+        }
+
+        .section.open .section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 0 24px 24px;
+        }
+
+        .section.open .section-content {
+            display: block;
+        }
+
+        /* Flowchart Styles */
+        .flowchart {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 32px;
+            overflow-x: auto;
+        }
+
+        .flow-horizontal {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0;
+            min-width: max-content;
+        }
+
+        .flow-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 140px;
+        }
+
+        .flow-box {
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 130px;
+            position: relative;
+        }
+
+        .flow-box-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .flow-box-owner {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 8px;
+            color: #475569;
+            font-size: 1.5rem;
+        }
+
+        .flow-tasks {
+            margin-top: 12px;
+            text-align: left;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .flow-tasks li {
+            margin-bottom: 4px;
+            list-style: none;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .flow-tasks li::before {
+            content: '•';
+            position: absolute;
+            left: 4px;
+            color: inherit;
+        }
+
+        /* Stage Colors */
+        .stage-sales { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff; }
+        .stage-onboarding { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: #fff; }
+        .stage-compliance { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: #fff; }
+        .stage-integration { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); color: #fff; }
+        .stage-support { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; }
+        .stage-success { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #fff; }
+
+        /* Pipeline Stages */
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            min-width: 150px;
+            max-width: 180px;
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .pipeline-stage:hover {
+            transform: translateY(-4px);
+            border-color: #6366f1;
+        }
+
+        .pipeline-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0 auto 12px;
+        }
+
+        .pipeline-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .pipeline-desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-sla {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .pipeline-sla.no-limit {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        /* Meeting Flow */
+        .meeting-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .meeting-row {
+            display: flex;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .meeting-person {
+            flex: 1;
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid;
+        }
+
+        .meeting-person.maria { border-color: #6366f1; }
+        .meeting-person.marcelle { border-color: #8b5cf6; }
+        .meeting-person.sales { border-color: #22c55e; }
+
+        .meeting-person-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .meeting-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .meeting-avatar.maria { background: rgba(99, 102, 241, 0.2); }
+        .meeting-avatar.marcelle { background: rgba(139, 92, 246, 0.2); }
+        .meeting-avatar.sales { background: rgba(34, 197, 94, 0.2); }
+
+        .meeting-name {
+            font-weight: 600;
+        }
+
+        .meeting-role {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .meeting-tasks {
+            list-style: none;
+        }
+
+        .meeting-tasks li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .meeting-tasks li:last-child {
+            border-bottom: none;
+        }
+
+        .meeting-tasks .task-num {
+            background: rgba(255,255,255,0.1);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        /* Interactive Checklist */
+        .checklist {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .checklist-title {
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-progress {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1 0%, #22c55e 100%);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .checklist-items {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: #1e293b;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .checklist-item:hover {
+            background: #263548;
+            border-color: #334155;
+        }
+
+        .checklist-item.checked {
+            opacity: 0.6;
+        }
+
+        .checklist-item.checked .item-text {
+            text-decoration: line-through;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #475569;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .checklist-item.checked .checkbox {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-color: #22c55e;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .checklist-item.checked .checkbox::after {
+            opacity: 1;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-text {
+            font-size: 0.95rem;
+        }
+
+        .item-hint {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* Checklist Groups */
+        .checklist-group {
+            margin-bottom: 24px;
+        }
+
+        .checklist-group-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 12px;
+            padding-left: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checklist-group-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #6366f1;
+            border-radius: 2px;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #334155;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        /* Team Directory */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .team-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .team-info {
+            flex: 1;
+        }
+
+        .team-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .team-role {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .header {
+                background: #fff;
+                border-bottom: 2px solid #000;
+                position: relative;
+            }
+
+            .back-btn, .print-btn {
+                display: none;
+            }
+
+            .page-title {
+                background: none;
+                -webkit-text-fill-color: #000;
+            }
+
+            .section {
+                background: #fff;
+                border: 1px solid #ccc;
+                break-inside: avoid;
+            }
+
+            .section-content {
+                display: block !important;
+            }
+
+            .section-toggle {
+                display: none;
+            }
+
+            .flowchart, .checklist, .meeting-person, .pipeline-stage {
+                background: #f5f5f5;
+                border: 1px solid #ddd;
+            }
+
+            .flow-box, .pipeline-number {
+                background: #333 !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .checklist-item {
+                background: #f5f5f5;
+                border: 1px solid #ddd;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .flow-horizontal {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                padding: 8px 0;
+            }
+
+            .meeting-row {
+                flex-direction: column;
+            }
+
+            .pipeline {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .pipeline-stage {
+                max-width: none;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .print-btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="index.html" class="back-btn">
+                ← Back to Hub
+            </a>
+            <h1 class="page-title">📋 Procedures & Flows</h1>
+        </div>
+        <div class="header-actions">
+            <button class="print-btn" onclick="window.print()">
+                🖨️ Print All
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 1. Client Lifecycle Flow -->
+        <div class="section open" data-section="lifecycle">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="icon">🔄</span>
+                    Client Lifecycle Flow
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="flowchart">
+                    <div class="flow-horizontal">
+                        <!-- Sales -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-sales">
+                                <div class="flow-box-title">🤝 SALES</div>
+                                <div class="flow-box-owner">Regi</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>Prospect</li>
+                                <li>Negotiate</li>
+                                <li>Close</li>
+                            </ul>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Onboarding -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-onboarding">
+                                <div class="flow-box-title">📋 ONBOARDING</div>
+                                <div class="flow-box-owner">Vlad / Ileana</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>KYC Collection</li>
+                                <li>Documentation</li>
+                                <li>Form Completion</li>
+                            </ul>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Compliance -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-compliance">
+                                <div class="flow-box-title">✅ COMPLIANCE</div>
+                                <div class="flow-box-owner">Elina / Eliska</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>Review & Approve</li>
+                                <li>AML Screening</li>
+                                <li>Risk Assessment</li>
+                            </ul>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Integration -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-integration">
+                                <div class="flow-box-title">🔧 INTEGRATION</div>
+                                <div class="flow-box-owner">Mark</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>API Setup</li>
+                                <li>Configuration</li>
+                                <li>Testing</li>
+                            </ul>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Support -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-support">
+                                <div class="flow-box-title">🏢 SUPPORT</div>
+                                <div class="flow-box-owner">Eirini</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>Day-to-day</li>
+                                <li>Issue Resolution</li>
+                                <li>Maintenance</li>
+                            </ul>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Success -->
+                        <div class="flow-stage">
+                            <div class="flow-box stage-success">
+                                <div class="flow-box-title">⭐ SUCCESS</div>
+                                <div class="flow-box-owner">Aleksandra (VIPs)</div>
+                            </div>
+                            <ul class="flow-tasks">
+                                <li>Strategic Partnership</li>
+                                <li>Growth Planning</li>
+                                <li>Executive Relations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Directory -->
+                <h3 style="margin-top: 24px; margin-bottom: 16px; font-size: 1rem; color: #94a3b8;">👥 Team Directory</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar stage-sales">🤝</div>
+                        <div class="team-info">
+                            <div class="team-name">Regi</div>
+                            <div class="team-role">Sales Lead</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-onboarding">📋</div>
+                        <div class="team-info">
+                            <div class="team-name">Vlad</div>
+                            <div class="team-role">Onboarding</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-onboarding">📋</div>
+                        <div class="team-info">
+                            <div class="team-name">Ileana</div>
+                            <div class="team-role">Onboarding</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-compliance">✅</div>
+                        <div class="team-info">
+                            <div class="team-name">Elina</div>
+                            <div class="team-role">Compliance Officer</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-compliance">✅</div>
+                        <div class="team-info">
+                            <div class="team-name">Eliska</div>
+                            <div class="team-role">Compliance Analyst</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-integration">🔧</div>
+                        <div class="team-info">
+                            <div class="team-name">Mark</div>
+                            <div class="team-role">Integration Lead</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-support">🏢</div>
+                        <div class="team-info">
+                            <div class="team-name">Eirini</div>
+                            <div class="team-role">Corporate Support</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-avatar stage-success">⭐</div>
+                        <div class="team-info">
+                            <div class="team-name">Aleksandra</div>
+                            <div class="team-role">VIP Success</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color stage-sales"></div>
+                        Sales
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color stage-onboarding"></div>
+                        Onboarding
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color stage-compliance"></div>
+                        Compliance
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color stage-integration"></div>
+                        Integration
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color stage-support"></div>
+                        Support
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color stage-success"></div>
+                        Success
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Pipedrive Pipeline Stages -->
+        <div class="section" data-section="pipeline">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="icon">📊</span>
+                    Pipedrive Pipeline Stages
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="pipeline">
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">1</div>
+                        <div class="pipeline-name">Negotiation</div>
+                        <div class="pipeline-desc">Terms & pricing discussions</div>
+                        <div class="pipeline-sla">⏱️ 7 days max</div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">2</div>
+                        <div class="pipeline-name">Integration</div>
+                        <div class="pipeline-desc">Technical setup & API</div>
+                        <div class="pipeline-sla">⏱️ 7 days max</div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">3</div>
+                        <div class="pipeline-name">Post Integration</div>
+                        <div class="pipeline-desc">Testing & go-live prep</div>
+                        <div class="pipeline-sla">⏱️ 7 days max</div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">4</div>
+                        <div class="pipeline-name">Pending Momentum</div>
+                        <div class="pipeline-desc">Awaiting first transaction</div>
+                        <div class="pipeline-sla">⏱️ 7 days max</div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">5</div>
+                        <div class="pipeline-name">Momentum</div>
+                        <div class="pipeline-desc">Active trading & growth</div>
+                        <div class="pipeline-sla no-limit">✓ No limit</div>
+                    </div>
+                    <div class="pipeline-stage">
+                        <div class="pipeline-number">6</div>
+                        <div class="pipeline-name">Success</div>
+                        <div class="pipeline-desc">Fully scaled client</div>
+                        <div class="pipeline-sla no-limit">✓ No limit</div>
+                    </div>
+                </div>
+
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 16px;">
+                    <h4 style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        ⚠️ SLA Rules
+                    </h4>
+                    <ul style="list-style: none; color: #94a3b8; font-size: 0.9rem;">
+                        <li style="padding: 8px 0; border-bottom: 1px solid #1e293b;">
+                            📅 <strong>Working days only</strong> — Weekends and holidays excluded
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #1e293b;">
+                            ⏰ <strong>Clock starts</strong> — Day after entering stage
+                        </li>
+                        <li style="padding: 8px 0; border-bottom: 1px solid #1e293b;">
+                            🛑 <strong>First breach</strong> — Warning + explanation required
+                        </li>
+                        <li style="padding: 8px 0;">
+                            ❌ <strong>Repeated breaches</strong> — Deal reassignment considered
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Meeting Booking Flow -->
+        <div class="section" data-section="meeting">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="icon">📅</span>
+                    Meeting Booking Flow
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="meeting-flow">
+                    <div class="meeting-row">
+                        <!-- Maria -->
+                        <div class="meeting-person maria">
+                            <div class="meeting-person-header">
+                                <div class="meeting-avatar maria">📅</div>
+                                <div>
+                                    <div class="meeting-name">Maria</div>
+                                    <div class="meeting-role">Meeting Coordinator</div>
+                                </div>
+                            </div>
+                            <ul class="meeting-tasks">
+                                <li>
+                                    <span class="task-num">1</span>
+                                    Fill shared meeting request file
+                                </li>
+                                <li>
+                                    <span class="task-num">2</span>
+                                    Create calendar invite with all parties
+                                </li>
+                                <li>
+                                    <span class="task-num">3</span>
+                                    Add meeting link (Teams/Zoom)
+                                </li>
+                                <li>
+                                    <span class="task-num">4</span>
+                                    Include agenda if provided
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Marcelle -->
+                        <div class="meeting-person marcelle">
+                            <div class="meeting-person-header">
+                                <div class="meeting-avatar marcelle">📊</div>
+                                <div>
+                                    <div class="meeting-name">Marcelle</div>
+                                    <div class="meeting-role">CRM Administrator</div>
+                                </div>
+                            </div>
+                            <ul class="meeting-tasks">
+                                <li>
+                                    <span class="task-num">1</span>
+                                    Populate Pipedrive from shared file
+                                </li>
+                                <li>
+                                    <span class="task-num">2</span>
+                                    Check 14/14 mandatory fields
+                                </li>
+                                <li>
+                                    <span class="task-num">3</span>
+                                    Merge duplicate records
+                                </li>
+                                <li>
+                                    <span class="task-num">4</span>
+                                    Flag missing information
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Sales Rep -->
+                        <div class="meeting-person sales">
+                            <div class="meeting-person-header">
+                                <div class="meeting-avatar sales">🤝</div>
+                                <div>
+                                    <div class="meeting-name">Sales Rep</div>
+                                    <div class="meeting-role">Deal Owner</div>
+                                </div>
+                            </div>
+                            <ul class="meeting-tasks">
+                                <li>
+                                    <span class="task-num">1</span>
+                                    Review client info before meeting
+                                </li>
+                                <li>
+                                    <span class="task-num">2</span>
+                                    Attend and take notes
+                                </li>
+                                <li>
+                                    <span class="task-num">3</span>
+                                    Send follow-up within 24h
+                                </li>
+                                <li>
+                                    <span class="task-num">4</span>
+                                    Add Pipedrive note same day
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 24px;">
+                    <h4 style="margin-bottom: 12px;">⏱️ Timeline SLAs</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                        <div style="background: #1e293b; padding: 12px 16px; border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Maria fills shared file</div>
+                            <div style="font-weight: 600; margin-top: 4px;">Within 2 hours</div>
+                        </div>
+                        <div style="background: #1e293b; padding: 12px 16px; border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Calendar invite sent</div>
+                            <div style="font-weight: 600; margin-top: 4px;">Within 4 hours</div>
+                        </div>
+                        <div style="background: #1e293b; padding: 12px 16px; border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Marcelle updates Pipedrive</div>
+                            <div style="font-weight: 600; margin-top: 4px;">Within 24 hours</div>
+                        </div>
+                        <div style="background: #1e293b; padding: 12px 16px; border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Post-meeting follow-up</div>
+                            <div style="font-weight: 600; margin-top: 4px;">Within 24 hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Telegram Group Setup -->
+        <div class="section" data-section="telegram">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="icon">💬</span>
+                    Telegram Group Setup
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="checklist" id="telegram-checklist">
+                    <div class="checklist-title">
+                        📱 Complete Setup Checklist
+                    </div>
+                    <div class="checklist-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">0 of 7 completed</div>
+                    </div>
+                    <ul class="checklist-items">
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Create new Telegram group</div>
+                                <div class="item-hint">Tap pencil icon → "New Group" → Add initial members</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Set group name: XBO X [Company Name]</div>
+                                <div class="item-hint">Always use official company name, no abbreviations or emojis</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Add official XBO group image</div>
+                                <div class="item-hint">Find in /Marketing/Brand Assets/Telegram-Group-Logo.png</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Add @XBOADMIN to group</div>
+                                <div class="item-hint">Search exactly @XBOADMIN and add as member</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Grant @XBOADMIN full admin rights</div>
+                                <div class="item-hint">Enable all permissions: change info, delete, ban, invite, pin, add admins</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Transfer ownership to @XBOADMIN</div>
+                                <div class="item-hint">Settings → Administrators → @XBOADMIN → Transfer Ownership</div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" onclick="toggleCheck(this)">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Send welcome message</div>
+                                <div class="item-hint">Use the standard welcome template with team contacts</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 24px;">
+                    <h4 style="margin-bottom: 12px;">📝 Welcome Message Template</h4>
+                    <div style="background: #1e293b; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; color: #94a3b8;">👋 Welcome to your XBO support group!
+
+This is your dedicated channel for:
+• Quick questions and support
+• Document sharing
+• Updates and announcements
+
+Our team is here to help. Feel free to reach out anytime.
+
+Key contacts:
+• [Your Name] - Sales
+• @XBOADMIN - Admin Support
+
+Response time: Business hours (Mon-Fri, 9:00-18:00 CET)
+For urgent matters outside hours, please email support@xbo.com</div>
+                    <button onclick="copyTemplate(this)" style="margin-top: 12px; background: #334155; border: none; color: #fff; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;">
+                        📋 Copy Template
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Mandatory Fields Checklist -->
+        <div class="section" data-section="fields">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="icon">✅</span>
+                    Mandatory Fields Checklist (14/14)
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content">
+                <div class="checklist" id="fields-checklist">
+                    <div class="checklist-title">
+                        📊 Complete All 14 Fields
+                    </div>
+                    <div class="checklist-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">0 of 14 completed</div>
+                    </div>
+
+                    <!-- Core Fields -->
+                    <div class="checklist-group">
+                        <div class="checklist-group-title">Core Deal Information</div>
+                        <ul class="checklist-items">
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Owner</div>
+                                    <div class="item-hint">Auto-assigned by CRM</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Title</div>
+                                    <div class="item-hint">Format: Company Name or Company – PAY</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Company Group</div>
+                                    <div class="item-hint">Select parent organization from list</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Volume & Services -->
+                    <div class="checklist-group">
+                        <div class="checklist-group-title">Volume & Services</div>
+                        <ul class="checklist-items">
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Expected Volume</div>
+                                    <div class="item-hint">Use K/M format (e.g., 250K, 1.2M)</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Services</div>
+                                    <div class="item-hint">Multi-select: CEX, PayX, OTC, Custody, Other</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">SPOT Fee</div>
+                                    <div class="item-hint">Enter as number (e.g., 0.25 for 0.25%)</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">PayX Fee</div>
+                                    <div class="item-hint">Enter as number (e.g., 1.5 for 1.5%)</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Lead Source -->
+                    <div class="checklist-group">
+                        <div class="checklist-group-title">Lead Source Information</div>
+                        <ul class="checklist-items">
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Referred By</div>
+                                    <div class="item-hint">Name or "Self-sourced"</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Source Channel</div>
+                                    <div class="item-hint">LinkedIn, Conference, Referral, Inbound, etc.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Source Channel ID</div>
+                                    <div class="item-hint">Specific identifier (profile URL, @handle, event name)</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Source Origin</div>
+                                    <div class="item-hint">Country or region</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Status & Contact -->
+                    <div class="checklist-group">
+                        <div class="checklist-group-title">Status & Contact</div>
+                        <ul class="checklist-items">
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Contact Person</div>
+                                    <div class="item-hint">Link actual Pipedrive Person record (not text)</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <div class="item-content">
+                                    <div class="item-text">Money Flow</div>
+                                    <div class="item-hint">Document INBOUND and OUTBOUND fund flows</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 20px; margin-top: 24px;">
+                    <h4 style="color: #f87171; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        ⚠️ Common Mistakes to Avoid
+                    </h4>
+                    <ul style="list-style: none; color: #94a3b8; font-size: 0.9rem;">
+                        <li style="padding: 6px 0;">❌ Volume as "250000" → ✅ Use <strong>250K</strong> format</li>
+                        <li style="padding: 6px 0;">❌ SPOT Fee as "0.25%" → ✅ Enter <strong>0.25</strong> (number only)</li>
+                        <li style="padding: 6px 0;">❌ Source Channel ID blank → ✅ Always include specific identifier</li>
+                        <li style="padding: 6px 0;">❌ Money Flow as "Standard" → ✅ Document actual flow</li>
+                        <li style="padding: 6px 0;">❌ Contact Person as text → ✅ Link actual Pipedrive record</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle section collapse
+        function toggleSection(header) {
+            const section = header.closest('.section');
+            section.classList.toggle('open');
+        }
+
+        // Toggle checklist item
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+            updateProgress(item.closest('.checklist'));
+        }
+
+        // Update progress bar
+        function updateProgress(checklist) {
+            const items = checklist.querySelectorAll('.checklist-item');
+            const checked = checklist.querySelectorAll('.checklist-item.checked');
+            const percentage = (checked.length / items.length) * 100;
+            
+            const progressFill = checklist.querySelector('.progress-fill');
+            const progressText = checklist.querySelector('.progress-text');
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `${checked.length} of ${items.length} completed`;
+            
+            // Save to localStorage
+            saveChecklistState(checklist);
+        }
+
+        // Save checklist state
+        function saveChecklistState(checklist) {
+            const id = checklist.id;
+            const items = checklist.querySelectorAll('.checklist-item');
+            const states = Array.from(items).map(item => item.classList.contains('checked'));
+            localStorage.setItem('checklist_' + id, JSON.stringify(states));
+        }
+
+        // Load checklist state
+        function loadChecklistState(checklist) {
+            const id = checklist.id;
+            const saved = localStorage.getItem('checklist_' + id);
+            if (saved) {
+                const states = JSON.parse(saved);
+                const items = checklist.querySelectorAll('.checklist-item');
+                items.forEach((item, index) => {
+                    if (states[index]) {
+                        item.classList.add('checked');
+                    }
+                });
+                updateProgress(checklist);
+            }
+        }
+
+        // Copy template to clipboard
+        function copyTemplate(button) {
+            const template = button.previousElementSibling.textContent;
+            navigator.clipboard.writeText(template).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#22c55e';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#334155';
+                }, 2000);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved states
+            document.querySelectorAll('.checklist').forEach(checklist => {
+                loadChecklistState(checklist);
+            });
+        });
+    </script>
+</body>
+</html>
