@@ -1340,6 +1340,20 @@ Min: $100 / €100 / £100<br><br>
                     copyText: "Minimums:\n\nDeposit Card: $10\nDeposit Wire: $100\nWithdrawal: $100\n(EUR/GBP same amounts)"
                 },
                 
+                // Corporate Registration
+                {
+                    triggers: ["registration link", "corporate register", "open account", "new account link", "onboarding link", "לינק הרשמה", "פתיחת חשבון"],
+                    response: `<strong>🔗 Corporate Registration Link:</strong><br><br>
+<a href="https://www.xbo.com/corporate/register" target="_blank" style="color: #818cf8; font-size: 1.1rem;">xbo.com/corporate/register</a><br><br>
+<strong>When sharing this link:</strong><br>
+1. Collect: Company Name + Email<br>
+2. Send the link<br>
+3. Notify Marcel on Teams → "New Onboarding Leads"<br>
+4. Include company + email in message<br><br>
+⚠️ No notification = auto-rotation!`,
+                    copyText: "Corporate Registration: https://www.xbo.com/corporate/register\n\nWhen sharing:\n1. Collect Company Name + Email\n2. Send link\n3. Notify Marcel on Teams (New Onboarding Leads)\n4. Include company + email"
+                },
+                
                 // Help
                 {
                     triggers: ["help", "what can you", "מה אתה יכול"],

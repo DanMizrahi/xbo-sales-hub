@@ -985,6 +985,82 @@
             </div>
         </div>
 
+        <!-- New Lead Onboarding Procedure -->
+        <div class="section" data-section="new-lead" style="border: 2px solid #f59e0b;">
+            <div class="section-header" onclick="toggleSection(this)" style="background: rgba(245, 158, 11, 0.1);">
+                <div class="section-title">
+                    <span class="icon">🆕</span>
+                    New Lead Onboarding Procedure
+                    <span style="background: #f59e0b; color: #000; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-left: 8px;">IMPORTANT</span>
+                </div>
+                <div class="section-toggle">▼</div>
+            </div>
+            <div class="section-content" style="display: block;">
+                <!-- Corporate Registration Link -->
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
+                    <h4 style="margin-bottom: 8px; color: #a5b4fc;">🔗 Corporate Registration Link</h4>
+                    <a href="https://www.xbo.com/corporate/register" target="_blank" style="color: #818cf8; font-size: 1.1rem; font-weight: 600; word-break: break-all;">
+                        https://www.xbo.com/corporate/register
+                    </a>
+                    <button onclick="navigator.clipboard.writeText('https://www.xbo.com/corporate/register'); this.textContent='✓ Copied!'; setTimeout(() => this.textContent='📋 Copy Link', 2000);" style="display: block; margin: 12px auto 0; background: #6366f1; border: none; color: #fff; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;">
+                        📋 Copy Link
+                    </button>
+                </div>
+
+                <!-- Procedure Steps -->
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 8px;">
+                        👥 For Sales Team — New Clients
+                    </h4>
+                    <ol style="color: #94a3b8; font-size: 0.9rem; padding-left: 20px; line-height: 1.8;">
+                        <li><strong>Collect details:</strong> Company Name + Email they'll register with</li>
+                        <li><strong>Share OB link:</strong> Send the corporate registration link</li>
+                        <li><strong>Notify Marcel on Teams:</strong> Post in <strong style="color: #fbbf24;">"New Onboarding Leads"</strong> group with Company Name + Email</li>
+                        <li><strong>Lead assignment:</strong> Marcel verifies and assigns in CRM</li>
+                    </ol>
+                </div>
+
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 8px;">
+                        💬 For Support/Sales — Existing Client via Group Chat
+                    </h4>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                        Same steps as above, but <strong>also include which company group</strong> the new lead belongs to.
+                    </p>
+                </div>
+
+                <div style="background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 8px;">
+                        🤝 For Referrals Team
+                    </h4>
+                    <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                        Same steps, but <strong>clarify which referral</strong> the new lead came from.
+                    </p>
+                </div>
+
+                <!-- Important Notes -->
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 20px;">
+                    <h4 style="margin-bottom: 12px; color: #f87171; display: flex; align-items: center; gap: 8px;">
+                        ⚠️ Important Notes
+                    </h4>
+                    <ul style="color: #94a3b8; font-size: 0.9rem; padding-left: 20px; line-height: 1.8;">
+                        <li><strong>No notification = auto-rotation:</strong> Lead goes to standard rotation if not claimed</li>
+                        <li><strong>Check CRM regularly:</strong> Filter "Assigned to" with your name</li>
+                        <li><strong>Your responsibility:</strong> Once assigned, the lead is yours</li>
+                        <li><strong>Test accounts:</strong> Use "TEST" in company name</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div style="text-align: center; margin-top: 20px; padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                    <p style="color: #fbbf24; font-size: 0.9rem;">
+                        📢 Teams Channel: <strong>"New Onboarding Leads"</strong><br>
+                        👤 CRM Manager: <strong>Marcel</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <!-- 3. Meeting Booking Flow -->
         <div class="section" data-section="meeting">
             <div class="section-header" onclick="toggleSection(this)">
