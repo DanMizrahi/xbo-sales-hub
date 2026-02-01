@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Download Banner */
+        .download-banner {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .download-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .download-text .icon {
+            font-size: 2rem;
+        }
+
+        .download-text h3 {
+            font-size: 1rem;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .download-text p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Section */
+        .section {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 6px;
+        }
+
+        .step-content p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .info-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .info-box h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-box.warning h4 {
+            color: #fbbf24;
+        }
+
+        .info-box.success h4 {
+            color: #10b981;
+        }
+
+        .info-box p, .info-box ul {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .info-box ul {
+            margin-left: 16px;
+            margin-top: 8px;
+        }
+
+        .info-box li {
+            margin-bottom: 4px;
+        }
+
+        /* Table */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
+
+        .fee-table th, .fee-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .fee-table th {
+            background: rgba(15, 23, 42, 0.5);
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .fee-table td {
+            color: #e2e8f0;
+        }
+
+        .fee-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Verification Levels */
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .verification-card {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+        }
+
+        .verification-card.pro {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .verification-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .verification-card .badge {
+            font-size: 0.7rem;
+            background: #334155;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #94a3b8;
+        }
+
+        .verification-card.pro .badge {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .verification-card p {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .verification-limits {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .verification-limits strong {
+            color: #e2e8f0;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .quick-link {
+            background: #334155;
+            color: #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #475569;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.2) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .contact-box h3 {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .contact-box p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-box a {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .download-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .verification-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Hub</a>
+            <h1 class="header-logo">🚀 Getting Started</h1>
+            <p class="subtitle">New Client Guide — Everything to get up and running</p>
+        </header>
+
+        <!-- Download Banner -->
+        <div class="download-banner">
+            <div class="download-text">
+                <span class="icon">📄</span>
+                <div>
+                    <h3>Download Full PDF Guide</h3>
+                    <p>Complete guide with screenshots and step-by-step instructions</p>
+                </div>
+            </div>
+            <a href="downloads/xbo-new-client-guide.pdf" class="download-btn" download>
+                📥 Download PDF
+            </a>
+        </div>
+
+        <!-- 1. Account Verification -->
+        <div class="section" id="verification">
+            <div class="section-header">
+                <span class="section-icon">✅</span>
+                <div>
+                    <h2 class="section-title">Account Verification</h2>
+                    <p class="section-subtitle">Complete verification to unlock full features</p>
+                </div>
+            </div>
+
+            <div class="verification-grid">
+                <div class="verification-card">
+                    <h4>01. Occasional <span class="badge">Basic</span></h4>
+                    <p>Email & phone verification</p>
+                    <div class="verification-limits">
+                        <strong>Crypto:</strong> Deposit unlimited, Withdraw $1K/day<br>
+                        <strong>Fiat:</strong> Not available
+                    </div>
+                </div>
+                <div class="verification-card">
+                    <h4>02. Basic <span class="badge">ID Verified</span></h4>
+                    <p>Automatic proof of identity</p>
+                    <div class="verification-limits">
+                        <strong>Crypto:</strong> Withdraw $500K/day<br>
+                        <strong>Fiat:</strong> $100K/day, $500K/month
+                    </div>
+                </div>
+                <div class="verification-card pro">
+                    <h4>03. Pro <span class="badge">Recommended</span></h4>
+                    <p>Proof of residence + questionnaire</p>
+                    <div class="verification-limits">
+                        <strong>Crypto:</strong> Unlimited<br>
+                        <strong>Fiat:</strong> Unlimited
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box success">
+                <h4>💡 Pro Tip</h4>
+                <p>To reach PRO level, clients need to: 1) Upload a live selfie (not from gallery), 2) Complete address verification.</p>
+            </div>
+        </div>
+
+        <!-- 2. Deposit Fiat -->
+        <div class="section" id="deposit-fiat">
+            <div class="section-header">
+                <span class="section-icon">💶</span>
+                <div>
+                    <h2 class="section-title">How to Deposit FIAT</h2>
+                    <p class="section-subtitle">Fund your account via card or bank transfer</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Click "Deposit"</h4>
+                        <p>Found on the left side of the page</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Choose Method</h4>
+                        <p><strong>Card:</strong> Enter card details directly | <strong>Bank:</strong> Wire transfer</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Enter Amount & Bank Details</h4>
+                        <p>Select currency and amount, enter your bank information</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Get Transaction ID</h4>
+                        <p>System generates TXN12345 — <strong>add this as reference in your bank transfer!</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <table class="fee-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>USD</th>
+                        <th>EUR</th>
+                        <th>GBP</th>
+                        <th>Other</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>💳 Card</td>
+                        <td>Min $10</td>
+                        <td>Min €10</td>
+                        <td>Min £10</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>🏦 Wire</td>
+                        <td>Min $100</td>
+                        <td>Min €100</td>
+                        <td>Min £100</td>
+                        <td>CHF 100, AUD 5000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. Withdraw Fiat -->
+        <div class="section" id="withdraw-fiat">
+            <div class="section-header">
+                <span class="section-icon">💸</span>
+                <div>
+                    <h2 class="section-title">How to Withdraw FIAT</h2>
+                    <p class="section-subtitle">Send funds to your bank account</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Go to Wallet</h4>
+                        <p>Select the currency you want to withdraw</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Click "Withdraw"</h4>
+                        <p>Enter amount and your bank details</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Confirm with OTP</h4>
+                        <p>Enter the code sent to your phone</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>📋 Minimum Withdrawals</h4>
+                <p>USD $100 | EUR €100 | GBP £100 | CHF 100 | AUD 5000</p>
+            </div>
+        </div>
+
+        <!-- 4. Deposit Crypto -->
+        <div class="section" id="deposit-crypto">
+            <div class="section-header">
+                <span class="section-icon">📥</span>
+                <div>
+                    <h2 class="section-title">How to Deposit Crypto</h2>
+                    <p class="section-subtitle">Find your wallet address and receive crypto</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Go to Wallet → Search Cryptocurrency → Deposit</h4>
+                        <p>Select the crypto you want to deposit</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Select Network</h4>
+                        <p>Choose the network (ERC-20, TRC-20, etc.) — must match sending wallet!</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Copy Address or Scan QR</h4>
+                        <p>Your unique XBO deposit address will be displayed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <h4>⚠️ Important</h4>
+                <p>The network you select <strong>must match</strong> the network you use when sending. Wrong network = lost funds!</p>
+            </div>
+        </div>
+
+        <!-- 5. Withdraw Crypto -->
+        <div class="section" id="withdraw-crypto">
+            <div class="section-header">
+                <span class="section-icon">📤</span>
+                <div>
+                    <h2 class="section-title">How to Withdraw Crypto</h2>
+                    <p class="section-subtitle">Send crypto to external wallet</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Wallet → Select Crypto → Withdraw</h4>
+                        <p>Choose the cryptocurrency to withdraw</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Enter Amount, Network & Destination Address</h4>
+                        <p>Make sure the network matches the receiving wallet</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Confirm with OTP</h4>
+                        <p>Enter the SMS code to finalize</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box success">
+                <h4>💡 Free Transfers</h4>
+                <p>Transferring to another XBO user? <strong>0 fees!</strong></p>
+            </div>
+        </div>
+
+        <!-- 6. API Keys -->
+        <div class="section" id="api">
+            <div class="section-header">
+                <span class="section-icon">🔑</span>
+                <div>
+                    <h2 class="section-title">API Keys & Documentation</h2>
+                    <p class="section-subtitle">For CryptoPayX and Client API integration</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Profile Icon → Security</h4>
+                        <p>Bottom right corner of the screen</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Choose API Type</h4>
+                        <p><strong>Client API</strong> (trading) or <strong>CryptoPayX API</strong> (payments)</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Generate Keys (Sandbox or Live)</h4>
+                        <p>Sandbox for testing, Production for live transactions</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Whitelist IP Addresses</h4>
+                        <p>Email <a href="mailto:support@xbo.com" style="color: #818cf8;">support@xbo.com</a> with your IP addresses</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <h4>⚠️ Save Your Keys!</h4>
+                <p>API keys are <strong>not recoverable</strong>. If lost, you'll need to reset them.</p>
+            </div>
+
+            <div class="quick-links">
+                <a href="https://docs.xbo.com" class="quick-link" target="_blank">📚 API Documentation</a>
+                <a href="mailto:support@xbo.com" class="quick-link">✉️ Request IP Whitelist</a>
+            </div>
+        </div>
+
+        <!-- 7. Fees Reference -->
+        <div class="section" id="fees">
+            <div class="section-header">
+                <span class="section-icon">💰</span>
+                <div>
+                    <h2 class="section-title">Fees Reference</h2>
+                    <p class="section-subtitle">Deposit and withdrawal fees</p>
+                </div>
+            </div>
+
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 16px;">
+                For the most up-to-date fee information, check the Support Hub on the platform.
+            </p>
+
+            <div class="quick-links">
+                <a href="https://support.xbo.com/hc/en-us/articles/5765046657564-What-are-the-deposit-and-withdrawal-commissions" class="quick-link" target="_blank">📋 View Current Fees</a>
+                <a href="https://support.xbo.com/hc/en-us/articles/5765007737500-What-cryptocurrencies-can-I-buy-and-sell" class="quick-link" target="_blank">🪙 Supported Crypto</a>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact-box">
+            <h3>Need Help?</h3>
+            <p>Our team is here to assist you with onboarding and any questions.</p>
+            <p>
+                <a href="mailto:onboarding@xbo.com">📧 onboarding@xbo.com</a> · 
+                <a href="mailto:support@xbo.com">🛟 support@xbo.com</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

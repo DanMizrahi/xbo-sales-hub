@@ -557,6 +557,7 @@
                 <a href="compliance.html" class="nav-link">Compliance</a>
                 <a href="contracts.html" class="nav-link">Contracts</a>
                 <a href="procedures.html" class="nav-link">Internal</a>
+                <a href="getting-started.html" class="nav-link">🚀 Getting Started</a>
                 <a href="onboarding.html" class="nav-link" style="color: #10b981;">🎓 Onboarding</a>
                 <a href="updates.html" class="nav-link">Updates</a>
             </nav>
@@ -1267,6 +1268,76 @@ UAE, Turkey, Nigeria, Pakistan, Philippines, and others.<br><br>
 5. <strong>Go Live</strong> - first transaction<br><br>
 📋 Details: <a href="procedures.html" style="color: #818cf8;">procedures.html</a>`,
                     copyText: null
+                },
+
+                // Getting Started / New Client Guide
+                {
+                    triggers: ["how to deposit", "deposit fiat", "deposit crypto", "הפקדה", "איך מפקידים"],
+                    response: `<strong>💶 How to Deposit:</strong><br><br>
+<strong>FIAT (Card/Bank):</strong><br>
+1. Click "Deposit" → Choose Card or Bank<br>
+2. Enter amount & bank details<br>
+3. Get Transaction ID (add to wire reference!)<br>
+Min: Card $10, Wire $100<br><br>
+<strong>CRYPTO:</strong><br>
+1. Wallet → Select coin → Deposit<br>
+2. Choose network (must match sending wallet!)<br>
+3. Copy address or scan QR<br><br>
+📋 Full guide: <a href="getting-started.html#deposit-fiat" style="color: #818cf8;">getting-started.html</a>`,
+                    copyText: "How to Deposit:\n\nFIAT: Deposit → Card/Bank → Enter amount → Get TXN ID (add to wire reference)\nMin: Card $10, Wire $100\n\nCRYPTO: Wallet → Select coin → Deposit → Choose network → Copy address"
+                },
+                
+                {
+                    triggers: ["how to withdraw", "withdraw fiat", "withdraw crypto", "משיכה", "איך מושכים"],
+                    response: `<strong>💸 How to Withdraw:</strong><br><br>
+<strong>FIAT:</strong><br>
+1. Wallet → Select currency → Withdraw<br>
+2. Enter amount & bank details<br>
+3. Confirm with OTP (SMS)<br>
+Min: $100 / €100 / £100<br><br>
+<strong>CRYPTO:</strong><br>
+1. Wallet → Select coin → Withdraw<br>
+2. Enter amount, network & destination address<br>
+3. Confirm with OTP<br>
+💡 XBO to XBO = 0 fees!<br><br>
+📋 Full guide: <a href="getting-started.html#withdraw-fiat" style="color: #818cf8;">getting-started.html</a>`,
+                    copyText: "How to Withdraw:\n\nFIAT: Wallet → Currency → Withdraw → Enter bank details → OTP\nMin: $100\n\nCRYPTO: Wallet → Coin → Withdraw → Enter address → OTP\nXBO to XBO transfers = 0 fees!"
+                },
+                
+                {
+                    triggers: ["verification", "kyc level", "pro account", "אימות", "verify account"],
+                    response: `<strong>✅ Verification Levels:</strong><br><br>
+<strong>01. Occasional:</strong> Email+phone<br>
+→ Crypto: $1K/day withdraw<br><br>
+<strong>02. Basic:</strong> ID verification<br>
+→ Crypto: $500K/day | Fiat: $100K/day<br><br>
+<strong>03. PRO:</strong> Address + questionnaire<br>
+→ <strong>Unlimited</strong> crypto & fiat<br><br>
+💡 To reach PRO: Upload live selfie (not from gallery) + address proof<br><br>
+📋 Full guide: <a href="getting-started.html#verification" style="color: #818cf8;">getting-started.html</a>`,
+                    copyText: "Verification Levels:\n\n1. Occasional: Email+phone → $1K/day crypto\n2. Basic: ID verified → $500K crypto, $100K fiat\n3. PRO: Address verified → Unlimited\n\nTo reach PRO: Upload live selfie + address proof"
+                },
+                
+                {
+                    triggers: ["api key", "generate api", "api docs", "מפתח api"],
+                    response: `<strong>🔑 API Keys:</strong><br><br>
+1. Profile icon → Security<br>
+2. Choose: <strong>Client API</strong> or <strong>CryptoPayX API</strong><br>
+3. Select Sandbox (test) or Production (live)<br>
+4. Generate keys<br>
+5. <strong>Whitelist IPs</strong> → Email support@xbo.com<br><br>
+⚠️ Keys are NOT recoverable - save them!<br><br>
+📚 Docs: <a href="https://docs.xbo.com" style="color: #818cf8;">docs.xbo.com</a>`,
+                    copyText: "API Setup:\n1. Profile → Security\n2. Choose Client API or CryptoPayX API\n3. Generate Sandbox (test) or Production (live)\n4. Whitelist IPs → support@xbo.com\n\nDocs: docs.xbo.com"
+                },
+                
+                {
+                    triggers: ["minimum deposit", "minimum withdrawal", "min deposit", "min withdrawal"],
+                    response: `<strong>💰 Minimums:</strong><br><br>
+<strong>Deposit (Card):</strong> $10 / €10 / £10<br>
+<strong>Deposit (Wire):</strong> $100 / €100 / £100 / CHF 100 / AUD 5000<br><br>
+<strong>Withdrawal:</strong> $100 / €100 / £100 / CHF 100 / AUD 5000`,
+                    copyText: "Minimums:\n\nDeposit Card: $10\nDeposit Wire: $100\nWithdrawal: $100\n(EUR/GBP same amounts)"
                 },
                 
                 // Help
