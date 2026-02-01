@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Search & Filter */
+        .filter-section {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #334155;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #64748b;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .legend-dot.prohibited {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .legend-dot.restricted {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+        }
+
+        .action-btn.primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Jurisdiction Cards */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .section-badge.prohibited {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+        }
+
+        .section-badge.restricted {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fcd34d;
+        }
+
+        .jurisdiction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .jurisdiction-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .jurisdiction-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .jurisdiction-card.prohibited {
+            border-left: 4px solid #ef4444;
+        }
+
+        .jurisdiction-card.restricted {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .jurisdiction-card.hidden {
+            display: none;
+        }
+
+        .jurisdiction-flag {
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .jurisdiction-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .jurisdiction-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .jurisdiction-status {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .jurisdiction-status.prohibited {
+            color: #fca5a5;
+        }
+
+        .jurisdiction-status.restricted {
+            color: #fcd34d;
+        }
+
+        /* Visual Map Section */
+        .map-section {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px 0;
+            border: 1px solid #334155;
+        }
+
+        .map-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-visual {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            border: 1px dashed #334155;
+        }
+
+        .map-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-number.prohibited {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+        }
+
+        .stat-number.restricted {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            -webkit-background-clip: text;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* Important Notes */
+        .notes-section {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 40px 0;
+        }
+
+        .notes-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-list {
+            list-style: none;
+        }
+
+        .notes-list li {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .notes-list li::before {
+            content: "•";
+            color: #6366f1;
+            position: absolute;
+            left: 8px;
+        }
+
+        /* Copy Toast */
+        .copy-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .copy-toast.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-logo {
+                font-size: 1.8rem;
+            }
+
+            .jurisdiction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                justify-content: center;
+            }
+
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Hub</a>
+            <h1 class="header-logo">⚖️ Compliance</h1>
+            <p class="subtitle">Prohibited & Restricted Jurisdictions</p>
+        </header>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-dot prohibited"></span>
+                <span>Prohibited – Cannot serve at all</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot restricted"></span>
+                <span>Restricted – Limited service available</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn" onclick="copyPageLink()">
+                🔗 Copy Page Link
+            </button>
+            <a href="downloads/xbo-jurisdictions.pdf" class="action-btn primary" download>
+                📄 Download PDF
+            </a>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="filter-section">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="jurisdictionSearch" class="search-input" placeholder="Search country or region..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="map-section">
+            <div class="map-title">📊 Overview</div>
+            <div class="map-stats">
+                <div class="stat-card">
+                    <div class="stat-number prohibited">2</div>
+                    <div class="stat-label">Prohibited Jurisdictions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number restricted">28</div>
+                    <div class="stat-label">Restricted Jurisdictions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Total Restrictions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prohibited Jurisdictions -->
+        <h2 class="section-title">
+            🚫 Prohibited Jurisdictions
+            <span class="section-badge prohibited">Cannot Serve</span>
+        </h2>
+        <div class="jurisdiction-grid" id="prohibitedGrid">
+            <div class="jurisdiction-card prohibited" data-country="china peoples republic">
+                <span class="jurisdiction-flag">🇨🇳</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">China (People's Republic)</div>
+                    <div class="jurisdiction-status prohibited">Fully prohibited</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card prohibited" data-country="macao macau china">
+                <span class="jurisdiction-flag">🇲🇴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Macao (China)</div>
+                    <div class="jurisdiction-status prohibited">Fully prohibited</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restricted Jurisdictions -->
+        <h2 class="section-title">
+            ⚠️ Restricted Jurisdictions
+            <span class="section-badge restricted">Limited Service</span>
+        </h2>
+        <div class="jurisdiction-grid" id="restrictedGrid">
+            <div class="jurisdiction-card restricted" data-country="afghanistan">
+                <span class="jurisdiction-flag">🇦🇫</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Afghanistan</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="algeria">
+                <span class="jurisdiction-flag">🇩🇿</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Algeria</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="bangladesh">
+                <span class="jurisdiction-flag">🇧🇩</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Bangladesh</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="belarus">
+                <span class="jurisdiction-flag">🇧🇾</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Belarus</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="bolivia">
+                <span class="jurisdiction-flag">🇧🇴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Bolivia</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="burkina faso">
+                <span class="jurisdiction-flag">🇧🇫</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Burkina Faso</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="burundi">
+                <span class="jurisdiction-flag">🇧🇮</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Burundi</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="cambodia">
+                <span class="jurisdiction-flag">🇰🇭</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Cambodia</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="congo brazzaville republic">
+                <span class="jurisdiction-flag">🇨🇬</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Congo (Brazzaville)</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="congo kinshasa drc democratic">
+                <span class="jurisdiction-flag">🇨🇩</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Congo, Kinshasa</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="crimea region ukraine russia">
+                <span class="jurisdiction-flag">🏴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Crimea Region</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="donetsk region ukraine russia">
+                <span class="jurisdiction-flag">🏴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Donetsk Region</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="gabon">
+                <span class="jurisdiction-flag">🇬🇦</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Gabon</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="haiti">
+                <span class="jurisdiction-flag">🇭🇹</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Haiti</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="iran">
+                <span class="jurisdiction-flag">🇮🇷</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Iran</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="iraq">
+                <span class="jurisdiction-flag">🇮🇶</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Iraq</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="jamaica">
+                <span class="jurisdiction-flag">🇯🇲</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Jamaica</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="kherson region ukraine russia">
+                <span class="jurisdiction-flag">🏴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Kherson Region</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="korea north dprk">
+                <span class="jurisdiction-flag">🇰🇵</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Korea (North Korea)</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="lesotho">
+                <span class="jurisdiction-flag">🇱🇸</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Lesotho</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="libya">
+                <span class="jurisdiction-flag">🇱🇾</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Libya</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="luhansk region ukraine russia">
+                <span class="jurisdiction-flag">🏴</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Luhansk Region</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="mali">
+                <span class="jurisdiction-flag">🇲🇱</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Mali</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="myanmar burma">
+                <span class="jurisdiction-flag">🇲🇲</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Myanmar/Burma</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="palestine palestinian">
+                <span class="jurisdiction-flag">🇵🇸</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Palestine</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="russia russian federation">
+                <span class="jurisdiction-flag">🇷🇺</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Russian Federation</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="syria syrian">
+                <span class="jurisdiction-flag">🇸🇾</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">Syria</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+            <div class="jurisdiction-card restricted" data-country="uae united arab emirates dubai abu dhabi">
+                <span class="jurisdiction-flag">🇦🇪</span>
+                <div class="jurisdiction-info">
+                    <div class="jurisdiction-name">United Arab Emirates</div>
+                    <div class="jurisdiction-status restricted">Limited service</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Notes -->
+        <div class="notes-section">
+            <h3 class="notes-title">📋 Important Notes</h3>
+            <ul class="notes-list">
+                <li><strong>Prohibited</strong> means XBO cannot provide any services to entities or individuals from these jurisdictions.</li>
+                <li><strong>Restricted</strong> means service availability is limited and requires additional compliance review.</li>
+                <li>Jurisdiction restrictions may change based on regulatory developments. Always verify current status with the compliance team.</li>
+                <li>For clients in restricted jurisdictions, additional due diligence and documentation may be required.</li>
+                <li>Questions? Contact the compliance team at <strong>compliance@xbo.com</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copy Toast -->
+    <div class="copy-toast" id="copyToast">✓ Link copied to clipboard!</div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('jurisdictionSearch');
+        const cards = document.querySelectorAll('.jurisdiction-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const country = card.dataset.country || '';
+                const name = card.querySelector('.jurisdiction-name').textContent.toLowerCase();
+                
+                if (country.includes(query) || name.includes(query) || query === '') {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+
+        // Copy page link
+        function copyPageLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('copyToast');
+            toast.classList.add('visible');
+            setTimeout(() => {
+                toast.classList.remove('visible');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMoney FAQ - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 24px 40px;
+            text-align: center;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px 18px 56px;
+            border-radius: 16px;
+            border: 2px solid #334155;
+            background: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .search-stats {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .category-tab {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-tab:hover {
+            background: #263548;
+            color: #fff;
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .category-count {
+            background: rgba(255,255,255,0.15);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .category-tab.active .category-count {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 40px;
+        }
+
+        .faq-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .faq-section-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .faq-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .faq-section-count {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* FAQ Items */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .faq-item:hover {
+            border-color: #475569;
+        }
+
+        .faq-item.open {
+            border-color: #6366f1;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            cursor: pointer;
+            gap: 16px;
+        }
+
+        .faq-question-text {
+            font-weight: 500;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .faq-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-copy-btn {
+            background: transparent;
+            border: none;
+            color: #475569;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .faq-item:hover .faq-copy-btn {
+            opacity: 1;
+        }
+
+        .faq-copy-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+        }
+
+        .faq-copy-btn.copied {
+            color: #10b981;
+        }
+
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            background: #334155;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .faq-toggle svg {
+            width: 14px;
+            height: 14px;
+            stroke: #94a3b8;
+            transition: transform 0.2s;
+        }
+
+        .faq-item.open .faq-toggle {
+            background: #6366f1;
+        }
+
+        .faq-item.open .faq-toggle svg {
+            stroke: #fff;
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 2000px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 20px 20px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .faq-answer-inner p {
+            margin-bottom: 12px;
+        }
+
+        .faq-answer-inner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer-inner ul, .faq-answer-inner ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .faq-answer-inner li {
+            margin-bottom: 8px;
+        }
+
+        .faq-answer-inner strong {
+            color: #e2e8f0;
+        }
+
+        .faq-answer-inner code {
+            background: #0f172a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #a5b4fc;
+        }
+
+        .info-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 12px 0;
+        }
+
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .info-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .no-results h3 {
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: #12121f;
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid #2a2a4a;
+                gap: 4px;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 40px 20px 30px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .category-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 16px;
+                margin-bottom: 24px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .category-tab {
+                flex-shrink: 0;
+            }
+
+            .faq-copy-btn {
+                opacity: 1;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Highlight matched text */
+        .highlight {
+            background: rgba(99, 102, 241, 0.3);
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            z-index: 50;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="case-studies.html" class="nav-link">Case Studies</a>
+                <a href="pdf-center.html" class="nav-link">Link Center</a>
+                <a href="emoney-faq.html" class="nav-link active">eMoney FAQ</a>
+                <a href="procedures.html" class="nav-link">Internal</a>
+            </nav>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span>🏦</span>
+            <span>Powered by Equals Money</span>
+        </div>
+        <h1 class="hero-title">eMoney FAQ</h1>
+        <p class="hero-subtitle">Everything you need to know about XBO eMoney accounts, cards, payments, and more.</p>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="faqSearch" placeholder="Search FAQs... (e.g., SEPA, cards, roles)" autocomplete="off">
+            </div>
+            <div class="search-stats" id="searchStats">Showing all <span id="totalCount">0</span> FAQs across 8 categories</div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Category Tabs -->
+        <div class="category-tabs" id="categoryTabs">
+            <button class="category-tab active" data-category="all">
+                All FAQs
+                <span class="category-count" id="countAll">0</span>
+            </button>
+            <button class="category-tab" data-category="account">
+                🔐 Account & Setup
+                <span class="category-count" id="countAccount">0</span>
+            </button>
+            <button class="category-tab" data-category="currencies">
+                💱 Currencies & Payments
+                <span class="category-count" id="countCurrencies">0</span>
+            </button>
+            <button class="category-tab" data-category="cards">
+                💳 Cards
+                <span class="category-count" id="countCards">0</span>
+            </button>
+            <button class="category-tab" data-category="balances">
+                💰 Balances
+                <span class="category-count" id="countBalances">0</span>
+            </button>
+            <button class="category-tab" data-category="people">
+                👥 People & Roles
+                <span class="category-count" id="countPeople">0</span>
+            </button>
+            <button class="category-tab" data-category="security">
+                🔒 Security
+                <span class="category-count" id="countSecurity">0</span>
+            </button>
+            <button class="category-tab" data-category="integrations">
+                🔗 Integrations
+                <span class="category-count" id="countIntegrations">0</span>
+            </button>
+            <button class="category-tab" data-category="approvals">
+                ✅ Approvals
+                <span class="category-count" id="countApprovals">0</span>
+            </button>
+        </div>
+
+        <!-- FAQ Sections Container -->
+        <div id="faqContainer">
+            <!-- Sections will be populated by JavaScript -->
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results hidden" id="noResults">
+            <div class="no-results-icon">🔍</div>
+            <h3>No FAQs found</h3>
+            <p>Try adjusting your search terms or browse by category</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        XBO Sales Hub · Internal Use Only<br>
+        eMoney services powered by <a href="https://equalsmoney.com" target="_blank">Equals Money</a> · Last updated: July 2025
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // FAQ Data Structure
+        const faqData = {
+            account: {
+                icon: '🔐',
+                title: 'Account & Setup',
+                items: [
+                    {
+                        id: 'open-account',
+                        question: 'How do I open an eMoney account?',
+                        answer: `<p>Opening an XBO eMoney account is straightforward:</p>
+                        <ol>
+                            <li><strong>Submit Application:</strong> Complete the online application form with your business details</li>
+                            <li><strong>Provide Documentation:</strong> Upload required KYB/KYC documents</li>
+                            <li><strong>Verification:</strong> Our compliance team reviews your application</li>
+                            <li><strong>Approval:</strong> Once approved, you'll receive login credentials</li>
+                            <li><strong>Activation:</strong> Set up MFA and start using your account</li>
+                        </ol>
+                        <div class="info-box">
+                            <strong>💡 Tip:</strong> Having all documentation ready can speed up the process significantly.
+                        </div>`
+                    },
+                    {
+                        id: 'documentation-requirements',
+                        question: 'What documentation do I need to open an account?',
+                        answer: `<p>Required documentation depends on your business type:</p>
+                        <p><strong>For Companies:</strong></p>
+                        <ul>
+                            <li>Certificate of Incorporation</li>
+                            <li>Memorandum & Articles of Association</li>
+                            <li>Register of Directors & Shareholders</li>
+                            <li>Proof of registered address (utility bill, bank statement)</li>
+                            <li>UBO (Ultimate Beneficial Owner) declaration</li>
+                        </ul>
+                        <p><strong>For Directors/UBOs (individuals owning 25%+):</strong></p>
+                        <ul>
+                            <li>Valid government-issued ID (passport preferred)</li>
+                            <li>Proof of address (dated within 3 months)</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Note:</strong> Additional documents may be requested based on your business activities and risk assessment.
+                        </div>`
+                    },
+                    {
+                        id: 'application-time',
+                        question: 'How long does the application process take?',
+                        answer: `<p>Application processing times vary based on several factors:</p>
+                        <ul>
+                            <li><strong>Standard Applications:</strong> 2-5 business days</li>
+                            <li><strong>Complex Structures:</strong> 5-10 business days</li>
+                            <li><strong>High-Risk Industries:</strong> 10-15 business days</li>
+                        </ul>
+                        <p>Factors that can speed up approval:</p>
+                        <ul>
+                            <li>Complete and accurate documentation</li>
+                            <li>Clear business description and use case</li>
+                            <li>Responsive to any additional information requests</li>
+                        </ul>
+                        <div class="info-box success">
+                            <strong>✅ Pro tip:</strong> Applications with XBO referral typically receive priority processing.
+                        </div>`
+                    },
+                    {
+                        id: 'close-account',
+                        question: 'How do I close my account?',
+                        answer: `<p>To close your eMoney account:</p>
+                        <ol>
+                            <li><strong>Withdraw Funds:</strong> Transfer all remaining balances to an external account</li>
+                            <li><strong>Cancel Cards:</strong> Ensure all cards are cancelled and there are no pending transactions</li>
+                            <li><strong>Submit Request:</strong> Contact support with a formal closure request</li>
+                            <li><strong>Confirmation:</strong> You'll receive confirmation once the account is closed</li>
+                        </ol>
+                        <div class="info-box warning">
+                            <strong>⚠️ Important:</strong> Account closure is permanent. Ensure you've downloaded all statements and transaction history before closing.
+                        </div>`
+                    },
+                    {
+                        id: 'multiple-accounts',
+                        question: 'Can I have multiple eMoney accounts?',
+                        answer: `<p>Yes, businesses can have multiple accounts for different purposes:</p>
+                        <ul>
+                            <li><strong>Separate Entities:</strong> Each legal entity can have its own account</li>
+                            <li><strong>Different Currencies:</strong> Hold balances in multiple currencies within one account</li>
+                            <li><strong>Departmental Separation:</strong> Use balances feature to separate funds by department</li>
+                        </ul>
+                        <p>Contact your account manager to discuss multi-account structures.</p>`
+                    },
+                    {
+                        id: 'business-types',
+                        question: 'What types of businesses can open an account?',
+                        answer: `<p>XBO eMoney accounts are available for most legitimate businesses including:</p>
+                        <ul>
+                            <li>Limited Companies (Ltd, LLC, Inc, etc.)</li>
+                            <li>Partnerships (LLP, LP)</li>
+                            <li>Sole Traders</li>
+                            <li>Trusts and Foundations</li>
+                            <li>Regulated Financial Institutions</li>
+                        </ul>
+                        <p><strong>Restricted Industries:</strong></p>
+                        <ul>
+                            <li>Unregulated gambling</li>
+                            <li>Adult content</li>
+                            <li>Weapons trading</li>
+                            <li>Cannabis (jurisdiction dependent)</li>
+                        </ul>
+                        <p>Contact us to discuss your specific use case.</p>`
+                    }
+                ]
+            },
+            currencies: {
+                icon: '💱',
+                title: 'Currencies & Payments',
+                items: [
+                    {
+                        id: 'supported-currencies-iban',
+                        question: 'How many currencies are supported for IBAN accounts?',
+                        answer: `<p>XBO eMoney supports <strong>38 currencies</strong> for IBAN-based accounts:</p>
+                        <p><strong>Major Currencies:</strong> EUR, GBP, USD, CHF, CAD, AUD, NZD, JPY, HKD, SGD</p>
+                        <p><strong>European:</strong> DKK, NOK, SEK, PLN, CZK, HUF, RON, BGN, HRK</p>
+                        <p><strong>Others:</strong> AED, ZAR, THB, MXN, ILS, TRY, BRL, and more</p>
+                        <div class="info-box">
+                            <strong>💡 Note:</strong> Availability may vary based on your account type and jurisdiction.
+                        </div>`
+                    },
+                    {
+                        id: 'supported-currencies-cards',
+                        question: 'Which currencies can I use with cards?',
+                        answer: `<p>Cards support spending in <strong>21 currencies</strong> without conversion fees:</p>
+                        <ul>
+                            <li><strong>Primary:</strong> EUR, GBP, USD</li>
+                            <li><strong>European:</strong> CHF, DKK, NOK, SEK, PLN, CZK, HUF</li>
+                            <li><strong>Asia-Pacific:</strong> AUD, NZD, JPY, HKD, SGD, THB</li>
+                            <li><strong>Americas:</strong> CAD, MXN</li>
+                            <li><strong>Others:</strong> AED, ZAR</li>
+                        </ul>
+                        <p>Spending in other currencies will incur a small FX conversion fee.</p>`
+                    },
+                    {
+                        id: 'supported-currencies-wire',
+                        question: 'How many currencies are supported for international wire transfers?',
+                        answer: `<p>International wire transfers (SWIFT) support <strong>61 currencies</strong>, including all major and exotic currencies:</p>
+                        <ul>
+                            <li>All 38 IBAN currencies</li>
+                            <li>Plus: INR, PHP, VND, IDR, KRW, TWD, PKR, BDT, LKR, and more</li>
+                        </ul>
+                        <p>This makes XBO eMoney ideal for businesses with global payment needs.</p>`
+                    },
+                    {
+                        id: 'sepa-payments',
+                        question: 'How do SEPA payments work?',
+                        answer: `<p><strong>SEPA (Single Euro Payments Area)</strong> enables fast, low-cost EUR transfers across 36 European countries.</p>
+                        <p><strong>SEPA Credit Transfer (SCT):</strong></p>
+                        <ul>
+                            <li>Standard: 1-2 business days</li>
+                            <li>Fee: Typically free or very low</li>
+                        </ul>
+                        <p><strong>SEPA Instant:</strong></p>
+                        <ul>
+                            <li>Speed: Seconds (24/7/365)</li>
+                            <li>Limit: Up to €100,000 per transaction</li>
+                            <li>Fee: Small premium over standard SEPA</li>
+                        </ul>
+                        <div class="info-box success">
+                            <strong>✅ Best for:</strong> Regular EUR payments to European suppliers, payroll, and B2B transactions.
+                        </div>`
+                    },
+                    {
+                        id: 'swift-payments',
+                        question: 'How do SWIFT payments work?',
+                        answer: `<p><strong>SWIFT</strong> is the global network for international bank transfers.</p>
+                        <p><strong>Processing Time:</strong></p>
+                        <ul>
+                            <li>Standard: 2-5 business days</li>
+                            <li>Some corridors: Same day or next day</li>
+                        </ul>
+                        <p><strong>Information Required:</strong></p>
+                        <ul>
+                            <li>Beneficiary name and address</li>
+                            <li>Bank name and SWIFT/BIC code</li>
+                            <li>Account number or IBAN</li>
+                            <li>Payment reference/purpose</li>
+                        </ul>
+                        <p><strong>Fees:</strong> Vary by currency and destination. Shared (SHA), beneficiary (BEN), or sender (OUR) charging options available.</p>`
+                    },
+                    {
+                        id: 'faster-payments',
+                        question: 'What are Faster Payments?',
+                        answer: `<p><strong>Faster Payments (FPS)</strong> is the UK's real-time payment system for GBP.</p>
+                        <ul>
+                            <li><strong>Speed:</strong> Usually within seconds, 24/7</li>
+                            <li><strong>Limit:</strong> Up to £1,000,000 per transaction</li>
+                            <li><strong>Requirements:</strong> UK sort code and account number</li>
+                            <li><strong>Cost:</strong> Typically included or minimal fee</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>💡 Note:</strong> Not all banks support the maximum limit. Check recipient bank limits.
+                        </div>`
+                    },
+                    {
+                        id: 'forward-contracts',
+                        question: 'What are forward contracts and how do they work?',
+                        answer: `<p><strong>Forward contracts</strong> let you lock in an exchange rate for a future date, protecting against currency fluctuations.</p>
+                        <p><strong>How It Works:</strong></p>
+                        <ol>
+                            <li>Agree on the amount and currency pair</li>
+                            <li>Lock in today's rate (or a forward rate)</li>
+                            <li>Settlement date: 1 week to 12 months ahead</li>
+                            <li>Exchange occurs at the agreed rate, regardless of market movements</li>
+                        </ol>
+                        <p><strong>Benefits:</strong></p>
+                        <ul>
+                            <li>Budget certainty for future payments</li>
+                            <li>Protection against adverse currency moves</li>
+                            <li>No upside participation (rate is fixed)</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Margin requirement:</strong> A deposit (typically 5-10%) may be required.
+                        </div>`
+                    },
+                    {
+                        id: 'fx-hedging',
+                        question: 'What FX hedging options are available?',
+                        answer: `<p>XBO eMoney offers several FX hedging tools:</p>
+                        <p><strong>1. Spot Contracts:</strong></p>
+                        <ul>
+                            <li>Immediate exchange at current rate</li>
+                            <li>Settlement: Same day or T+2</li>
+                        </ul>
+                        <p><strong>2. Forward Contracts:</strong></p>
+                        <ul>
+                            <li>Lock rate for future settlement</li>
+                            <li>Tenure: Up to 12 months</li>
+                        </ul>
+                        <p><strong>3. Market Orders:</strong></p>
+                        <ul>
+                            <li>Set target rate, execute when reached</li>
+                            <li>Stop-loss and take-profit orders</li>
+                        </ul>
+                        <p>Contact your account manager for tailored hedging strategies.</p>`
+                    },
+                    {
+                        id: 'payment-fees',
+                        question: 'What are the payment fees?',
+                        answer: `<p>Payment fees depend on the payment type and currency:</p>
+                        <p><strong>SEPA (EUR):</strong></p>
+                        <ul>
+                            <li>Standard: Free or €0.20 per transfer</li>
+                            <li>Instant: €1-2 per transfer</li>
+                        </ul>
+                        <p><strong>Faster Payments (GBP):</strong></p>
+                        <ul>
+                            <li>Usually included in account fee</li>
+                        </ul>
+                        <p><strong>SWIFT International:</strong></p>
+                        <ul>
+                            <li>From £/€15-30 depending on currency and destination</li>
+                            <li>Correspondent bank fees may apply</li>
+                        </ul>
+                        <p><strong>FX Conversion:</strong></p>
+                        <ul>
+                            <li>Competitive rates based on volume</li>
+                            <li>Live rates available in platform</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'incoming-payments',
+                        question: 'How do I receive payments?',
+                        answer: `<p>Your account comes with dedicated account details for receiving funds:</p>
+                        <p><strong>For GBP:</strong></p>
+                        <ul>
+                            <li>UK Sort Code + Account Number</li>
+                            <li>IBAN (for international)</li>
+                        </ul>
+                        <p><strong>For EUR:</strong></p>
+                        <ul>
+                            <li>IBAN + BIC/SWIFT</li>
+                        </ul>
+                        <p><strong>For other currencies:</strong></p>
+                        <ul>
+                            <li>Local account details where available</li>
+                            <li>SWIFT details for international transfers</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>💡 Tip:</strong> Share your account details from the platform to ensure accuracy.
+                        </div>`
+                    }
+                ]
+            },
+            cards: {
+                icon: '💳',
+                title: 'Cards',
+                items: [
+                    {
+                        id: 'individual-vs-shared-cards',
+                        question: 'What is the difference between Individual and Shared cards?',
+                        answer: `<p><strong>Individual Cards:</strong></p>
+                        <ul>
+                            <li>Assigned to one specific person</li>
+                            <li>Linked to that person's individual balance</li>
+                            <li>Cardholder name printed on card</li>
+                            <li>Best for: Employee expenses, travel cards</li>
+                        </ul>
+                        <p><strong>Shared Cards:</strong></p>
+                        <ul>
+                            <li>Can be used by multiple team members</li>
+                            <li>Linked to a shared balance (e.g., Marketing, Operations)</li>
+                            <li>Generic name on card (e.g., company name)</li>
+                            <li>Best for: Team subscriptions, departmental spending</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'virtual-vs-physical',
+                        question: 'Should I get virtual or physical cards?',
+                        answer: `<p><strong>Virtual Cards:</strong></p>
+                        <ul>
+                            <li>Instant issuance - ready in seconds</li>
+                            <li>Ideal for online purchases and subscriptions</li>
+                            <li>Add to Apple Pay / Google Pay for in-store use</li>
+                            <li>Easy to create and delete</li>
+                            <li>No delivery wait time</li>
+                        </ul>
+                        <p><strong>Physical Cards:</strong></p>
+                        <ul>
+                            <li>Required for ATM withdrawals</li>
+                            <li>Chip & PIN for in-store purchases</li>
+                            <li>Delivery: 3-5 business days</li>
+                            <li>Contactless enabled</li>
+                        </ul>
+                        <div class="info-box success">
+                            <strong>✅ Recommendation:</strong> Start with virtual cards for immediate use, order physical cards for frequent travelers.
+                        </div>`
+                    },
+                    {
+                        id: 'order-cards',
+                        question: 'How do I order cards and how long does delivery take?',
+                        answer: `<p><strong>Ordering Process:</strong></p>
+                        <ol>
+                            <li>Navigate to Cards section in platform</li>
+                            <li>Click "Order New Card"</li>
+                            <li>Select card type (Virtual/Physical) and link to balance</li>
+                            <li>Enter delivery address (for physical cards)</li>
+                            <li>Confirm and submit</li>
+                        </ol>
+                        <p><strong>Delivery Times:</strong></p>
+                        <ul>
+                            <li><strong>Virtual Cards:</strong> Instant</li>
+                            <li><strong>Physical Cards (UK):</strong> 3-5 business days</li>
+                            <li><strong>Physical Cards (EU):</strong> 5-7 business days</li>
+                            <li><strong>Physical Cards (International):</strong> 7-14 business days</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>💡 Express Delivery:</strong> Available for urgent requests at additional cost.
+                        </div>`
+                    },
+                    {
+                        id: 'card-limits',
+                        question: 'What are the card spending limits?',
+                        answer: `<p>Card limits can be customized per card:</p>
+                        <p><strong>Default Limits:</strong></p>
+                        <ul>
+                            <li>Daily spend limit: £5,000 / €6,000</li>
+                            <li>Daily ATM withdrawal: £500 / €600</li>
+                            <li>Monthly spend limit: £25,000 / €30,000</li>
+                            <li>Single transaction: £10,000 / €12,000</li>
+                        </ul>
+                        <p><strong>Customization:</strong></p>
+                        <ul>
+                            <li>Admins can adjust limits per card</li>
+                            <li>Limits can be increased upon request</li>
+                            <li>Real-time controls in platform</li>
+                        </ul>
+                        <p>Limits are also restricted by the linked balance amount.</p>`
+                    },
+                    {
+                        id: 'card-controls',
+                        question: 'What card controls are available?',
+                        answer: `<p>Comprehensive controls for each card:</p>
+                        <p><strong>Spending Controls:</strong></p>
+                        <ul>
+                            <li>Daily/weekly/monthly limits</li>
+                            <li>Single transaction limits</li>
+                            <li>ATM withdrawal limits</li>
+                            <li>Merchant category restrictions (e.g., block gambling)</li>
+                        </ul>
+                        <p><strong>Card Actions:</strong></p>
+                        <ul>
+                            <li>Freeze/unfreeze instantly</li>
+                            <li>Block specific transaction types</li>
+                            <li>Enable/disable online transactions</li>
+                            <li>Enable/disable contactless</li>
+                            <li>Geographic restrictions</li>
+                        </ul>
+                        <p>All controls are available in real-time through the platform.</p>`
+                    },
+                    {
+                        id: 'apple-google-pay',
+                        question: 'Can I use Apple Pay or Google Pay?',
+                        answer: `<p><strong>Yes!</strong> Both Apple Pay and Google Pay are fully supported.</p>
+                        <p><strong>To add your card:</strong></p>
+                        <ol>
+                            <li>Open Apple Wallet or Google Pay app</li>
+                            <li>Tap "Add Card"</li>
+                            <li>Scan your card or enter details manually</li>
+                            <li>Verify via SMS or in-app authentication</li>
+                            <li>Start using immediately</li>
+                        </ol>
+                        <div class="info-box success">
+                            <strong>✅ Pro tip:</strong> Virtual cards can be added to digital wallets instantly - no need to wait for physical card delivery!
+                        </div>`
+                    },
+                    {
+                        id: 'pin-management',
+                        question: 'How do I view or change my PIN?',
+                        answer: `<p><strong>View PIN:</strong></p>
+                        <ul>
+                            <li>Log into the platform or mobile app</li>
+                            <li>Navigate to your card</li>
+                            <li>Select "View PIN" (requires authentication)</li>
+                            <li>PIN is displayed temporarily</li>
+                        </ul>
+                        <p><strong>Change PIN:</strong></p>
+                        <ul>
+                            <li>At any Mastercard-enabled ATM</li>
+                            <li>Insert card, enter current PIN</li>
+                            <li>Select "Change PIN" from menu</li>
+                            <li>Enter new PIN (twice to confirm)</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Security:</strong> Never share your PIN with anyone, including support staff.
+                        </div>`
+                    },
+                    {
+                        id: 'atm-usage',
+                        question: 'Can I withdraw cash from ATMs?',
+                        answer: `<p><strong>Yes, ATM withdrawals are available</strong> with physical cards at any Mastercard-enabled ATM worldwide.</p>
+                        <p><strong>Limits:</strong></p>
+                        <ul>
+                            <li>Default daily limit: £500 / €600</li>
+                            <li>Per transaction: Based on ATM limits</li>
+                        </ul>
+                        <p><strong>Fees:</strong></p>
+                        <ul>
+                            <li>XBO may charge a small ATM fee</li>
+                            <li>ATM operator fees may apply</li>
+                            <li>FX conversion if withdrawing foreign currency</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>💡 Tip:</strong> When prompted, always choose to be charged in the local currency to get the best exchange rate.
+                        </div>`
+                    },
+                    {
+                        id: 'lost-stolen-card',
+                        question: 'What do I do if my card is lost or stolen?',
+                        answer: `<p><strong>Immediate Action:</strong></p>
+                        <ol>
+                            <li><strong>Freeze the card immediately</strong> via platform or mobile app</li>
+                            <li>Review recent transactions for unauthorized activity</li>
+                            <li>Report any suspicious transactions</li>
+                            <li>Order a replacement card</li>
+                        </ol>
+                        <p><strong>To freeze a card:</strong></p>
+                        <ul>
+                            <li>Platform: Cards → Select card → Freeze</li>
+                            <li>Mobile: Tap card → Freeze toggle</li>
+                        </ul>
+                        <p><strong>Replacement Cards:</strong></p>
+                        <ul>
+                            <li>New card issued with new number</li>
+                            <li>Previous card permanently cancelled</li>
+                            <li>Standard delivery times apply</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'card-expiry',
+                        question: 'What happens when my card expires?',
+                        answer: `<p>Cards are automatically renewed before expiry:</p>
+                        <ul>
+                            <li>Replacement card sent 4-6 weeks before expiry</li>
+                            <li>New card number and CVV</li>
+                            <li>Old card remains active until expiry date</li>
+                            <li>Update recurring payments with new details</li>
+                        </ul>
+                        <p>Virtual cards in digital wallets are automatically updated in most cases.</p>`
+                    }
+                ]
+            },
+            balances: {
+                icon: '💰',
+                title: 'Balances',
+                items: [
+                    {
+                        id: 'account-balance',
+                        question: 'What is the Account Balance?',
+                        answer: `<p>The <strong>Account Balance</strong> is the main pool of funds in your eMoney account.</p>
+                        <ul>
+                            <li>Receives all incoming payments</li>
+                            <li>Source for outgoing payments</li>
+                            <li>Can hold multiple currencies</li>
+                            <li>Visible to admins and owners</li>
+                        </ul>
+                        <p>Think of it as your company's main "treasury" from which funds can be allocated to other balances.</p>`
+                    },
+                    {
+                        id: 'shared-balances',
+                        question: 'What are Shared Balances?',
+                        answer: `<p><strong>Shared Balances</strong> are sub-accounts for teams or departments.</p>
+                        <p><strong>Use Cases:</strong></p>
+                        <ul>
+                            <li>Marketing budget</li>
+                            <li>Travel expenses</li>
+                            <li>Project-specific funds</li>
+                            <li>Department allocations</li>
+                        </ul>
+                        <p><strong>Features:</strong></p>
+                        <ul>
+                            <li>Multiple people can access one shared balance</li>
+                            <li>Cards can be linked to shared balances</li>
+                            <li>Set up spending controls per balance</li>
+                            <li>Track spending by team easily</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'individual-balances',
+                        question: 'What are Individual Balances?',
+                        answer: `<p><strong>Individual Balances</strong> are personal wallets for specific users.</p>
+                        <ul>
+                            <li>Assigned to one person only</li>
+                            <li>Linked to that person's card(s)</li>
+                            <li>Great for employee expense management</li>
+                            <li>Easy to track individual spending</li>
+                        </ul>
+                        <p><strong>Funding:</strong></p>
+                        <ul>
+                            <li>Admin allocates from Account Balance</li>
+                            <li>Can be topped up automatically</li>
+                            <li>Auto-replenishment rules available</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'balance-roles',
+                        question: 'What are the different balance roles?',
+                        answer: `<p>Each balance can have users with different access levels:</p>
+                        <p><strong>Admin:</strong></p>
+                        <ul>
+                            <li>Full control over balance</li>
+                            <li>Add/remove people</li>
+                            <li>Set spending limits</li>
+                            <li>View all transactions</li>
+                        </ul>
+                        <p><strong>Payer:</strong></p>
+                        <ul>
+                            <li>Make payments from balance</li>
+                            <li>Use linked cards</li>
+                            <li>View own transactions</li>
+                            <li>Cannot change settings</li>
+                        </ul>
+                        <p><strong>Viewer:</strong></p>
+                        <ul>
+                            <li>View-only access</li>
+                            <li>See balance and transactions</li>
+                            <li>Cannot make payments or changes</li>
+                            <li>Great for finance oversight</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'currency-alignment',
+                        question: 'What is currency alignment for balances?',
+                        answer: `<p><strong>Currency alignment</strong> determines which currency a balance operates in.</p>
+                        <ul>
+                            <li>Each balance has a base currency</li>
+                            <li>Cards linked to balance spend in that currency</li>
+                            <li>FX conversion happens at time of transaction if spending in different currency</li>
+                        </ul>
+                        <p><strong>Example:</strong></p>
+                        <p>A GBP balance linked to a card will:</p>
+                        <ul>
+                            <li>Show amounts in GBP</li>
+                            <li>Deduct GBP when spending</li>
+                            <li>Convert EUR purchases to GBP at live rate</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'internal-transfers',
+                        question: 'How do internal transfers between balances work?',
+                        answer: `<p>Moving money between balances is instant and free:</p>
+                        <p><strong>Transfer Types:</strong></p>
+                        <ul>
+                            <li>Account Balance → Shared/Individual Balance</li>
+                            <li>Shared Balance → Account Balance</li>
+                            <li>Between Shared Balances (if permitted)</li>
+                        </ul>
+                        <p><strong>To Transfer:</strong></p>
+                        <ol>
+                            <li>Go to Balances section</li>
+                            <li>Select source balance</li>
+                            <li>Click "Transfer"</li>
+                            <li>Choose destination and amount</li>
+                            <li>Confirm</li>
+                        </ol>
+                        <p><strong>Permissions:</strong> Admin role required to transfer funds.</p>`
+                    },
+                    {
+                        id: 'balance-limits',
+                        question: 'Are there limits on balances?',
+                        answer: `<p>Balance limits can be configured:</p>
+                        <ul>
+                            <li><strong>Maximum Balance:</strong> Set upper limit on balance amount</li>
+                            <li><strong>Monthly Spend Limit:</strong> Control total monthly outflow</li>
+                            <li><strong>Auto-replenishment:</strong> Top up when balance falls below threshold</li>
+                        </ul>
+                        <p>These controls help with budget management and prevent overspending.</p>`
+                    }
+                ]
+            },
+            people: {
+                icon: '👥',
+                title: 'People & Roles',
+                items: [
+                    {
+                        id: 'user-roles',
+                        question: 'What user roles are available?',
+                        answer: `<p>XBO eMoney has a comprehensive role system:</p>
+                        <p><strong>Primary Owner:</strong></p>
+                        <ul>
+                            <li>Ultimate control over account</li>
+                            <li>Cannot be removed (only transferred)</li>
+                            <li>All permissions including account closure</li>
+                        </ul>
+                        <p><strong>Owner:</strong></p>
+                        <ul>
+                            <li>Full account access</li>
+                            <li>Add/remove all users except Primary Owner</li>
+                            <li>Access all features and settings</li>
+                        </ul>
+                        <p><strong>Admin:</strong></p>
+                        <ul>
+                            <li>Manage users, cards, and balances</li>
+                            <li>Make payments and view reports</li>
+                            <li>Cannot change account settings</li>
+                        </ul>
+                        <p><strong>Payer:</strong></p>
+                        <ul>
+                            <li>Make payments within assigned limits</li>
+                            <li>Use assigned cards</li>
+                            <li>View own transactions</li>
+                        </ul>
+                        <p><strong>Viewer:</strong></p>
+                        <ul>
+                            <li>Read-only access</li>
+                            <li>View transactions and balances</li>
+                            <li>No payment capabilities</li>
+                        </ul>
+                        <p><strong>Accountant:</strong></p>
+                        <ul>
+                            <li>Access to financial reports</li>
+                            <li>Export statements</li>
+                            <li>Integration access (Xero, etc.)</li>
+                        </ul>
+                        <p><strong>User:</strong></p>
+                        <ul>
+                            <li>Basic access</li>
+                            <li>Can be assigned cards</li>
+                            <li>Limited visibility</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'add-people',
+                        question: 'How do I add people to my account?',
+                        answer: `<p><strong>To invite a new user:</strong></p>
+                        <ol>
+                            <li>Go to People section</li>
+                            <li>Click "Invite Person"</li>
+                            <li>Enter email address</li>
+                            <li>Select role</li>
+                            <li>Assign to balances (optional)</li>
+                            <li>Send invitation</li>
+                        </ol>
+                        <p><strong>What happens next:</strong></p>
+                        <ul>
+                            <li>User receives email invitation</li>
+                            <li>They complete verification (ID if required)</li>
+                            <li>Once verified, they gain access</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>💡 Note:</strong> Users must be from an approved email domain if domain restriction is enabled.
+                        </div>`
+                    },
+                    {
+                        id: 'remove-people',
+                        question: 'How do I remove someone from my account?',
+                        answer: `<p><strong>To remove a user:</strong></p>
+                        <ol>
+                            <li>Go to People section</li>
+                            <li>Find the user</li>
+                            <li>Click "Remove" or access user settings</li>
+                            <li>Confirm removal</li>
+                        </ol>
+                        <p><strong>What happens:</strong></p>
+                        <ul>
+                            <li>User immediately loses access</li>
+                            <li>Their cards are frozen</li>
+                            <li>Transaction history is preserved</li>
+                            <li>Any pending approvals are cancelled</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Important:</strong> Consider card balances before removing users.
+                        </div>`
+                    },
+                    {
+                        id: 'change-permissions',
+                        question: 'How do I change someone\'s permissions?',
+                        answer: `<p>Admins and Owners can modify user permissions:</p>
+                        <ol>
+                            <li>Go to People section</li>
+                            <li>Select the user</li>
+                            <li>Click "Edit Permissions"</li>
+                            <li>Adjust role, balance access, or limits</li>
+                            <li>Save changes</li>
+                        </ol>
+                        <p>Changes take effect immediately.</p>`
+                    },
+                    {
+                        id: 'teams',
+                        question: 'Can I organize users into teams?',
+                        answer: `<p>Yes, <strong>Teams</strong> help organize users:</p>
+                        <ul>
+                            <li>Group users by department, project, or function</li>
+                            <li>Assign balances to entire teams</li>
+                            <li>Set team-level spending limits</li>
+                            <li>Easier reporting and oversight</li>
+                        </ul>
+                        <p><strong>To create a team:</strong></p>
+                        <ol>
+                            <li>Go to People → Teams</li>
+                            <li>Click "Create Team"</li>
+                            <li>Name the team and add members</li>
+                            <li>Assign balances</li>
+                        </ol>`
+                    },
+                    {
+                        id: 'transfer-ownership',
+                        question: 'How do I transfer Primary Owner status?',
+                        answer: `<p>Primary Owner can be transferred:</p>
+                        <ol>
+                            <li>Go to Account Settings</li>
+                            <li>Select "Transfer Ownership"</li>
+                            <li>Choose the new Primary Owner</li>
+                            <li>Complete verification</li>
+                            <li>New owner accepts the transfer</li>
+                        </ol>
+                        <div class="info-box warning">
+                            <strong>⚠️ Important:</strong> The new owner must already be an Owner on the account and complete identity verification.
+                        </div>`
+                    }
+                ]
+            },
+            security: {
+                icon: '🔒',
+                title: 'Security',
+                items: [
+                    {
+                        id: 'mfa-setup',
+                        question: 'How do I set up two-factor authentication (MFA)?',
+                        answer: `<p><strong>MFA is required</strong> for all users and adds an extra layer of security.</p>
+                        <p><strong>Setup Process:</strong></p>
+                        <ol>
+                            <li>Log in to your account</li>
+                            <li>Go to Security Settings</li>
+                            <li>Select "Enable MFA"</li>
+                            <li>Choose method: Authenticator App (recommended) or SMS</li>
+                            <li>Scan QR code or enter phone number</li>
+                            <li>Enter verification code to confirm</li>
+                            <li>Save backup codes securely</li>
+                        </ol>
+                        <div class="info-box success">
+                            <strong>✅ Recommended:</strong> Use an authenticator app (Google Authenticator, Authy) for better security than SMS.
+                        </div>`
+                    },
+                    {
+                        id: 'approved-domains',
+                        question: 'What are approved email domains?',
+                        answer: `<p><strong>Approved email domains</strong> restrict who can be invited to your account.</p>
+                        <p><strong>How it works:</strong></p>
+                        <ul>
+                            <li>Admins set allowed email domains (e.g., @yourcompany.com)</li>
+                            <li>Only users with approved domain emails can be invited</li>
+                            <li>Prevents accidental invites to personal emails</li>
+                        </ul>
+                        <p><strong>To configure:</strong></p>
+                        <ol>
+                            <li>Go to Settings → Security</li>
+                            <li>Find "Approved Domains"</li>
+                            <li>Add your company domains</li>
+                            <li>Save changes</li>
+                        </ol>`
+                    },
+                    {
+                        id: 'report-fraud',
+                        question: 'How do I report fraud or suspicious activity?',
+                        answer: `<p><strong>Immediate steps if you suspect fraud:</strong></p>
+                        <ol>
+                            <li><strong>Freeze affected cards immediately</strong></li>
+                            <li>Review recent transactions</li>
+                            <li>Contact support urgently</li>
+                            <li>Document suspicious activity</li>
+                        </ol>
+                        <p><strong>Contact Methods:</strong></p>
+                        <ul>
+                            <li>In-app: Report Transaction → Flag as Fraudulent</li>
+                            <li>Email: fraud@equalsmoney.com</li>
+                            <li>Phone: 24/7 fraud hotline (see app for number)</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Time is critical:</strong> Report fraud immediately for the best chance of recovery.
+                        </div>`
+                    },
+                    {
+                        id: 'money-safeguarding',
+                        question: 'How is my money protected?',
+                        answer: `<p><strong>Your funds are safeguarded</strong> in accordance with FCA regulations:</p>
+                        <ul>
+                            <li>Funds held in segregated safeguarding accounts</li>
+                            <li>Separate from company operating funds</li>
+                            <li>Protected in case of insolvency</li>
+                        </ul>
+                        <div class="info-box warning">
+                            <strong>⚠️ Not FSCS Protected:</strong> eMoney accounts are NOT covered by the Financial Services Compensation Scheme (FSCS). However, safeguarding provides strong protection.
+                        </div>
+                        <p><strong>Safeguarding explained:</strong></p>
+                        <ul>
+                            <li>Your money is held at regulated banks</li>
+                            <li>Ring-fenced from business operations</li>
+                            <li>In insolvency, safeguarded funds are returned to customers first</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'password-requirements',
+                        question: 'What are the password requirements?',
+                        answer: `<p>Strong passwords are required:</p>
+                        <ul>
+                            <li>Minimum 10 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one lowercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character</li>
+                            <li>Cannot be a previously used password</li>
+                        </ul>
+                        <p><strong>Password change:</strong> Required every 90 days for high-privilege users.</p>`
+                    },
+                    {
+                        id: 'session-security',
+                        question: 'How are my sessions secured?',
+                        answer: `<p>Multiple security measures protect your sessions:</p>
+                        <ul>
+                            <li><strong>Automatic logout:</strong> After 15 minutes of inactivity</li>
+                            <li><strong>Device recognition:</strong> New devices require verification</li>
+                            <li><strong>IP monitoring:</strong> Unusual locations flagged</li>
+                            <li><strong>Active sessions:</strong> View and terminate sessions from settings</li>
+                        </ul>
+                        <p>You can view all active sessions in Security Settings and terminate any suspicious ones.</p>`
+                    },
+                    {
+                        id: 'api-security',
+                        question: 'How are API connections secured?',
+                        answer: `<p>API access is secured through:</p>
+                        <ul>
+                            <li><strong>OAuth 2.0:</strong> Industry-standard authentication</li>
+                            <li><strong>API Keys:</strong> Unique keys per integration</li>
+                            <li><strong>IP Whitelisting:</strong> Restrict access to known IPs</li>
+                            <li><strong>Scoped Permissions:</strong> Grant only necessary access</li>
+                            <li><strong>Audit Logs:</strong> All API calls logged</li>
+                        </ul>`
+                    }
+                ]
+            },
+            integrations: {
+                icon: '🔗',
+                title: 'Integrations',
+                items: [
+                    {
+                        id: 'xero-integration',
+                        question: 'How does the Xero integration work?',
+                        answer: `<p>XBO eMoney integrates directly with Xero for seamless accounting:</p>
+                        <p><strong>Features:</strong></p>
+                        <ul>
+                            <li>Automatic transaction sync</li>
+                            <li>Real-time bank feeds</li>
+                            <li>Categorization matching</li>
+                            <li>Multi-currency support</li>
+                        </ul>
+                        <p><strong>To connect:</strong></p>
+                        <ol>
+                            <li>Go to Integrations → Xero</li>
+                            <li>Click "Connect to Xero"</li>
+                            <li>Log in to your Xero account</li>
+                            <li>Authorize the connection</li>
+                            <li>Map accounts and categories</li>
+                        </ol>
+                        <div class="info-box success">
+                            <strong>✅ Pro tip:</strong> Enable auto-reconciliation to save hours on bookkeeping.
+                        </div>`
+                    },
+                    {
+                        id: 'annotations',
+                        question: 'What are annotations and how do I use them?',
+                        answer: `<p><strong>Annotations</strong> are notes and attachments you can add to transactions:</p>
+                        <ul>
+                            <li>Add descriptions/memos</li>
+                            <li>Attach receipts and invoices</li>
+                            <li>Categorize transactions</li>
+                            <li>Tag for easy searching</li>
+                        </ul>
+                        <p><strong>To annotate:</strong></p>
+                        <ol>
+                            <li>Find the transaction</li>
+                            <li>Click "Add Details" or the annotation icon</li>
+                            <li>Enter notes, upload files, select category</li>
+                            <li>Save</li>
+                        </ol>
+                        <p>Annotations sync to connected accounting software.</p>`
+                    },
+                    {
+                        id: 'csv-exports',
+                        question: 'How do I export statements and data?',
+                        answer: `<p>Multiple export options are available:</p>
+                        <p><strong>Statement Export:</strong></p>
+                        <ul>
+                            <li>PDF statements (monthly, custom date range)</li>
+                            <li>CSV transaction exports</li>
+                            <li>Excel-compatible formats</li>
+                        </ul>
+                        <p><strong>To export:</strong></p>
+                        <ol>
+                            <li>Go to Transactions or Statements</li>
+                            <li>Select date range</li>
+                            <li>Click "Export"</li>
+                            <li>Choose format (PDF, CSV, Excel)</li>
+                            <li>Download</li>
+                        </ol>
+                        <p><strong>Automated exports:</strong> Schedule regular exports to email or FTP.</p>`
+                    },
+                    {
+                        id: 'bank-feeds',
+                        question: 'How do bank feeds work?',
+                        answer: `<p><strong>Bank feeds</strong> automatically send transactions to your accounting software:</p>
+                        <ul>
+                            <li>Real-time or daily sync options</li>
+                            <li>Works with Xero, QuickBooks, Sage</li>
+                            <li>Includes all transaction details</li>
+                            <li>Supports multiple currencies</li>
+                        </ul>
+                        <p><strong>Setup:</strong></p>
+                        <ol>
+                            <li>Connect your accounting software</li>
+                            <li>Link to specific balance(s)</li>
+                            <li>Configure sync frequency</li>
+                            <li>Transactions flow automatically</li>
+                        </ol>`
+                    },
+                    {
+                        id: 'api-access',
+                        question: 'Is API access available?',
+                        answer: `<p>Yes, full API access is available for programmatic integration:</p>
+                        <p><strong>Capabilities:</strong></p>
+                        <ul>
+                            <li>View balances and transactions</li>
+                            <li>Initiate payments</li>
+                            <li>Manage cards</li>
+                            <li>Webhooks for real-time events</li>
+                        </ul>
+                        <p><strong>Getting Started:</strong></p>
+                        <ol>
+                            <li>Request API access from your account manager</li>
+                            <li>Receive API credentials</li>
+                            <li>Access documentation</li>
+                            <li>Integrate and test in sandbox</li>
+                        </ol>
+                        <p>Contact support for API documentation.</p>`
+                    },
+                    {
+                        id: 'other-integrations',
+                        question: 'What other integrations are available?',
+                        answer: `<p>Beyond Xero, additional integrations include:</p>
+                        <ul>
+                            <li><strong>QuickBooks Online:</strong> Full accounting sync</li>
+                            <li><strong>Sage:</strong> Bank feeds and transactions</li>
+                            <li><strong>Slack:</strong> Payment notifications</li>
+                            <li><strong>Zapier:</strong> Connect to 3,000+ apps</li>
+                        </ul>
+                        <p>More integrations are being added regularly. Contact your account manager for specific integration requests.</p>`
+                    }
+                ]
+            },
+            approvals: {
+                icon: '✅',
+                title: 'Funds Requests & Approvals',
+                items: [
+                    {
+                        id: 'approval-tiers',
+                        question: 'How do approval tiers work?',
+                        answer: `<p><strong>Approval tiers</strong> require sign-off for payments above certain thresholds:</p>
+                        <p><strong>Example Configuration:</strong></p>
+                        <ul>
+                            <li>Up to £1,000: No approval needed</li>
+                            <li>£1,001 - £10,000: One approver required</li>
+                            <li>£10,001 - £50,000: Two approvers required</li>
+                            <li>Above £50,000: Three approvers required</li>
+                        </ul>
+                        <p><strong>To configure tiers:</strong></p>
+                        <ol>
+                            <li>Go to Settings → Approval Rules</li>
+                            <li>Define threshold amounts</li>
+                            <li>Set number of approvers per tier</li>
+                            <li>Designate approved approvers</li>
+                        </ol>
+                        <p>Different rules can apply to different payment types.</p>`
+                    },
+                    {
+                        id: 'request-workflow',
+                        question: 'What is the payment request workflow?',
+                        answer: `<p><strong>Standard Workflow:</strong></p>
+                        <ol>
+                            <li><strong>Create Request:</strong> User submits payment request with details</li>
+                            <li><strong>Pending Approval:</strong> Request enters queue</li>
+                            <li><strong>Review:</strong> Approver(s) review details</li>
+                            <li><strong>Decision:</strong> Approve, reject, or request more info</li>
+                            <li><strong>Processing:</strong> If approved, payment executes</li>
+                            <li><strong>Confirmation:</strong> All parties notified</li>
+                        </ol>
+                        <p><strong>Request Info Includes:</strong></p>
+                        <ul>
+                            <li>Beneficiary details</li>
+                            <li>Amount and currency</li>
+                            <li>Payment reference</li>
+                            <li>Supporting documents (optional)</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'approval-notifications',
+                        question: 'How do approval notifications work?',
+                        answer: `<p>Stay informed at every stage:</p>
+                        <p><strong>Requester receives:</strong></p>
+                        <ul>
+                            <li>Confirmation when request submitted</li>
+                            <li>Notification when approved/rejected</li>
+                            <li>Payment confirmation when processed</li>
+                        </ul>
+                        <p><strong>Approvers receive:</strong></p>
+                        <ul>
+                            <li>Push notification for new requests</li>
+                            <li>Email with request details</li>
+                            <li>Reminders for pending approvals</li>
+                        </ul>
+                        <p><strong>Notification Channels:</strong></p>
+                        <ul>
+                            <li>In-app notifications</li>
+                            <li>Email alerts</li>
+                            <li>Push notifications (mobile)</li>
+                            <li>Slack integration (if enabled)</li>
+                        </ul>`
+                    },
+                    {
+                        id: 'approve-on-mobile',
+                        question: 'Can I approve payments on mobile?',
+                        answer: `<p><strong>Yes!</strong> Full approval functionality on mobile:</p>
+                        <ul>
+                            <li>View pending requests</li>
+                            <li>See full payment details</li>
+                            <li>Approve or reject with one tap</li>
+                            <li>Add comments/notes</li>
+                            <li>Biometric authentication (Face ID/fingerprint)</li>
+                        </ul>
+                        <p>Download the mobile app for iOS or Android.</p>`
+                    },
+                    {
+                        id: 'bulk-approvals',
+                        question: 'Can I approve multiple payments at once?',
+                        answer: `<p>Yes, <strong>bulk approvals</strong> are supported:</p>
+                        <ol>
+                            <li>Go to Approvals → Pending</li>
+                            <li>Select multiple requests (checkbox)</li>
+                            <li>Review summary</li>
+                            <li>Click "Approve Selected" or "Reject Selected"</li>
+                            <li>Confirm with authentication</li>
+                        </ol>
+                        <div class="info-box">
+                            <strong>💡 Tip:</strong> Use filters to view specific payment types or amounts before bulk actions.
+                        </div>`
+                    },
+                    {
+                        id: 'approval-delegation',
+                        question: 'Can I delegate my approval authority?',
+                        answer: `<p><strong>Delegation</strong> allows temporary transfer of approval rights:</p>
+                        <ul>
+                            <li>Set date range for delegation</li>
+                            <li>Choose specific delegate(s)</li>
+                            <li>All or specific payment types</li>
+                            <li>Automatic restoration after period</li>
+                        </ul>
+                        <p><strong>To delegate:</strong></p>
+                        <ol>
+                            <li>Go to Settings → Delegation</li>
+                            <li>Select delegate</li>
+                            <li>Set start and end dates</li>
+                            <li>Define scope</li>
+                            <li>Activate</li>
+                        </ol>
+                        <p>Useful for holidays or temporary absences.</p>`
+                    },
+                    {
+                        id: 'approval-limits',
+                        question: 'What are the approval limits?',
+                        answer: `<p>Limits can be set at multiple levels:</p>
+                        <p><strong>User Limits:</strong></p>
+                        <ul>
+                            <li>Maximum payment amount per transaction</li>
+                            <li>Daily/weekly/monthly totals</li>
+                        </ul>
+                        <p><strong>Approval Limits:</strong></p>
+                        <ul>
+                            <li>Thresholds for each approval tier</li>
+                            <li>Different limits by currency</li>
+                            <li>Limits by payment type</li>
+                        </ul>
+                        <p><strong>Balance Limits:</strong></p>
+                        <ul>
+                            <li>Maximum outflow from specific balances</li>
+                        </ul>
+                        <p>All limits are configurable by Owners/Admins.</p>`
+                    },
+                    {
+                        id: 'request-balance-topup',
+                        question: 'How do I request a balance top-up?',
+                        answer: `<p>Users can request funds to their balance:</p>
+                        <ol>
+                            <li>Go to your balance</li>
+                            <li>Click "Request Funds"</li>
+                            <li>Enter amount needed</li>
+                            <li>Add reason/notes</li>
+                            <li>Submit request</li>
+                        </ol>
+                        <p><strong>Admin receives notification and can:</strong></p>
+                        <ul>
+                            <li>Approve for exact amount</li>
+                            <li>Approve different amount</li>
+                            <li>Reject with reason</li>
+                        </ul>
+                        <p>Once approved, funds transfer instantly.</p>`
+                    }
+                ]
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFAQs();
+            updateCounts();
+            setupEventListeners();
+        });
+
+        // Render all FAQ sections
+        function renderFAQs(filter = '', category = 'all') {
+            const container = document.getElementById('faqContainer');
+            const noResults = document.getElementById('noResults');
+            let html = '';
+            let hasResults = false;
+
+            for (const [categoryKey, categoryData] of Object.entries(faqData)) {
+                if (category !== 'all' && category !== categoryKey) continue;
+
+                const filteredItems = categoryData.items.filter(item => {
+                    if (!filter) return true;
+                    const searchText = (item.question + ' ' + item.answer).toLowerCase();
+                    return searchText.includes(filter.toLowerCase());
+                });
+
+                if (filteredItems.length === 0) continue;
+
+                hasResults = true;
+
+                html += `
+                    <section class="faq-section" data-category="${categoryKey}" id="section-${categoryKey}">
+                        <div class="faq-section-header">
+                            <div class="faq-section-icon">${categoryData.icon}</div>
+                            <h2 class="faq-section-title">
+                                ${categoryData.title}
+                                <span class="faq-section-count">(${filteredItems.length})</span>
+                            </h2>
+                        </div>
+                        <div class="faq-list">
+                            ${filteredItems.map(item => renderFAQItem(item, categoryKey, filter)).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            container.innerHTML = html;
+
+            if (hasResults) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+
+            // Reattach event listeners to FAQ items
+            attachFAQListeners();
+        }
+
+        // Render individual FAQ item
+        function renderFAQItem(item, categoryKey, filter = '') {
+            let question = item.question;
+            let answer = item.answer;
+
+            // Highlight search matches
+            if (filter) {
+                const regex = new RegExp(`(${escapeRegExp(filter)})`, 'gi');
+                question = question.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            return `
+                <div class="faq-item" data-id="${item.id}" id="faq-${item.id}">
+                    <div class="faq-question">
+                        <span class="faq-question-text">${question}</span>
+                        <div class="faq-actions">
+                            <button class="faq-copy-btn" onclick="copyFAQLink(event, '${item.id}')" title="Copy link">
+                                🔗
+                            </button>
+                            <div class="faq-toggle">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">${answer}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Escape regex special characters
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Update category counts
+        function updateCounts() {
+            let total = 0;
+            for (const [key, data] of Object.entries(faqData)) {
+                const count = data.items.length;
+                total += count;
+                const countEl = document.getElementById(`count${key.charAt(0).toUpperCase() + key.slice(1)}`);
+                if (countEl) countEl.textContent = count;
+            }
+            document.getElementById('countAll').textContent = total;
+            document.getElementById('totalCount').textContent = total;
+        }
+
+        // Attach FAQ item event listeners
+        function attachFAQListeners() {
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function(e) {
+                    if (e.target.closest('.faq-copy-btn')) return;
+                    const item = this.closest('.faq-item');
+                    item.classList.toggle('open');
+                });
+            });
+        }
+
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Search
+            const searchInput = document.getElementById('faqSearch');
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const activeCategory = document.querySelector('.category-tab.active').dataset.category;
+                    renderFAQs(this.value, activeCategory);
+                    updateSearchStats(this.value);
+                }, 200);
+            });
+
+            // Category tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.dataset.category;
+                    const searchValue = searchInput.value;
+                    renderFAQs(searchValue, category);
+                });
+            });
+
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('nav');
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('open');
+                mobileMenuBtn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+            });
+
+            // Back to top
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Handle URL hash for direct linking
+            if (window.location.hash) {
+                const id = window.location.hash.substring(1);
+                setTimeout(() => openFAQById(id), 100);
+            }
+        }
+
+        // Update search stats display
+        function updateSearchStats(filter) {
+            const stats = document.getElementById('searchStats');
+            let count = 0;
+            for (const data of Object.values(faqData)) {
+                count += data.items.filter(item => {
+                    if (!filter) return true;
+                    const searchText = (item.question + ' ' + item.answer).toLowerCase();
+                    return searchText.includes(filter.toLowerCase());
+                }).length;
+            }
+            
+            if (filter) {
+                stats.innerHTML = `Found <strong>${count}</strong> FAQs matching "<em>${escapeHtml(filter)}</em>"`;
+            } else {
+                stats.innerHTML = `Showing all <span id="totalCount">${count}</span> FAQs across 8 categories`;
+            }
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Copy FAQ link
+        function copyFAQLink(event, id) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = event.currentTarget;
+                btn.classList.add('copied');
+                btn.textContent = '✓';
+                
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = '🔗';
+                }, 2000);
+            });
+        }
+
+        // Open FAQ by ID (for direct links)
+        function openFAQById(id) {
+            const faqItem = document.getElementById(`faq-${id}`);
+            if (faqItem) {
+                faqItem.classList.add('open');
+                faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
+</body>
+</html>

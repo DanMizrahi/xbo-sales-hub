@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Inspiring Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            margin: 30px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-headline {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtext {
+            font-size: 1.1rem;
+            color: #c7d2fe;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-note {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #86efac;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        /* ==================== COMING SOON / IMMEDIATE ROADMAP ==================== */
+        .coming-soon-section {
+            margin-bottom: 60px;
+        }
+
+        .coming-soon-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        /* Featured eMoney Launch Card */
+        .emoney-launch-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.2) 50%, rgba(168, 85, 247, 0.15) 100%);
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .emoney-launch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7, #ec4899);
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .emoney-launch-card::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .launch-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.7); }
+        }
+
+        .launch-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .launch-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .launch-date {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 16px;
+        }
+
+        .launch-date span {
+            background: rgba(99, 102, 241, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+        }
+
+        .launch-desc {
+            color: #c7d2fe;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Immediate Items Grid */
+        .immediate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .immediate-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .immediate-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.15);
+        }
+
+        .immediate-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .immediate-content {
+            flex: 1;
+        }
+
+        .immediate-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .immediate-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .q1-label {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        /* ==================== ROADMAP SECTIONS ==================== */
+        .roadmap-section {
+            margin-bottom: 60px;
+        }
+
+        .roadmap-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .roadmap-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .roadmap-subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Pillar Grid */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .pillar-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .pillar-card {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(30, 41, 59, 0.4) 100%);
+            border: 1px solid #334155;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pillar-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .pillar-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .pillar-tagline {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .pillar-items {
+            padding: 16px 24px 24px;
+            list-style: none;
+        }
+
+        .pillar-items li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pillar-items li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-items li::before {
+            content: '→';
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        /* Pillar color variants */
+        .pillar-card.platform .pillar-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
+        }
+        .pillar-card.platform { border-top: 3px solid #6366f1; }
+        .pillar-card.platform .pillar-items li::before { color: #6366f1; }
+
+        .pillar-card.cryptopayx .pillar-header {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.2) 0%, rgba(251, 146, 60, 0.05) 100%);
+        }
+        .pillar-card.cryptopayx { border-top: 3px solid #fb923c; }
+        .pillar-card.cryptopayx .pillar-items li::before { color: #fb923c; }
+
+        .pillar-card.xbopay .pillar-header {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(34, 211, 238, 0.05) 100%);
+        }
+        .pillar-card.xbopay { border-top: 3px solid #22d3ee; }
+        .pillar-card.xbopay .pillar-items li::before { color: #22d3ee; }
+
+        .pillar-card.partners .pillar-header {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.05) 100%);
+        }
+        .pillar-card.partners { border-top: 3px solid #22c55e; }
+        .pillar-card.partners .pillar-items li::before { color: #22c55e; }
+
+        .pillar-card.core .pillar-header {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+        .pillar-card.core { border-top: 3px solid #8b5cf6; }
+        .pillar-card.core .pillar-items li::before { color: #8b5cf6; }
+
+        .pillar-card.security .pillar-header {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 100%);
+        }
+        .pillar-card.security { border-top: 3px solid #ef4444; }
+        .pillar-card.security .pillar-items li::before { color: #ef4444; }
+
+        .pillar-card.regulation .pillar-header {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+        .pillar-card.regulation { border-top: 3px solid #3b82f6; }
+        .pillar-card.regulation .pillar-items li::before { color: #3b82f6; }
+
+        /* ==================== TRUSTED BY SECTION ==================== */
+        .trusted-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .trusted-header {
+            margin-bottom: 32px;
+        }
+
+        .trusted-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .trusted-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .trusted-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .trusted-logo {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(30, 41, 59, 0.6) 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 24px 40px;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .trusted-logo:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        .trusted-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .trusted-logo-sub {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==================== RELEASES SECTION ==================== */
+        .releases-section {
+            margin-top: 60px;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 20px 0 30px;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab:hover {
+            border-color: #6366f1;
+            color: #fff;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Release card */
+        .release-card {
+            background: #1e293b;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 1px solid #334155;
+            overflow: hidden;
+        }
+
+        .release-header {
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .release-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .release-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .release-date {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .release-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-main {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+        }
+
+        .badge-partners {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .badge-cryptopayx {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fb923c;
+        }
+
+        .release-body {
+            padding: 24px;
+        }
+
+        /* Feature section */
+        .feature-section {
+            margin-bottom: 24px;
+        }
+
+        .feature-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .feature-item {
+            background: rgba(15, 15, 26, 0.5);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-left: 3px solid #6366f1;
+        }
+
+        .feature-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-item.partners {
+            border-left-color: #22c55e;
+        }
+
+        .feature-item.cryptopayx {
+            border-left-color: #fb923c;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+        }
+
+        .feature-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .feature-desc ul {
+            margin-top: 8px;
+            margin-left: 20px;
+        }
+
+        .feature-desc li {
+            margin-bottom: 4px;
+        }
+
+        .feature-note {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #fbbf24;
+        }
+
+        .feature-note::before {
+            content: '⚠️ ';
+        }
+
+        /* Download button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: #334155;
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .download-btn:hover {
+            background: #475569;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        /* Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #334155, transparent);
+            margin: 50px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .header-logo {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 28px 20px;
+            }
+
+            .hero-headline {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtext {
+                font-size: 1rem;
+            }
+
+            .emoney-launch-card {
+                padding: 28px 20px;
+            }
+
+            .launch-icon {
+                font-size: 3rem;
+            }
+
+            .launch-title {
+                font-size: 1.6rem;
+            }
+
+            .launch-date {
+                font-size: 1.1rem;
+            }
+
+            .immediate-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillar-grid,
+            .pillar-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-title {
+                font-size: 1.4rem;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .release-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .feature-item {
+                padding: 14px 16px;
+            }
+
+            .trusted-logos {
+                flex-direction: column;
+            }
+
+            .trusted-logo {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Sales Hub</a>
+            <div class="header-logo">🚀 Updates</div>
+            <p class="subtitle">What's coming and what just shipped</p>
+        </header>
+
+        <!-- Inspiring Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-headline">Always Building, Always Growing</h1>
+                <p class="hero-subtext">
+                    XBO's core strength is relentless development. We're in constant developer mode — advancing, innovating, and scaling every single day.
+                </p>
+                <span class="hero-note">✨ 2026 is our biggest year yet</span>
+            </div>
+        </section>
+
+        <!-- ==================== COMING SOON / Q1 2026 ==================== -->
+        <section class="coming-soon-section">
+            <div class="section-header">
+                <span style="font-size: 1.5rem;">🔮</span>
+                <div>
+                    <h2 class="section-title">Immediate Roadmap — Q1 2026</h2>
+                    <p class="section-subtitle">What's launching in the next few weeks</p>
+                </div>
+            </div>
+
+            <div class="coming-soon-grid">
+                <!-- Featured: eMoney Launch -->
+                <div class="emoney-launch-card">
+                    <span class="launch-badge">🚀 Major Launch</span>
+                    <div class="launch-icon">🏦</div>
+                    <h3 class="launch-title">eMoney Full Launch</h3>
+                    <div class="launch-date"><span>📅 February 6, 2026</span></div>
+                    <p class="launch-desc">
+                        Complete eMoney banking integration goes live! XBO users will gain seamless access to banking services powered by Equals Money — including dedicated IBANs, SEPA & SWIFT transfers, and a full-featured banking dashboard.
+                    </p>
+                </div>
+
+                <!-- Immediate Items Grid -->
+                <div class="immediate-grid">
+                    <div class="immediate-card">
+                        <span class="immediate-icon">💳</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">XBOPay</div>
+                            <p class="immediate-desc">On-ramp payment solution for seamless fiat-to-crypto conversions</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">⚡</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">Client API Enhancements</div>
+                            <p class="immediate-desc">Futures, Cards, and Earn support for API integrations</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">💰</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">Credit Line 2.0 & Collateral</div>
+                            <p class="immediate-desc">Enhanced credit facilities with flexible collateral options</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">🏧</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">FIAT Withdrawals</div>
+                            <p class="immediate-desc">Virtual IBAN, SWIFT, and Multi-WDRs support</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">🔐</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">Roles & Permissions</div>
+                            <p class="immediate-desc">Granular access control for Corporate accounts</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">👥</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">Group Accounts</div>
+                            <p class="immediate-desc">Fund management for institutional clients</p>
+                        </div>
+                    </div>
+
+                    <div class="immediate-card">
+                        <span class="immediate-icon">📧</span>
+                        <div class="immediate-content">
+                            <span class="q1-label">Q1 2026</span>
+                            <div class="immediate-title">CryptoPayX Email Handling</div>
+                            <p class="immediate-desc">Enhanced email flows + Web3 deposit support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==================== 2026 CORPORATE ROADMAP ==================== -->
+        <section class="roadmap-section">
+            <div class="roadmap-header">
+                <h2 class="roadmap-title">🏢 2026 Corporate Roadmap</h2>
+                <p class="roadmap-subtitle">Enterprise features & B2B solutions planned for 2026</p>
+            </div>
+
+            <div class="pillar-grid">
+                <!-- Platform Pillar -->
+                <div class="pillar-card platform">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">🖥️</div>
+                        <h3 class="pillar-name">Platform</h3>
+                        <p class="pillar-tagline">Core infrastructure & features</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Client API (Futures, Cards, Earn)</li>
+                        <li>Fee based on Volume + Processing fees</li>
+                        <li>Credit Line 2.0 & Collateral</li>
+                        <li>Payments: vIBAN, SEPA, Multi-WDRs</li>
+                        <li>Roles and Permissions</li>
+                        <li>CA UI for Corporate</li>
+                        <li>Group accounts for Funds management</li>
+                        <li>Telegram groups management</li>
+                    </ul>
+                </div>
+
+                <!-- CryptoPayX Pillar -->
+                <div class="pillar-card cryptopayx">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">⚡</div>
+                        <h3 class="pillar-name">CryptoPayX</h3>
+                        <p class="pillar-tagline">Payment gateway evolution</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Email handling</li>
+                        <li>Deposit with Web3 / Connect Web3</li>
+                        <li>Recurrent payments</li>
+                        <li>Partial Refund</li>
+                        <li>Processing Fee for Payouts</li>
+                        <li>Buy with card (onramp) to Iframe</li>
+                        <li>CryptoPayX Sandbox</li>
+                    </ul>
+                </div>
+
+                <!-- XBO Pay Pillar -->
+                <div class="pillar-card xbopay">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">💳</div>
+                        <h3 class="pillar-name">XBO Pay</h3>
+                        <p class="pillar-tagline">Fiat on-ramp solutions</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>On-ramp solution</li>
+                        <li>Web3 Onramper</li>
+                        <li>CRM for Corporate</li>
+                        <li>Sumsub for Merchants</li>
+                    </ul>
+                </div>
+
+                <!-- Partners Pillar -->
+                <div class="pillar-card partners">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">🤝</div>
+                        <h3 class="pillar-name">Partners</h3>
+                        <p class="pillar-tagline">Affiliate & partner ecosystem</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Dashboard</li>
+                        <li>Tutorials</li>
+                        <li>Reports</li>
+                        <li>Support</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==================== CORE 2026 ROADMAP ==================== -->
+        <section class="roadmap-section">
+            <div class="roadmap-header">
+                <h2 class="roadmap-title">⚙️ Core 2026 Roadmap</h2>
+                <p class="roadmap-subtitle">Platform foundations, security, and regulatory compliance</p>
+            </div>
+
+            <div class="pillar-grid pillar-grid-3">
+                <!-- Core Pillar -->
+                <div class="pillar-card core">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">🚀</div>
+                        <h3 class="pillar-name">Core</h3>
+                        <p class="pillar-tagline">Platform & product evolution</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Company AI (R&D tools, Knowledge center)</li>
+                        <li>Spot Exchange 2.0 / New CEX 2.0</li>
+                        <li>Futures LP additions</li>
+                        <li>XBO eMoney</li>
+                    </ul>
+                </div>
+
+                <!-- Security Pillar -->
+                <div class="pillar-card security">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">🛡️</div>
+                        <h3 class="pillar-name">Security</h3>
+                        <p class="pillar-tagline">Enterprise-grade protection</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Suspicious login detection</li>
+                        <li>User permissions management</li>
+                        <li>3FA for withdrawals</li>
+                        <li>ISO/SOC/DORA compliance</li>
+                        <li>Passkeys adoption</li>
+                        <li>AI monitoring tools</li>
+                    </ul>
+                </div>
+
+                <!-- Regulation Pillar -->
+                <div class="pillar-card regulation">
+                    <div class="pillar-header">
+                        <div class="pillar-icon">⚖️</div>
+                        <h3 class="pillar-name">Regulation</h3>
+                        <p class="pillar-tagline">Global compliance framework</p>
+                    </div>
+                    <ul class="pillar-items">
+                        <li>Dedicated FB/banks by regulation</li>
+                        <li>Global Solution - XBO Offshore</li>
+                        <li>Compliance: Sumsub, Address verification</li>
+                        <li>Antifraud</li>
+                        <li>Travel Rules</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==================== TRUSTED BY SECTION ==================== -->
+        <section class="trusted-section">
+            <div class="trusted-header">
+                <h2 class="trusted-title">Trusted By Industry Leaders</h2>
+                <p class="trusted-subtitle">Join the companies already building with XBO</p>
+            </div>
+
+            <div class="trusted-logos">
+                <div class="trusted-logo">
+                    <div class="trusted-logo-text">RABONA</div>
+                    <div class="trusted-logo-sub">Gaming & Entertainment</div>
+                </div>
+                <div class="trusted-logo">
+                    <div class="trusted-logo-text">LEGIANO</div>
+                    <div class="trusted-logo-sub">Online Gaming</div>
+                </div>
+                <div class="trusted-logo">
+                    <div class="trusted-logo-text">BANKOBET</div>
+                    <div class="trusted-logo-sub">Sports & Gaming</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==================== RECENT RELEASES SECTION ==================== -->
+        <section class="releases-section">
+            <div class="section-header">
+                <span style="font-size: 1.5rem;">📋</span>
+                <div>
+                    <h2 class="section-title">Recent Releases</h2>
+                    <p class="section-subtitle">What we've shipped in the last few weeks</p>
+                </div>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="main">Main Platform</button>
+                <button class="filter-tab" data-filter="partners">Partners</button>
+                <button class="filter-tab" data-filter="cryptopayx">CryptoPayX</button>
+            </div>
+
+            <!-- Sprint 198 - Main Platform -->
+            <div class="release-card" data-type="main">
+                <div class="release-header">
+                    <div class="release-title">Sprint 198</div>
+                    <div class="release-meta">
+                        <span class="release-date">February 2, 2026</span>
+                        <span class="release-badge badge-main">Main Platform</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <!-- Mobile App -->
+                    <div class="feature-section">
+                        <div class="section-label">📱 Mobile App</div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">💳</span>
+                                Google Pay Deposits
+                            </div>
+                            <div class="feature-desc">
+                                The mobile application now supports Google Pay as a deposit method, enabling users to fund their accounts faster and more conveniently while boosting overall deposit conversion.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🪙</span>
+                                Extended Token Page Data
+                            </div>
+                            <div class="feature-desc">
+                                Each token page now displays additional information:
+                                <ul>
+                                    <li>Deposit/Withdrawal contracts available on XBO</li>
+                                    <li>Official project website and social media URLs</li>
+                                    <li>Total and circulating supply</li>
+                                    <li>Tokenomics, roadmap, team info (when available)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">✅</span>
+                                Verification Center UI/UX Improvements
+                            </div>
+                            <div class="feature-desc">
+                                Users can now access the Verification Center directly from a new UI element in the Menu to view their verification status and navigate to complete or upgrade their verification level.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Platform -->
+                    <div class="feature-section">
+                        <div class="section-label">🌐 Web Platform</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">📤</span>
+                                Improved Deposit & Withdrawal Sharing
+                            </div>
+                            <div class="feature-desc">
+                                The deposit and withdrawal details share flows have been updated. Users can now share a newly generated file that includes a banner with a referral link, aligned with new designs. When clicking "Save" on transaction details, a new branded file is generated.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🏦</span>
+                                eMoney: New Banking Service Integration
+                            </div>
+                            <div class="feature-desc">
+                                New eMoney functionality enables XBO users to access banking services provided by Equals Money. Customers submit a request (visible in CRM's dedicated eMoney section), and once registered, receive login credentials to access the eMoney service.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile App & Web Platform -->
+                    <div class="feature-section">
+                        <div class="section-label">📱🌐 Mobile App & Web Platform</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🔄</span>
+                                New Payment Methods: Virtual IBAN & SWIFT
+                            </div>
+                            <div class="feature-desc">
+                                The withdrawal form now supports two new methods—SWIFT and Virtual IBAN—providing users with only the relevant banking fields to complete transactions quickly and accurately.
+                                <ul>
+                                    <li>Withdrawal methods shown via popup (multiple options) or auto-selected (single option)</li>
+                                    <li>Confirmation screen displays all details before submission</li>
+                                    <li>Once confirmed, withdrawal is sent to CRM with selected fiat method</li>
+                                </ul>
+                                <div class="feature-note">
+                                    New withdrawal methods (Virtual IBAN and SWIFT) will be available only in app version 3.5.0 and later. Earlier versions support only SEPA-configured currencies.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Cards -->
+                    <div class="feature-section">
+                        <div class="section-label">💳 Payment Cards</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🛡️</span>
+                                New State Authentication & Failed Transaction Handling
+                            </div>
+                            <div class="feature-desc">
+                                Failed card transactions are now handled in a controlled and transparent manner:
+                                <ul>
+                                    <li>Failed transactions: held amount reflected in balance but unavailable for use</li>
+                                    <li>Visible in transaction history (failed spend + failed transaction fee)</li>
+                                    <li>CRM shows two entries: failed spend fee and spend transaction in failed status</li>
+                                    <li>Failed transaction fee applied to Payment Card account balance</li>
+                                    <li>Completed transactions update to "Completed" status across all systems</li>
+                                    <li>Each transaction recorded only once—no duplicate charges</li>
+                                    <li>Card issuance process now includes a Close option</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-sprint-198.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 198 - Partners -->
+            <div class="release-card" data-type="partners">
+                <div class="release-header">
+                    <div class="release-title">Partners Sprint 198</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 29, 2026</span>
+                        <span class="release-badge badge-partners">Partners</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <div class="feature-section">
+                        <div class="section-label">👥 XBO Partners Portal</div>
+
+                        <div class="feature-item partners">
+                            <div class="feature-title">
+                                <span class="feature-icon">📊</span>
+                                Commission Verification: Default Sorting by Date
+                            </div>
+                            <div class="feature-desc">
+                                On the Commission Verification page, all commissions are now sorted by date by default to reduce mistakes and ensure accuracy and clarity. Filters support a reset function which restores the default settings.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-partners-sprint-198.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 198 - CryptoPayX -->
+            <div class="release-card" data-type="cryptopayx">
+                <div class="release-header">
+                    <div class="release-title">CryptoPayX Sprint 198</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 29, 2026</span>
+                        <span class="release-badge badge-cryptopayx">CryptoPayX</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <div class="feature-section">
+                        <div class="section-label">💰 Payment & Email Features</div>
+
+                        <div class="feature-item cryptopayx">
+                            <div class="feature-title">
+                                <span class="feature-icon">📧</span>
+                                Email Capture in Payment Flows
+                            </div>
+                            <div class="feature-desc">
+                                API payments now accept optional customer email. Iframe deposits feature a configurable email field with three modes: None, Optional, or Mandatory.
+                            </div>
+                        </div>
+
+                        <div class="feature-item cryptopayx">
+                            <div class="feature-title">
+                                <span class="feature-icon">⚙️</span>
+                                New CRM Configuration
+                            </div>
+                            <div class="feature-desc">
+                                Merchants can now manage email collection behavior for Iframe deposits directly through CRM configuration settings.
+                            </div>
+                        </div>
+
+                        <div class="feature-item cryptopayx">
+                            <div class="feature-title">
+                                <span class="feature-icon">🔔</span>
+                                Email Notifications
+                            </div>
+                            <div class="feature-desc">
+                                Email notifications are sent only when AutoRefund or AutoTopUp is enabled. Automated reminders are dispatched on Day 3, 7, 14, and 21 of pending transactions.
+                            </div>
+                        </div>
+
+                        <div class="feature-item cryptopayx">
+                            <div class="feature-title">
+                                <span class="feature-icon">✉️</span>
+                                Email Deliverability
+                            </div>
+                            <div class="feature-desc">
+                                All email notifications are now sent from <strong>info@cryptopayx.tech</strong> for improved deliverability and brand consistency.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-cryptopayx-sprint-198.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 197 - Main Platform -->
+            <div class="release-card" data-type="main">
+                <div class="release-header">
+                    <div class="release-title">Sprint 197</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 15, 2026</span>
+                        <span class="release-badge badge-main">Main Platform</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <!-- Mobile App -->
+                    <div class="feature-section">
+                        <div class="section-label">📱 Mobile App</div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">📊</span>
+                                Futures/Stocks: Margin Level vs Risk Ratio Switcher
+                            </div>
+                            <div class="feature-desc">
+                                Users can now choose between two display modes for their trading positions: Margin Level (higher = better) or Risk Ratio (lower = better), providing flexibility based on personal preference.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">💬</span>
+                                Customer.io In-App Messaging
+                            </div>
+                            <div class="feature-desc">
+                                New marketing channel for in-app messages with modal format. Full tracking of impressions and clicks enables data-driven campaign optimization.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Platform -->
+                    <div class="feature-section">
+                        <div class="section-label">🌐 Web Platform</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">📤</span>
+                                Improved Withdrawal/Deposit Sharing
+                            </div>
+                            <div class="feature-desc">
+                                New generated images with banner and referral link for enhanced sharing experience.
+                                <div class="feature-note">
+                                    This feature has been postponed to a future sprint.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-sprint-197.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 197 - Partners -->
+            <div class="release-card" data-type="partners">
+                <div class="release-header">
+                    <div class="release-title">Partners Sprint 197</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 15, 2026</span>
+                        <span class="release-badge badge-partners">Partners</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <div class="feature-section">
+                        <div class="section-label">👥 XBO Partners Portal</div>
+
+                        <div class="feature-item partners">
+                            <div class="feature-title">
+                                <span class="feature-icon">🎬</span>
+                                Add Video to 'Get to Know XBO' Section
+                            </div>
+                            <div class="feature-desc">
+                                A new video card has been added that redirects partners to the official XBO YouTube channel for educational and promotional content.
+                            </div>
+                        </div>
+
+                        <div class="feature-item partners">
+                            <div class="feature-title">
+                                <span class="feature-icon">💰</span>
+                                Edit Commission Deal Logic
+                            </div>
+                            <div class="feature-desc">
+                                Individual and general commission deals can now coexist. Individual deals apply to specific leads, while general deals apply to all other leads, providing more flexible commission structures.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-partners-sprint-197.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 197 - CryptoPayX -->
+            <div class="release-card" data-type="cryptopayx">
+                <div class="release-header">
+                    <div class="release-title">CryptoPayX Sprint 197</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 15, 2026</span>
+                        <span class="release-badge badge-cryptopayx">CryptoPayX</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <div class="feature-section">
+                        <div class="section-label">💰 Email Support Management</div>
+
+                        <div class="feature-item cryptopayx">
+                            <div class="feature-title">
+                                <span class="feature-icon">📧</span>
+                                Email Support Management
+                            </div>
+                            <div class="feature-desc">
+                                Comprehensive email support system including:
+                                <ul>
+                                    <li>API expansion for email capture functionality</li>
+                                    <li>CRM configuration for email collection settings</li>
+                                    <li>Notifications delivered via Customer.io</li>
+                                    <li>Automated reminders sent on Days 3, 7, 14, and 21</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-cryptopayx-sprint-197.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 196 - Main Platform -->
+            <div class="release-card" data-type="main">
+                <div class="release-header">
+                    <div class="release-title">Sprint 196</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 6, 2026</span>
+                        <span class="release-badge badge-main">Main Platform</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <!-- Web Platform -->
+                    <div class="feature-section">
+                        <div class="section-label">🌐 Web Platform</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🎁</span>
+                                Reward Center: Aggregated Balance in Wallet
+                            </div>
+                            <div class="feature-desc">
+                                Total unclaimed rewards are now displayed in the Wallet view with USD equivalent, giving users a clear overview of their pending rewards.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">💳</span>
+                                Report Center: Card Transactions in Statement
+                            </div>
+                            <div class="feature-desc">
+                                Unified view of all card usage including top-ups, spending, and fees in a single comprehensive statement.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corporate -->
+                    <div class="feature-section">
+                        <div class="section-label">🏢 Corporate</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🔄</span>
+                                Corporate/Individual Onboarding Selection
+                            </div>
+                            <div class="feature-desc">
+                                New switch on the registration page allows users to select between Corporate and Individual account types during onboarding.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CRM -->
+                    <div class="feature-section">
+                        <div class="section-label">⚙️ CRM</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">⭐</span>
+                                Loyalty Conditions for Crypto Rewards
+                            </div>
+                            <div class="feature-desc">
+                                Automatic reward application for Special tier customers, streamlining the loyalty program management.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">💸</span>
+                                Crypto Withdrawal Fee Bulk Update
+                            </div>
+                            <div class="feature-desc">
+                                Apply fee changes to all rows or filtered selections with a single action, improving operational efficiency.
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">📊</span>
+                                Report Center: Account Statements & Crypto Pay
+                            </div>
+                            <div class="feature-desc">
+                                New tabs for generating reports with auto-delivery scheduling capabilities for streamlined reporting workflows.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MiCA -->
+                    <div class="feature-section">
+                        <div class="section-label">🇪🇺 MiCA Compliance</div>
+
+                        <div class="feature-item">
+                            <div class="feature-title">
+                                <span class="feature-icon">🌍</span>
+                                Redirect Customers by Jurisdiction
+                            </div>
+                            <div class="feature-desc">
+                                Automatic routing based on customer location: EU customers are directed to XBO.eu while Global customers access XBO.com.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-sprint-196.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sprint 196 - Partners -->
+            <div class="release-card" data-type="partners">
+                <div class="release-header">
+                    <div class="release-title">Partners Sprint 196</div>
+                    <div class="release-meta">
+                        <span class="release-date">January 6, 2026</span>
+                        <span class="release-badge badge-partners">Partners</span>
+                    </div>
+                </div>
+                <div class="release-body">
+                    <div class="feature-section">
+                        <div class="section-label">👥 XBO Partners Portal</div>
+
+                        <div class="feature-item partners">
+                            <div class="feature-title">
+                                <span class="feature-icon">📄</span>
+                                Add PDF Files to 'Get to Know XBO'
+                            </div>
+                            <div class="feature-desc">
+                                New documents have been added under Marketing Tools, providing partners with additional resources to understand and promote XBO.
+                            </div>
+                        </div>
+
+                        <div class="feature-item partners">
+                            <div class="feature-title">
+                                <span class="feature-icon">🔗</span>
+                                Get Deposit Address for Leads
+                            </div>
+                            <div class="feature-desc">
+                                Affiliates can now create and retrieve crypto deposit addresses for their leads via the API, enabling seamless onboarding flows.
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="downloads/xbo-partners-sprint-196.pdf" class="download-btn" download>
+                        📄 Download Full PDF
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <a href="index.html" class="back-link">← Back to Sales Hub</a><br><br>
+            XBO Sales Hub · Internal Use Only<br>
+            Last updated: February 2026
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const releaseCards = document.querySelectorAll('.release-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filter = tab.dataset.filter;
+
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Filter cards
+                releaseCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.type === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
