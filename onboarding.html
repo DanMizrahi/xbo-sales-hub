@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Track | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .header-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(99, 102, 241, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .progress-percent {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #6366f1 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .progress-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Day Cards */
+        .day-card {
+            background: #1e293b;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #334155;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .day-card:hover {
+            border-color: #6366f1;
+        }
+
+        .day-card.completed {
+            border-color: #10b981;
+        }
+
+        .day-card.active {
+            border: 2px solid #6366f1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .day-card.locked {
+            opacity: 0.6;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .day-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .day-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .day-card.completed .day-number {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+        }
+
+        .day-card.active .day-number {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .day-text h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .day-text p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .day-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .day-card.completed .day-status {
+            color: #10b981;
+        }
+
+        .expand-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .day-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Day Content */
+        .day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .day-card.expanded .day-content {
+            max-height: 2000px;
+        }
+
+        .day-inner {
+            padding: 0 24px 24px;
+            border-top: 1px solid #334155;
+        }
+
+        /* Topics */
+        .topic-list {
+            margin-top: 20px;
+        }
+
+        .topic-item {
+            background: #0f172a;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+        }
+
+        .topic-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topic-icon {
+            font-size: 1.3rem;
+        }
+
+        .topic-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        .topic-time {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .topic-btn {
+            background: #334155;
+            border: none;
+            color: #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .topic-btn:hover {
+            background: #475569;
+        }
+
+        .topic-btn.primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+
+        .topic-btn.primary:hover {
+            opacity: 0.9;
+        }
+
+        .topic-btn.complete {
+            background: #10b981;
+        }
+
+        .topic-btn.completed {
+            background: #334155;
+            color: #10b981;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .quiz-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quiz-question {
+            margin-bottom: 16px;
+        }
+
+        .quiz-q {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            margin-bottom: 12px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quiz-option {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .quiz-option:hover {
+            border-color: #6366f1;
+        }
+
+        .quiz-option.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .quiz-option.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .quiz-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        /* Reset Button */
+        .reset-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #334155;
+        }
+
+        .reset-btn {
+            background: transparent;
+            border: 1px solid #475569;
+            color: #94a3b8;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reset-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Welcome Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+        }
+
+        .modal p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .day-header {
+                padding: 16px;
+            }
+
+            .day-info {
+                gap: 12px;
+            }
+
+            .day-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .day-text h3 {
+                font-size: 1rem;
+            }
+
+            .day-status span {
+                display: none;
+            }
+
+            .topic-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .topic-actions {
+                width: 100%;
+            }
+
+            .topic-btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal">
+            <div class="modal-icon">🚀</div>
+            <h2>Welcome to XBO!</h2>
+            <p>This 5-day onboarding track will get you up to speed on our products, processes, and tools. Let's start with your name:</p>
+            <input type="text" class="modal-input" id="userName" placeholder="Your name..." autocomplete="off">
+            <button class="modal-btn" onclick="startOnboarding()">Start Learning →</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Hub</a>
+            <h1 class="header-logo">🎓 Onboarding Track</h1>
+            <p class="subtitle">5-Day New Employee Training</p>
+        </header>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <div class="progress-title">Welcome, <span id="displayName">Team Member</span>!</div>
+                <div class="progress-percent"><span id="progressPercent">0</span>%</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <div class="progress-stat">
+                    <span>✅</span>
+                    <span><span id="completedTopics">0</span> topics completed</span>
+                </div>
+                <div class="progress-stat">
+                    <span>📚</span>
+                    <span><span id="totalTopics">15</span> total topics</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <div class="day-card active" id="day1" data-day="1">
+            <div class="day-header" onclick="toggleDay(1)">
+                <div class="day-info">
+                    <div class="day-number">1</div>
+                    <div class="day-text">
+                        <h3>XBO Overview & Products</h3>
+                        <p>Company intro and core product lineup</p>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-text">Start here</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-inner">
+                    <div class="topic-list">
+                        <div class="topic-item" data-topic="1-1">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">🏢</span>
+                                    <div>
+                                        <div class="topic-title">About XBO</div>
+                                        <div class="topic-time">5 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="products.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('1-1')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-item" data-topic="1-2">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">💰</span>
+                                    <div>
+                                        <div class="topic-title">Credit Line</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="products.html#credit-line" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('1-2')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="1-3">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">⚙️</span>
+                                    <div>
+                                        <div class="topic-title">CaaS (Crypto-as-a-Service)</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="products.html#caas" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('1-3')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 1 Quiz -->
+                    <div class="quiz-section" id="quiz-day1">
+                        <div class="quiz-title">📝 Quick Quiz</div>
+                        <div class="quiz-question">
+                            <div class="quiz-q">What does Credit Line allow clients to do?</div>
+                            <div class="quiz-options" data-quiz="q1">
+                                <div class="quiz-option" data-answer="a">Get a loan for personal use</div>
+                                <div class="quiz-option" data-answer="b" data-correct="true">Trade without holding funds upfront</div>
+                                <div class="quiz-option" data-answer="c">Open a bank account</div>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="quiz-q">How long does CaaS deployment typically take?</div>
+                            <div class="quiz-options" data-quiz="q2">
+                                <div class="quiz-option" data-answer="a">1-2 weeks</div>
+                                <div class="quiz-option" data-answer="b" data-correct="true">4-6 weeks</div>
+                                <div class="quiz-option" data-answer="c">6-12 months</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-card" id="day2" data-day="2">
+            <div class="day-header" onclick="toggleDay(2)">
+                <div class="day-info">
+                    <div class="day-number">2</div>
+                    <div class="day-text">
+                        <h3>Payment Products & IBAN</h3>
+                        <p>CryptoPayX, eMoney, and banking rails</p>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-text">3 topics</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-inner">
+                    <div class="topic-list">
+                        <div class="topic-item" data-topic="2-1">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">💳</span>
+                                    <div>
+                                        <div class="topic-title">CryptoPayX</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="products.html#cryptopayx" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('2-1')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="2-2">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">🏦</span>
+                                    <div>
+                                        <div class="topic-title">eMoney / Corporate IBAN</div>
+                                        <div class="topic-time">15 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="products.html#emoney" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('2-2')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="2-3">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">❓</span>
+                                    <div>
+                                        <div class="topic-title">eMoney FAQ (Reference)</div>
+                                        <div class="topic-time">Browse as needed</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="emoney-faq.html" class="topic-btn primary" target="_blank">📖 Browse</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('2-3')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="day-card" id="day3" data-day="3">
+            <div class="day-header" onclick="toggleDay(3)">
+                <div class="day-info">
+                    <div class="day-number">3</div>
+                    <div class="day-text">
+                        <h3>Sales Process & CRM</h3>
+                        <p>Pipedrive, lifecycle, and procedures</p>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-text">3 topics</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-inner">
+                    <div class="topic-list">
+                        <div class="topic-item" data-topic="3-1">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">🔄</span>
+                                    <div>
+                                        <div class="topic-title">Client Lifecycle</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="procedures.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('3-1')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="3-2">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">📊</span>
+                                    <div>
+                                        <div class="topic-title">Pipedrive & Pipeline Stages</div>
+                                        <div class="topic-time">15 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="internal.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('3-2')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="3-3">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">💬</span>
+                                    <div>
+                                        <div class="topic-title">Telegram Group Setup</div>
+                                        <div class="topic-time">5 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="internal.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('3-3')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="day-card" id="day4" data-day="4">
+            <div class="day-header" onclick="toggleDay(4)">
+                <div class="day-info">
+                    <div class="day-number">4</div>
+                    <div class="day-text">
+                        <h3>Compliance & Pricing</h3>
+                        <p>Jurisdictions, KYC, and fee structures</p>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-text">3 topics</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-inner">
+                    <div class="topic-list">
+                        <div class="topic-item" data-topic="4-1">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">⚖️</span>
+                                    <div>
+                                        <div class="topic-title">Prohibited & Restricted Jurisdictions</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="compliance.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('4-1')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="4-2">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">💰</span>
+                                    <div>
+                                        <div class="topic-title">Tiered Pricing Structure</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="contracts.html#tiered-pricing" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('4-2')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="4-3">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">📋</span>
+                                    <div>
+                                        <div class="topic-title">Contracts & Insertion Order</div>
+                                        <div class="topic-time">10 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="contracts.html" class="topic-btn primary" target="_blank">📖 Read</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('4-3')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="day-card" id="day5" data-day="5">
+            <div class="day-header" onclick="toggleDay(5)">
+                <div class="day-info">
+                    <div class="day-number">5</div>
+                    <div class="day-text">
+                        <h3>Case Studies & Sales Tools</h3>
+                        <p>Real examples and your toolkit</p>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-text">3 topics</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-inner">
+                    <div class="topic-list">
+                        <div class="topic-item" data-topic="5-1">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">📊</span>
+                                    <div>
+                                        <div class="topic-title">Case Studies</div>
+                                        <div class="topic-time">20 min read</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="case-studies.html" class="topic-btn primary" target="_blank">📖 Read All</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('5-1')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="5-2">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">🤖</span>
+                                    <div>
+                                        <div class="topic-title">Using the AI Chat</div>
+                                        <div class="topic-time">5 min explore</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="index.html" class="topic-btn primary" target="_blank">💬 Try Chat</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('5-2')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-item" data-topic="5-3">
+                            <div class="topic-header">
+                                <div class="topic-info">
+                                    <span class="topic-icon">📄</span>
+                                    <div>
+                                        <div class="topic-title">PDF Center & Resources</div>
+                                        <div class="topic-time">Browse as needed</div>
+                                    </div>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="pdf-center.html" class="topic-btn primary" target="_blank">📖 Browse</a>
+                                    <button class="topic-btn complete" onclick="completeTopic('5-3')">✓ Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completion Section -->
+                    <div class="quiz-section" id="completion-section" style="display: none;">
+                        <div class="quiz-title">🎉 Congratulations!</div>
+                        <p style="color: #94a3b8; margin-bottom: 16px;">You've completed the XBO Onboarding Track! You're now ready to start selling.</p>
+                        <p style="color: #a5b4fc; font-size: 0.9rem;">Questions? Use the AI Chat or ask your team lead.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset Section -->
+        <div class="reset-section">
+            <button class="reset-btn" onclick="resetProgress()">🔄 Reset Progress</button>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let state = {
+            userName: '',
+            completedTopics: [],
+            startedAt: null
+        };
+
+        const TOTAL_TOPICS = 15;
+        const STORAGE_KEY = 'xbo_onboarding_progress';
+
+        // Initialize
+        function init() {
+            loadState();
+            
+            if (!state.userName) {
+                document.getElementById('welcomeModal').classList.remove('hidden');
+            } else {
+                document.getElementById('welcomeModal').classList.add('hidden');
+                document.getElementById('displayName').textContent = state.userName;
+            }
+            
+            updateUI();
+        }
+
+        // Load/Save state
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                state = JSON.parse(saved);
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        // Start onboarding
+        function startOnboarding() {
+            const name = document.getElementById('userName').value.trim();
+            if (!name) {
+                document.getElementById('userName').focus();
+                return;
+            }
+            
+            state.userName = name;
+            state.startedAt = new Date().toISOString();
+            saveState();
+            
+            document.getElementById('welcomeModal').classList.add('hidden');
+            document.getElementById('displayName').textContent = name;
+            
+            // Expand day 1
+            toggleDay(1);
+        }
+
+        // Toggle day expansion
+        function toggleDay(dayNum) {
+            const card = document.getElementById(`day${dayNum}`);
+            const wasExpanded = card.classList.contains('expanded');
+            
+            // Close all
+            document.querySelectorAll('.day-card').forEach(c => c.classList.remove('expanded'));
+            
+            // Toggle this one
+            if (!wasExpanded) {
+                card.classList.add('expanded');
+            }
+        }
+
+        // Complete topic
+        function completeTopic(topicId) {
+            if (!state.completedTopics.includes(topicId)) {
+                state.completedTopics.push(topicId);
+                saveState();
+                updateUI();
+            }
+        }
+
+        // Update UI
+        function updateUI() {
+            const completed = state.completedTopics.length;
+            const percent = Math.round((completed / TOTAL_TOPICS) * 100);
+            
+            // Update progress
+            document.getElementById('progressPercent').textContent = percent;
+            document.getElementById('progressFill').style.width = `${percent}%`;
+            document.getElementById('completedTopics').textContent = completed;
+            
+            // Update topic buttons
+            state.completedTopics.forEach(topicId => {
+                const topicItem = document.querySelector(`[data-topic="${topicId}"]`);
+                if (topicItem) {
+                    const btn = topicItem.querySelector('.complete');
+                    if (btn) {
+                        btn.textContent = '✓ Completed';
+                        btn.classList.remove('complete');
+                        btn.classList.add('completed');
+                    }
+                }
+            });
+            
+            // Update day statuses
+            for (let day = 1; day <= 5; day++) {
+                const dayCard = document.getElementById(`day${day}`);
+                const dayTopics = [`${day}-1`, `${day}-2`, `${day}-3`];
+                const dayCompleted = dayTopics.filter(t => state.completedTopics.includes(t)).length;
+                const dayTotal = dayTopics.length;
+                
+                if (dayCompleted === dayTotal) {
+                    dayCard.classList.add('completed');
+                    dayCard.classList.remove('active');
+                    dayCard.querySelector('.status-text').textContent = 'Completed ✓';
+                } else if (dayCompleted > 0) {
+                    dayCard.classList.add('active');
+                    dayCard.querySelector('.status-text').textContent = `${dayCompleted}/${dayTotal} done`;
+                }
+            }
+            
+            // Show completion section if all done
+            if (completed === TOTAL_TOPICS) {
+                document.getElementById('completion-section').style.display = 'block';
+            }
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Reset all progress? This cannot be undone.')) {
+                state = {
+                    userName: '',
+                    completedTopics: [],
+                    startedAt: null
+                };
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        // Quiz handling
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const parent = this.parentElement;
+                const options = parent.querySelectorAll('.quiz-option');
+                
+                // Remove previous selections
+                options.forEach(o => o.classList.remove('selected', 'correct', 'wrong'));
+                
+                // Mark this one
+                this.classList.add('selected');
+                
+                if (this.dataset.correct === 'true') {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('wrong');
+                    // Show correct answer
+                    options.forEach(o => {
+                        if (o.dataset.correct === 'true') {
+                            o.classList.add('correct');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Init on load
+        init();
+    </script>
+</body>
+</html>

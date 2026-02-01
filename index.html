@@ -557,6 +557,7 @@
                 <a href="compliance.html" class="nav-link">Compliance</a>
                 <a href="contracts.html" class="nav-link">Contracts</a>
                 <a href="procedures.html" class="nav-link">Internal</a>
+                <a href="onboarding.html" class="nav-link" style="color: #10b981;">🎓 Onboarding</a>
                 <a href="updates.html" class="nav-link">Updates</a>
             </nav>
 
@@ -690,6 +691,9 @@
         <!-- Quick Links Bar -->
         <section class="section">
             <div class="quick-links-bar">
+                <a href="onboarding.html" class="quick-link" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(99, 102, 241, 0.2)); border-color: #10b981;">
+                    🎓 Onboarding Track
+                </a>
                 <a href="pdf-center.html" class="quick-link">
                     📄 Link Center
                 </a>
@@ -702,6 +706,242 @@
             </div>
         </section>
     </main>
+
+    <!-- AI Chat Widget -->
+    <div id="aiChatWidget" class="ai-chat-widget">
+        <button class="ai-chat-toggle" onclick="toggleAIChat()">
+            <span class="chat-icon">🤖</span>
+            <span class="chat-label">Ask AI</span>
+        </button>
+        <div class="ai-chat-panel" id="aiChatPanel">
+            <div class="ai-chat-header">
+                <span>🤖 XBO AI Assistant</span>
+                <button class="close-chat" onclick="toggleAIChat()">✕</button>
+            </div>
+            <div class="ai-chat-messages" id="aiChatMessages">
+                <div class="ai-message bot">
+                    <div class="message-content">
+                        👋 Hey! I can help you with:
+                        <ul style="margin: 8px 0 0 16px; font-size: 0.85rem;">
+                            <li>Product info & pricing</li>
+                            <li>Sales pitches by client type</li>
+                            <li>Objection handling</li>
+                            <li>Compliance questions</li>
+                            <li>Process & procedures</li>
+                        </ul>
+                        <div style="margin-top: 12px; font-size: 0.85rem; color: #94a3b8;">Try: "OTC fee for $3M deal" or "iGaming pitch"</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-chat-input-area">
+                <input type="text" id="aiChatInput" placeholder="Ask anything about XBO..." onkeypress="handleAIChatKeypress(event)">
+                <button class="send-btn" onclick="sendAIMessage()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* AI Chat Widget */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+        }
+
+        .ai-chat-toggle {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 14px 24px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s;
+        }
+
+        .ai-chat-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5);
+        }
+
+        .chat-icon {
+            font-size: 1.3rem;
+        }
+
+        .ai-chat-panel {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 400px;
+            max-height: 500px;
+            background: #1e293b;
+            border-radius: 16px;
+            border: 1px solid #334155;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .ai-chat-panel.open {
+            display: flex;
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .close-chat:hover {
+            opacity: 1;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            max-height: 350px;
+        }
+
+        .ai-message {
+            margin-bottom: 16px;
+        }
+
+        .ai-message.user {
+            text-align: right;
+        }
+
+        .ai-message.user .message-content {
+            background: #6366f1;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .ai-message.bot .message-content {
+            background: #0f172a;
+        }
+
+        .message-content {
+            background: #0f172a;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            max-width: 90%;
+            display: inline-block;
+        }
+
+        .message-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .message-content th, .message-content td {
+            padding: 6px 10px;
+            border: 1px solid #334155;
+            text-align: left;
+        }
+
+        .message-content th {
+            background: #1e293b;
+        }
+
+        .message-content ul, .message-content ol {
+            margin-left: 16px;
+        }
+
+        .message-content strong {
+            color: #a5b4fc;
+        }
+
+        .copy-response-btn {
+            background: #334155;
+            border: none;
+            color: #94a3b8;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .copy-response-btn:hover {
+            background: #475569;
+            color: #fff;
+        }
+
+        .copy-response-btn.copied {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .ai-chat-input-area {
+            padding: 16px;
+            border-top: 1px solid #334155;
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-chat-input-area input {
+            flex: 1;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .ai-chat-input-area input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .send-btn {
+            background: #6366f1;
+            border: none;
+            color: #fff;
+            width: 44px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .send-btn:hover {
+            background: #8b5cf6;
+        }
+
+        @media (max-width: 768px) {
+            .ai-chat-panel {
+                width: calc(100vw - 48px);
+                right: -12px;
+            }
+        }
+    </style>
 
     <!-- Footer -->
     <footer class="footer">
@@ -826,6 +1066,335 @@
                 searchInput.blur();
             }
         });
+
+        // ============================================
+        // AI CHAT FUNCTIONALITY
+        // ============================================
+        
+        const aiResponses = {
+            patterns: [
+                // OTC Pricing
+                {
+                    triggers: ["otc fee", "otc price", "otc rate", "otc pricing", "עמלת otc", "מחיר otc", "otc $", "otc deal"],
+                    response: `<strong>OTC Fee Structure:</strong><br><br>
+<table>
+<tr><th>Deal Size</th><th>Rate</th></tr>
+<tr><td>$500K – $2M</td><td>2.00%</td></tr>
+<tr><td>$2M – $5M</td><td>1.00% – 1.50%</td></tr>
+<tr><td>$5M+</td><td>0.50% – 0.75%</td></tr>
+</table>
+<br>Default rate: 2%. Large volume clients can negotiate.`,
+                    copyText: "OTC Fees:\n• $500K-$2M: 2%\n• $2M-$5M: 1-1.5%\n• $5M+: 0.5-0.75% (negotiable)"
+                },
+                
+                // Spot Pricing
+                {
+                    triggers: ["spot fee", "spot price", "trading fee", "exchange fee", "עמלת מסחר"],
+                    response: `<strong>Spot Exchange Fees:</strong><br><br>
+<table>
+<tr><th>Monthly Volume</th><th>Rate</th></tr>
+<tr><td>&lt; $500K</td><td>0.80%</td></tr>
+<tr><td>$500K – $2M</td><td>0.50%</td></tr>
+<tr><td>$2M+</td><td>0.25%</td></tr>
+</table>
+<br>Default: 0.8%. Volume discounts apply automatically.`,
+                    copyText: "Spot Trading Fees:\n• <$500K: 0.8%\n• $500K-$2M: 0.5%\n• $2M+: 0.25%"
+                },
+                
+                // CryptoPayX Pricing  
+                {
+                    triggers: ["cryptopayx fee", "cryptopayx price", "processing fee", "payment fee", "עמלת עיבוד"],
+                    response: `<strong>CryptoPayX Processing Fees:</strong><br><br>
+<table>
+<tr><th>Monthly Flow</th><th>Rate</th></tr>
+<tr><td>Up to $1M</td><td>1.50%</td></tr>
+<tr><td>$1M – $5M</td><td>1.00%</td></tr>
+<tr><td>$5M – $10M</td><td>0.75%</td></tr>
+<tr><td>$10M+</td><td>0.50%</td></tr>
+</table>
+<br>Default: 1.5%. Enterprise pricing available.`,
+                    copyText: "CryptoPayX Fees:\n• Up to $1M: 1.5%\n• $1M-$5M: 1%\n• $5M-$10M: 0.75%\n• $10M+: 0.5%"
+                },
+
+                // Credit Line
+                {
+                    triggers: ["credit line", "what is credit", "explain credit", "קרדיט ליין", "קרדיט"],
+                    response: `<strong>💰 Credit Line</strong><br><br>
+Trade without holding funds upfront.<br><br>
+<strong>How it works:</strong><br>
+1. Get approved credit limit (fiat/crypto)<br>
+2. Execute trades using the credit<br>
+3. Settle within agreed timeframe<br>
+4. Track usage in real-time<br><br>
+<strong>Best for:</strong> CFD Brokers, Trading Platforms, Market Makers`,
+                    copyText: "XBO Credit Line enables trading without upfront funds. Execute trades first, settle later. Perfect for brokers and trading platforms needing liquidity flexibility."
+                },
+                
+                // CaaS
+                {
+                    triggers: ["caas", "crypto as a service", "white label", "מה זה קאס"],
+                    response: `<strong>⚙️ CaaS - Crypto-as-a-Service</strong><br><br>
+White-label crypto infrastructure for banks & fintechs.<br><br>
+<strong>Includes:</strong><br>
+• 🌊 Deep liquidity (50+ exchanges)<br>
+• 🔐 Custody (SOC 2, insured)<br>
+• ⚖️ MiCA & AML compliance<br>
+• 📱 White-label UI<br>
+• 💹 Staking & Earn<br><br>
+<strong>Time to market:</strong> 4-6 weeks`,
+                    copyText: "XBO CaaS: Launch your own crypto offering in 4-6 weeks. Complete white-label solution with liquidity, custody, compliance, and UI."
+                },
+                
+                // CryptoPayX
+                {
+                    triggers: ["cryptopayx", "crypto payment", "payment processing", "accept crypto"],
+                    response: `<strong>💳 CryptoPayX</strong><br><br>
+Instant crypto payment processing.<br><br>
+<strong>Features:</strong><br>
+• ⚡ Real-time processing<br>
+• 🌍 Global coverage<br>
+• 💱 Fiat/stablecoin settlement<br>
+• 🔒 Dedicated wallet per client<br><br>
+<strong>Best for:</strong> iGaming, Forex, Creator Platforms`,
+                    copyText: "CryptoPayX: Instant crypto payment processing. Accept deposits globally, real-time settlement."
+                },
+                
+                // IBAN
+                {
+                    triggers: ["iban", "emoney", "corporate iban", "banking", "sepa"],
+                    response: `<strong>🏦 eMoney / Corporate IBAN</strong><br><br>
+Dedicated IBAN accounts with full banking rails.<br><br>
+<strong>Features:</strong><br>
+• 🇪🇺 SEPA transfers<br>
+• 🌐 SWIFT international<br>
+• 🇬🇧 UK Faster Payments<br>
+• 💱 Multi-currency<br>
+• 🔗 Crypto bridge<br><br>
+<strong>Pro tip:</strong> IBAN clients benefit from our Credit Line!`,
+                    copyText: "XBO Corporate IBAN: SEPA, SWIFT & Faster Payments. Multi-currency with crypto bridge."
+                },
+
+                // iGaming Pitch
+                {
+                    triggers: ["igaming pitch", "casino pitch", "gambling pitch", "igaming client", "gaming client"],
+                    response: `<strong>🎰 iGaming Sales Pitch</strong><br><br>
+"Looking for reliable crypto payments for your platform?"<br><br>
+<strong>Why XBO:</strong><br>
+✅ Instant deposits - players fund in seconds<br>
+✅ Global reach - accept from restricted regions<br>
+✅ 1-1.5% fees (vs 3-5% cards)<br>
+✅ Zero chargebacks<br>
+✅ Player privacy<br><br>
+<strong>Results:</strong> 40% better conversion, 60% lower costs`,
+                    copyText: "XBO CryptoPayX for iGaming:\n\n• Instant crypto deposits\n• Global reach (no banking restrictions)\n• 1-1.5% fees (vs 3-5% cards)\n• Zero chargebacks\n• Player privacy\n\nOur iGaming clients see 40% better deposit conversion and 60% lower costs."
+                },
+                
+                // Broker Pitch
+                {
+                    triggers: ["broker pitch", "cfd pitch", "forex pitch", "trading pitch", "broker client"],
+                    response: `<strong>📈 Broker/Trading Platform Pitch</strong><br><br>
+"Need liquidity flexibility for trading operations?"<br><br>
+<strong>Why XBO:</strong><br>
+✅ Credit Line - trade without upfront capital<br>
+✅ Deep liquidity across 50+ venues<br>
+✅ Fiat & crypto coverage<br>
+✅ Real-time settlement<br>
+✅ API-first integration<br><br>
+<strong>Results:</strong> Better capital efficiency, 24/7 trading`,
+                    copyText: "XBO for Trading Platforms:\n\n• Credit Line - trade without upfront funds\n• Deep liquidity across 50+ venues\n• Fiat & crypto coverage\n• Real-time settlement\n• Full API integration"
+                },
+                
+                // Bank/EMI Pitch
+                {
+                    triggers: ["bank pitch", "emi pitch", "fintech pitch", "bank client", "emi client"],
+                    response: `<strong>🏛️ Bank/EMI/Fintech Pitch</strong><br><br>
+"Want crypto services without building from scratch?"<br><br>
+<strong>Why XBO CaaS:</strong><br>
+✅ 4-6 weeks to launch (not 12+ months)<br>
+✅ Full MiCA & AML compliance<br>
+✅ Your brand, our infrastructure<br>
+✅ New revenue stream<br><br>
+<strong>Includes:</strong> Trading, Custody, Staking, Cards, Full API`,
+                    copyText: "XBO CaaS for Banks & Fintechs:\n\n• Launch crypto in 4-6 weeks\n• Full MiCA & AML compliance\n• Complete white-label solution\n• Trading, custody, staking, cards"
+                },
+
+                // Prohibited Countries
+                {
+                    triggers: ["prohibited", "restricted", "blocked countries", "can't work", "מדינות חסומות"],
+                    response: `<strong>⚖️ Prohibited & Restricted</strong><br><br>
+<strong>🚫 Prohibited:</strong><br>
+Russia, Iran, North Korea, Cuba, Syria, Belarus, Myanmar, Venezuela, and sanctioned territories.<br><br>
+<strong>⚠️ Restricted (extra DD):</strong><br>
+UAE, Turkey, Nigeria, Pakistan, Philippines, and others.<br><br>
+📋 Full list: <a href="compliance.html" style="color: #818cf8;">compliance.html</a>`,
+                    copyText: null
+                },
+                
+                // Settlement Times
+                {
+                    triggers: ["settlement time", "how long", "when settled", "זמן סליקה"],
+                    response: `<strong>⏱️ Settlement Times:</strong><br><br>
+• <strong>Crypto deposits:</strong> Instant (after confirms)<br>
+• <strong>Crypto withdrawals:</strong> Minutes to hours<br>
+• <strong>SEPA:</strong> Same-day or T+1<br>
+• <strong>SWIFT:</strong> 1-3 business days<br>
+• <strong>UK Faster Payments:</strong> Instant<br>
+• <strong>Credit Line:</strong> As agreed (usually T+1)`,
+                    copyText: "Settlement:\n• Crypto: Instant\n• SEPA: Same-day/T+1\n• SWIFT: 1-3 days\n• UK Faster Payments: Instant"
+                },
+                
+                // Supported Crypto
+                {
+                    triggers: ["supported coins", "which crypto", "what coins", "currencies", "מטבעות"],
+                    response: `<strong>🪙 Supported Cryptocurrencies:</strong><br><br>
+<strong>Major:</strong> BTC, ETH, USDT, USDC, XRP, SOL, ADA, DOT<br><br>
+<strong>Stablecoins:</strong> USDT, USDC, DAI<br><br>
+<strong>Networks:</strong> Ethereum, BSC, Polygon, Solana, Tron, Arbitrum, Optimism<br><br>
+600+ trading pairs available!`,
+                    copyText: "Supported: BTC, ETH, USDT, USDC, XRP, SOL + 600 pairs\nNetworks: Ethereum, BSC, Polygon, Solana, Tron, Arbitrum"
+                },
+                
+                // Onboarding
+                {
+                    triggers: ["onboarding", "client onboarding", "new client", "how to onboard"],
+                    response: `<strong>🔄 Client Onboarding Process:</strong><br><br>
+1. <strong>Discovery call</strong> - identify needs<br>
+2. <strong>Documentation</strong> - KYB docs (3-5 days review)<br>
+3. <strong>Agreement</strong> - sign Insertion Order<br>
+4. <strong>Setup</strong> - Telegram group, API creds<br>
+5. <strong>Go Live</strong> - first transaction<br><br>
+📋 Details: <a href="procedures.html" style="color: #818cf8;">procedures.html</a>`,
+                    copyText: null
+                },
+                
+                // Help
+                {
+                    triggers: ["help", "what can you", "מה אתה יכול"],
+                    response: `<strong>🤖 I can help with:</strong><br><br>
+<strong>Pricing:</strong><br>
+• "OTC fee for $3M deal"<br>
+• "CryptoPayX pricing"<br>
+• "Spot trading fees"<br><br>
+<strong>Products:</strong><br>
+• "What is Credit Line?"<br>
+• "Explain CaaS"<br>
+• "IBAN features"<br><br>
+<strong>Sales:</strong><br>
+• "iGaming pitch"<br>
+• "Broker pitch"<br>
+• "Bank/EMI pitch"<br><br>
+<strong>Other:</strong><br>
+• "Prohibited countries"<br>
+• "Settlement times"<br>
+• "Supported crypto"`,
+                    copyText: null
+                }
+            ]
+        };
+
+        function toggleAIChat() {
+            const panel = document.getElementById('aiChatPanel');
+            panel.classList.toggle('open');
+            if (panel.classList.contains('open')) {
+                document.getElementById('aiChatInput').focus();
+            }
+        }
+
+        function handleAIChatKeypress(e) {
+            if (e.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiChatInput');
+            const messages = document.getElementById('aiChatMessages');
+            const query = input.value.trim();
+            
+            if (!query) return;
+            
+            // Add user message
+            messages.innerHTML += `
+                <div class="ai-message user">
+                    <div class="message-content">${escapeHtml(query)}</div>
+                </div>
+            `;
+            
+            input.value = '';
+            
+            // Find response
+            const response = findAIResponse(query);
+            
+            // Add bot response with slight delay
+            setTimeout(() => {
+                let responseHtml = `
+                    <div class="ai-message bot">
+                        <div class="message-content">
+                            ${response.text}
+                `;
+                
+                if (response.copyText) {
+                    const copyId = 'copy-' + Date.now();
+                    responseHtml += `
+                            <br><button class="copy-response-btn" id="${copyId}" onclick="copyAIResponse('${copyId}', \`${response.copyText.replace(/`/g, '\\`')}\`)">
+                                📋 Copy for client
+                            </button>
+                    `;
+                }
+                
+                responseHtml += `
+                        </div>
+                    </div>
+                `;
+                
+                messages.innerHTML += responseHtml;
+                messages.scrollTop = messages.scrollHeight;
+            }, 300);
+        }
+
+        function findAIResponse(query) {
+            const q = query.toLowerCase();
+            
+            for (const pattern of aiResponses.patterns) {
+                for (const trigger of pattern.triggers) {
+                    if (q.includes(trigger)) {
+                        return {
+                            text: pattern.response,
+                            copyText: pattern.copyText
+                        };
+                    }
+                }
+            }
+            
+            // Fallback
+            return {
+                text: `🤔 לא מצאתי מידע ספציפי על זה.<br><br>
+נסה לשאול על:<br>
+• <strong>מוצרים:</strong> Credit Line, CaaS, CryptoPayX, IBAN<br>
+• <strong>תמחור:</strong> OTC fees, Spot fees, Processing fees<br>
+• <strong>פיץ'ים:</strong> iGaming pitch, Broker pitch, Bank pitch<br><br>
+או הקלד <strong>"help"</strong> לרשימה מלאה.`,
+                copyText: null
+            };
+        }
+
+        function copyAIResponse(btnId, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                btn.innerHTML = '✓ Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = '📋 Copy for client';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>
