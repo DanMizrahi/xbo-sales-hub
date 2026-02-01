@@ -589,11 +589,51 @@
             </div>
             
             <div class="topic-grid">
-                <a href="products.html#credit-line" class="topic-card" data-link="products.html#credit-line">
+                <a href="products.html#spot" class="topic-card" data-link="products.html#spot">
+                    <span class="topic-icon">💱</span>
+                    <h3 class="topic-title">Spot Exchange</h3>
+                    <p class="topic-desc">Fiat ↔ Crypto conversion. EUR, USD, GBP to USDT, USDC, and more.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#spot')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#otc" class="topic-card" data-link="products.html#otc">
+                    <span class="topic-icon">🏦</span>
+                    <h3 class="topic-title">OTC Services</h3>
+                    <p class="topic-desc">Large volume trading ($500K+). Direct dealing desk access.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#otc')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#cryptopayx" class="topic-card" data-link="products.html#cryptopayx">
                     <span class="topic-icon">💳</span>
-                    <h3 class="topic-title">Credit Line</h3>
-                    <p class="topic-desc">Trade without upfront funds. Flexible credit solutions for institutional clients.</p>
-                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#credit-line')">
+                    <h3 class="topic-title">CryptoPayX</h3>
+                    <p class="topic-desc">Crypto payment processing. Pay-in, pay-out, mass refunds.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#cryptopayx')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#emoney" class="topic-card" data-link="products.html#emoney">
+                    <span class="topic-icon">🏛️</span>
+                    <h3 class="topic-title">Corporate Banking</h3>
+                    <p class="topic-desc">Named IBANs, 30+ currencies. SEPA, SWIFT, Faster Payments.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#emoney')">
+                        <span class="copy-tooltip">Copy link</span>
+                        🔗
+                    </button>
+                </a>
+
+                <a href="products.html#earn" class="topic-card" data-link="products.html#earn">
+                    <span class="topic-icon">📈</span>
+                    <h3 class="topic-title">Earn & Staking</h3>
+                    <p class="topic-desc">Up to 15% APR on crypto holdings. Flexible terms.</p>
+                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#earn')">
                         <span class="copy-tooltip">Copy link</span>
                         🔗
                     </button>
@@ -602,48 +642,8 @@
                 <a href="products.html#caas" class="topic-card" data-link="products.html#caas">
                     <span class="topic-icon">⚙️</span>
                     <h3 class="topic-title">CaaS</h3>
-                    <p class="topic-desc">Crypto-as-a-Service. Turnkey infrastructure for launching crypto services.</p>
+                    <p class="topic-desc">White-label for EMIs & Banks. Launch crypto in 4-6 weeks.</p>
                     <button class="copy-link-btn" onclick="copyLink(event, 'products.html#caas')">
-                        <span class="copy-tooltip">Copy link</span>
-                        🔗
-                    </button>
-                </a>
-
-                <a href="products.html#cryptopayx" class="topic-card" data-link="products.html#cryptopayx">
-                    <span class="topic-icon">💰</span>
-                    <h3 class="topic-title">CryptoPayX</h3>
-                    <p class="topic-desc">Instant crypto payment processing. Accept crypto deposits globally.</p>
-                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#cryptopayx')">
-                        <span class="copy-tooltip">Copy link</span>
-                        🔗
-                    </button>
-                </a>
-
-                <a href="products.html#emoney" class="topic-card" data-link="products.html#emoney">
-                    <span class="topic-icon">🏦</span>
-                    <h3 class="topic-title">eMoney / IBAN</h3>
-                    <p class="topic-desc">Dedicated IBANs and banking rails. SEPA, SWIFT, and more.</p>
-                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#emoney')">
-                        <span class="copy-tooltip">Copy link</span>
-                        🔗
-                    </button>
-                </a>
-
-                <a href="products.html#cards" class="topic-card" data-link="products.html#cards">
-                    <span class="topic-icon">💎</span>
-                    <h3 class="topic-title">Cards</h3>
-                    <p class="topic-desc">Branded card programs. Let your clients spend crypto anywhere.</p>
-                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#cards')">
-                        <span class="copy-tooltip">Copy link</span>
-                        🔗
-                    </button>
-                </a>
-
-                <a href="products.html#custody" class="topic-card" data-link="products.html#custody">
-                    <span class="topic-icon">🔒</span>
-                    <h3 class="topic-title">Custody</h3>
-                    <p class="topic-desc">Institutional-grade custody. Secure storage with insurance coverage.</p>
-                    <button class="copy-link-btn" onclick="copyLink(event, 'products.html#custody')">
                         <span class="copy-tooltip">Copy link</span>
                         🔗
                     </button>
@@ -983,12 +983,14 @@
         const searchResults = document.getElementById('searchResults');
 
         const searchData = [
-            { title: 'Credit Line', category: 'Products', icon: '💳', link: 'products.html#credit-line' },
-            { title: 'Crypto-as-a-Service (CaaS)', category: 'Products', icon: '⚙️', link: 'products.html#caas' },
-            { title: 'CryptoPayX', category: 'Products', icon: '💰', link: 'products.html#cryptopayx' },
-            { title: 'eMoney / IBAN', category: 'Products', icon: '🏦', link: 'products.html#emoney' },
-            { title: 'Cards', category: 'Products', icon: '💎', link: 'products.html#cards' },
-            { title: 'Custody', category: 'Products', icon: '🔒', link: 'products.html#custody' },
+            { title: 'Spot Exchange', category: 'Products', icon: '💱', link: 'products.html#spot' },
+            { title: 'OTC Services', category: 'Products', icon: '🏦', link: 'products.html#otc' },
+            { title: 'Earn & Staking', category: 'Products', icon: '📈', link: 'products.html#earn' },
+            { title: 'Crypto Liquidity (API)', category: 'Products', icon: '🌊', link: 'products.html#liquidity' },
+            { title: 'CryptoPayX', category: 'Products', icon: '💳', link: 'products.html#cryptopayx' },
+            { title: 'Corporate Banking / IBAN', category: 'Products', icon: '🏛️', link: 'products.html#emoney' },
+            { title: 'Crypto Card', category: 'Products', icon: '💎', link: 'products.html#cards' },
+            { title: 'CaaS (White-label)', category: 'Products', icon: '⚙️', link: 'products.html#caas' },
             { title: 'CFD Broker Case Study', category: 'Case Studies', icon: '📈', link: 'case-studies.html#cfd' },
             { title: 'EMI Case Study', category: 'Case Studies', icon: '🏛️', link: 'case-studies.html#emi' },
             { title: 'iGaming Case Study', category: 'Case Studies', icon: '🎮', link: 'case-studies.html#igaming' },
