@@ -32,19 +32,33 @@
             padding: 40px 0 20px;
         }
 
-        .back-link {
-            display: inline-flex;
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
             color: #94a3b8;
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
             transition: color 0.2s;
         }
 
-        .back-link:hover {
-            color: #fff;
+        .breadcrumb a:hover {
+            color: #6366f1;
+        }
+
+        .breadcrumb .separator {
+            color: #475569;
+        }
+
+        .breadcrumb .current {
+            color: #e2e8f0;
+            font-weight: 500;
         }
 
         .header-logo {
@@ -485,7 +499,11 @@
 <body>
     <div class="container">
         <header>
-            <a href="index.html" class="back-link">← Back to Hub</a>
+            <nav class="breadcrumb">
+                <a href="index.html">🏠 Hub</a>
+                <span class="separator">›</span>
+                <span class="current">Products</span>
+            </nav>
             <div class="header-logo">📦 XBO Products</div>
             <p class="subtitle">Complete B2B product portfolio</p>
         </header>

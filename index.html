@@ -88,6 +88,68 @@
             background: rgba(99, 102, 241, 0.15);
         }
 
+        .nav-link.active {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.25);
+            border-bottom: 2px solid #6366f1;
+        }
+
+        .nav-link.nav-highlight {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2));
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-link.nav-highlight:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.3));
+            color: #fff;
+        }
+
+        /* Dropdown Navigation */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 200px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            z-index: 200;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+        }
+
+        .nav-dropdown-content a {
+            display: block;
+            padding: 10px 16px;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-dropdown-content a:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: #fff;
+        }
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -552,14 +614,25 @@
             <nav class="nav" id="nav">
                 <a href="products.html" class="nav-link">Products</a>
                 <a href="case-studies.html" class="nav-link">Case Studies</a>
-                <a href="pdf-center.html" class="nav-link">Link Center</a>
-                <a href="emoney-faq.html" class="nav-link">eMoney FAQ</a>
-                <a href="compliance.html" class="nav-link">Compliance</a>
-                <a href="contracts.html" class="nav-link">Contracts</a>
-                <a href="procedures.html" class="nav-link">Internal</a>
-                <a href="getting-started.html" class="nav-link">🚀 Getting Started</a>
-                <a href="onboarding.html" class="nav-link" style="color: #10b981;">🎓 Onboarding</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link nav-dropdown-btn">Resources ▾</button>
+                    <div class="nav-dropdown-content">
+                        <a href="pdf-center.html">📄 Documents & Links</a>
+                        <a href="compliance.html">⚖️ Compliance</a>
+                        <a href="contracts.html">📋 Contracts</a>
+                        <a href="emoney-faq.html">❓ eMoney FAQ</a>
+                    </div>
+                </div>
                 <a href="updates.html" class="nav-link">Updates</a>
+                <div class="nav-dropdown">
+                    <button class="nav-link nav-dropdown-btn">Internal ▾</button>
+                    <div class="nav-dropdown-content">
+                        <a href="procedures.html">📋 Procedures</a>
+                        <a href="internal.html">🔧 Resources</a>
+                        <a href="onboarding.html">🎓 Onboarding</a>
+                    </div>
+                </div>
+                <a href="getting-started.html" class="nav-link nav-highlight">🚀 Client Guide</a>
             </nav>
 
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
@@ -709,29 +782,35 @@
     </main>
 
     <!-- AI Chat Widget -->
+    <!-- AI Chat Widget - Improved UX -->
     <div id="aiChatWidget" class="ai-chat-widget">
         <button class="ai-chat-toggle" onclick="toggleAIChat()">
             <span class="chat-icon">🤖</span>
             <span class="chat-label">Ask AI</span>
+            <span class="chat-pulse"></span>
         </button>
         <div class="ai-chat-panel" id="aiChatPanel">
             <div class="ai-chat-header">
-                <span>🤖 XBO AI Assistant</span>
+                <div>
+                    <span style="font-size: 1.1rem;">🤖 XBO AI Assistant</span>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 2px;">Instant answers about XBO products & pricing</div>
+                </div>
                 <button class="close-chat" onclick="toggleAIChat()">✕</button>
             </div>
             <div class="ai-chat-messages" id="aiChatMessages">
                 <div class="ai-message bot">
                     <div class="message-content">
-                        👋 Hey! I can help you with:
-                        <ul style="margin: 8px 0 0 16px; font-size: 0.85rem;">
-                            <li>Product info & pricing</li>
-                            <li>Sales pitches by client type</li>
-                            <li>Objection handling</li>
-                            <li>Compliance questions</li>
-                            <li>Process & procedures</li>
-                        </ul>
-                        <div style="margin-top: 12px; font-size: 0.85rem; color: #94a3b8;">Try: "OTC fee for $3M deal" or "iGaming pitch"</div>
+                        👋 Hey! What can I help you with?
                     </div>
+                </div>
+                <div class="ai-suggestions" id="aiSuggestions">
+                    <div class="suggestions-label">Quick questions:</div>
+                    <button class="suggestion-btn" onclick="askSuggestion('OTC fee for $3M deal')">💰 OTC pricing</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('iGaming pitch')">🎰 iGaming pitch</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('What is Credit Line')">💳 Credit Line</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('registration link')">🔗 Registration link</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('prohibited countries')">⚖️ Compliance</button>
+                    <button class="suggestion-btn" onclick="askSuggestion('how to deposit')">📥 Deposits</button>
                 </div>
             </div>
             <div class="ai-chat-input-area">
@@ -773,6 +852,55 @@
 
         .chat-icon {
             font-size: 1.3rem;
+        }
+
+        .chat-pulse {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* AI Suggestions */
+        .ai-suggestions {
+            padding: 12px 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .suggestions-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .suggestion-btn {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin: 4px;
+            transition: all 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            color: #fff;
         }
 
         .ai-chat-panel {
@@ -1385,6 +1513,14 @@ Min: $100 / €100 / £100<br><br>
             if (panel.classList.contains('open')) {
                 document.getElementById('aiChatInput').focus();
             }
+        }
+
+        function askSuggestion(question) {
+            document.getElementById('aiChatInput').value = question;
+            // Hide suggestions after first use
+            const suggestions = document.getElementById('aiSuggestions');
+            if (suggestions) suggestions.style.display = 'none';
+            sendAIMessage();
         }
 
         function handleAIChatKeypress(e) {
