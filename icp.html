@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Customer Profiles | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 30px;
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Segment Filter */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 24px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #6366f1;
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* ICP Card */
+        .icp-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 0;
+            border: 1px solid #334155;
+            margin-bottom: 32px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .icp-card:hover {
+            border-color: var(--accent-color, #6366f1);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .icp-card.igaming { --accent-color: #f59e0b; }
+        .icp-card.cfd { --accent-color: #10b981; }
+        .icp-card.emi { --accent-color: #6366f1; }
+        .icp-card.creator { --accent-color: #ec4899; }
+        .icp-card.corporate { --accent-color: #8b5cf6; }
+        .icp-card.aviation { --accent-color: #0ea5e9; }
+
+        .icp-header {
+            padding: 28px 32px;
+            background: linear-gradient(90deg, var(--accent-color, #6366f1) 0%, transparent 100%);
+            background-size: 4px 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icp-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .icp-title-area {
+            flex: 1;
+        }
+
+        .icp-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .icp-subtitle {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .fit-score {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .icp-body {
+            padding: 28px 32px;
+        }
+
+        .icp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .icp-section {
+            background: #0f172a;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .icp-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-color, #6366f1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icp-list {
+            list-style: none;
+        }
+
+        .icp-list li {
+            padding: 8px 0;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .icp-list li::before {
+            content: '•';
+            color: var(--accent-color, #6366f1);
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .product-tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-tag.primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .volume-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pain-points {
+            background: rgba(239, 68, 68, 0.08);
+            border-left: 3px solid #f87171;
+        }
+
+        .pain-points .icp-section-title {
+            color: #f87171;
+        }
+
+        .pain-points .icp-list li::before {
+            color: #f87171;
+        }
+
+        .case-study-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+            color: #a5b4fc;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.2s;
+        }
+
+        .case-study-link:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+            transform: translateX(4px);
+        }
+
+        /* Quick Summary */
+        .summary-section {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid #334155;
+            margin-bottom: 40px;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 20px;
+            background: #0f172a;
+            border-radius: 12px;
+        }
+
+        .summary-item .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .summary-item .label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .summary-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .icp-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .icp-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo-img">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            <a href="index.html" class="back-link">← Back to Hub</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>🎯 Ideal Customer Profiles</h1>
+        <p>Know your target segments. Understand their needs, pain points, and which products to lead with.</p>
+    </section>
+
+    <!-- Segment Filter -->
+    <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterSegment('all')">All Segments</button>
+        <button class="filter-btn" onclick="filterSegment('igaming')">🎰 iGaming</button>
+        <button class="filter-btn" onclick="filterSegment('cfd')">📈 CFD/Broker</button>
+        <button class="filter-btn" onclick="filterSegment('emi')">🏦 EMI/Bank</button>
+        <button class="filter-btn" onclick="filterSegment('creator')">🎨 Creator</button>
+        <button class="filter-btn" onclick="filterSegment('corporate')">🏢 Corporate</button>
+        <button class="filter-btn" onclick="filterSegment('aviation')">✈️ Aviation/Luxury</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Quick Summary -->
+        <section class="summary-section">
+            <h2 class="summary-title">📊 Segment Overview</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="icon">🎰</div>
+                    <div class="label">iGaming</div>
+                    <div class="value">CryptoPayX</div>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">📈</div>
+                    <div class="label">CFD/Broker</div>
+                    <div class="value">Credit Line</div>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">🏦</div>
+                    <div class="label">EMI/Bank</div>
+                    <div class="value">CaaS</div>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">🎨</div>
+                    <div class="label">Creator</div>
+                    <div class="value">Mass Payouts</div>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">🏢</div>
+                    <div class="label">Corporate</div>
+                    <div class="value">OTC + IBAN</div>
+                </div>
+                <div class="summary-item">
+                    <div class="icon">✈️</div>
+                    <div class="label">Aviation/Luxury</div>
+                    <div class="value">OTC + Privacy</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- iGaming ICP -->
+        <article class="icp-card igaming" data-segment="igaming">
+            <div class="icp-header">
+                <div class="icp-icon">🎰</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">iGaming / Online Casino</h2>
+                    <p class="icp-subtitle">Casinos, sportsbooks, poker platforms</p>
+                </div>
+                <span class="fit-score">🔥 HIGH FIT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>Online casino, sportsbook, poker</li>
+                            <li>Licensed (MGA, Curaçao, UKGC)</li>
+                            <li>Global player base</li>
+                            <li>High transaction volumes</li>
+                            <li>Multiple brands/white-labels</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>35-50% card decline rates</li>
+                            <li>Slow payouts (24-72 hours)</li>
+                            <li>High chargebacks (2-5%)</li>
+                            <li>PSP fragmentation</li>
+                            <li>Banking restrictions</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>Zero card declines with crypto</li>
+                            <li>4-minute average payouts</li>
+                            <li>Zero chargebacks</li>
+                            <li>1-1.5% fees (vs 3-5% cards)</li>
+                            <li>Global reach, no banking blocks</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">CryptoPayX</span>
+                            <span class="product-tag">Mass Payouts</span>
+                            <span class="product-tag">Fiat Settlement</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: $1M-$50M/month
+                        </div>
+                    </div>
+                </div>
+                <a href="case-studies.html#igaming" class="case-study-link">
+                    📖 View iGaming Case Study →
+                </a>
+            </div>
+        </article>
+
+        <!-- CFD/Broker ICP -->
+        <article class="icp-card cfd" data-segment="cfd">
+            <div class="icp-header">
+                <div class="icp-icon">📈</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">CFD / Forex Broker</h2>
+                    <p class="icp-subtitle">Online trading platforms, prop firms</p>
+                </div>
+                <span class="fit-score">🔥 HIGH FIT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>CFD, Forex, crypto trading platforms</li>
+                            <li>CySEC, FCA, or offshore licensed</li>
+                            <li>50K+ active traders</li>
+                            <li>Need liquidity and fast settlement</li>
+                            <li>Global client base</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>Capital tied up waiting for settlement</li>
+                            <li>40% card decline rates</li>
+                            <li>Need liquidity for hedging</li>
+                            <li>3-5 day fiat settlement</li>
+                            <li>Multiple PSP management</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>Credit Line — trade without upfront capital</li>
+                            <li>T+0 same-day settlement</li>
+                            <li>Deep liquidity ($5M+ per trade)</li>
+                            <li>+30% deposit approval rates</li>
+                            <li>Full API integration</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">Credit Line</span>
+                            <span class="product-tag">Spot Exchange</span>
+                            <span class="product-tag">CryptoPayX</span>
+                            <span class="product-tag">OTC</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: $500K-$10M/month
+                        </div>
+                    </div>
+                </div>
+                <a href="case-studies.html#cfd" class="case-study-link">
+                    📖 View CFD Broker Case Study →
+                </a>
+            </div>
+        </article>
+
+        <!-- EMI/Bank ICP -->
+        <article class="icp-card emi" data-segment="emi">
+            <div class="icp-header">
+                <div class="icp-icon">🏦</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">EMI / Bank / Fintech</h2>
+                    <p class="icp-subtitle">Licensed fintechs wanting crypto capabilities</p>
+                </div>
+                <span class="fit-score">🔥 HIGH FIT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>EU E-Money licensed institution</li>
+                            <li>Neobank or digital bank</li>
+                            <li>B2B or B2C fintech</li>
+                            <li>Has banking core, wants crypto</li>
+                            <li>100K+ customer base</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>Customer demand for crypto (67%+)</li>
+                            <li>No blockchain expertise in-house</li>
+                            <li>12-18 month build timeline is too long</li>
+                            <li>Compliance complexity</li>
+                            <li>Would need 6+ vendors to build</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>4-6 week launch (not 12+ months)</li>
+                            <li>Full white-label UI</li>
+                            <li>MiCA compliance included</li>
+                            <li>No blockchain hires needed</li>
+                            <li>Revenue share model</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">CaaS (White-label)</span>
+                            <span class="product-tag">Custody</span>
+                            <span class="product-tag">Earn</span>
+                            <span class="product-tag">Cards</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: €1M+ revenue/year
+                        </div>
+                    </div>
+                </div>
+                <a href="case-studies.html#emi" class="case-study-link">
+                    📖 View EMI Case Study →
+                </a>
+            </div>
+        </article>
+
+        <!-- Creator Platform ICP -->
+        <article class="icp-card creator" data-segment="creator">
+            <div class="icp-header">
+                <div class="icp-icon">🎨</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">Creator / Marketplace Platform</h2>
+                    <p class="icp-subtitle">Adult, creator economy, gig marketplaces</p>
+                </div>
+                <span class="fit-score">🔥 HIGH FIT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>Creator platform, fan subscription</li>
+                            <li>Gig economy marketplace</li>
+                            <li>Adult content platforms</li>
+                            <li>100K+ creators/sellers</li>
+                            <li>Global user base</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>40-60% card decline in MENA/Asia</li>
+                            <li>High chargebacks (3.5%+)</li>
+                            <li>Statement exposure issues</li>
+                            <li>14-30 day creator payout cycles</li>
+                            <li>Payment processor restrictions</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>Zero declines — crypto bypasses blocks</li>
+                            <li>Zero chargebacks</li>
+                            <li>Privacy — no statement exposure</li>
+                            <li>4-minute creator payouts</li>
+                            <li>+154% MENA completion rate</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">CryptoPayX</span>
+                            <span class="product-tag primary">Mass Payouts</span>
+                            <span class="product-tag">Fiat Settlement</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: $500K-$20M/month
+                        </div>
+                    </div>
+                </div>
+                <a href="case-studies.html#creator" class="case-study-link">
+                    📖 View Creator Platform Case Study →
+                </a>
+            </div>
+        </article>
+
+        <!-- Corporate Treasury ICP -->
+        <article class="icp-card corporate" data-segment="corporate">
+            <div class="icp-header">
+                <div class="icp-icon">🏢</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">Corporate Treasury</h2>
+                    <p class="icp-subtitle">Companies needing crypto treasury management</p>
+                </div>
+                <span class="fit-score">✓ GOOD FIT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>Crypto-native companies</li>
+                            <li>Web3 / DeFi projects</li>
+                            <li>Companies holding crypto treasury</li>
+                            <li>Cross-border businesses</li>
+                            <li>Family offices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>Difficulty getting bank accounts</li>
+                            <li>Need to convert crypto to fiat</li>
+                            <li>Large trades with minimal slippage</li>
+                            <li>International payments</li>
+                            <li>Yield on crypto holdings</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>Corporate IBAN (30+ currencies)</li>
+                            <li>OTC desk for large trades</li>
+                            <li>SEPA + SWIFT payments</li>
+                            <li>Earn up to 15% on holdings</li>
+                            <li>Crypto-friendly banking</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">OTC Desk</span>
+                            <span class="product-tag primary">eMoney IBAN</span>
+                            <span class="product-tag">Spot Exchange</span>
+                            <span class="product-tag">Earn</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: $500K-$5M/month
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Aviation / Luxury ICP (NEW!) -->
+        <article class="icp-card aviation" data-segment="aviation">
+            <div class="icp-header">
+                <div class="icp-icon">✈️</div>
+                <div class="icp-title-area">
+                    <h2 class="icp-title">Private Aviation / Luxury</h2>
+                    <p class="icp-subtitle">Private jet charters, yachts, luxury goods</p>
+                </div>
+                <span class="fit-score">🆕 NEW SEGMENT</span>
+            </div>
+            <div class="icp-body">
+                <div class="icp-grid">
+                    <div class="icp-section">
+                        <div class="icp-section-title">🎯 Profile</div>
+                        <ul class="icp-list">
+                            <li>Private jet charter operators</li>
+                            <li>Yacht charter companies</li>
+                            <li>Luxury goods retailers</li>
+                            <li>Concierge services</li>
+                            <li>HNWI service providers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="icp-section pain-points">
+                        <div class="icp-section-title">😫 Pain Points</div>
+                        <ul class="icp-list">
+                            <li>Large payments ($50K-$500K+)</li>
+                            <li>Wire transfer delays (3-5 days)</li>
+                            <li>HNWI clients holding crypto</li>
+                            <li>International payment complexity</li>
+                            <li>Client privacy requirements</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">💡 Value Props</div>
+                        <ul class="icp-list">
+                            <li>Accept large crypto payments</li>
+                            <li>Same-day settlement to fiat</li>
+                            <li>Privacy for HNWI clients</li>
+                            <li>No cross-border friction</li>
+                            <li>Simple integration for bookings</li>
+                        </ul>
+                    </div>
+
+                    <div class="icp-section">
+                        <div class="icp-section-title">📦 Products to Lead</div>
+                        <div class="products-grid">
+                            <span class="product-tag primary">OTC Desk</span>
+                            <span class="product-tag primary">CryptoPayX</span>
+                            <span class="product-tag">Fiat Settlement</span>
+                            <span class="product-tag">eMoney IBAN</span>
+                        </div>
+                        <div class="volume-badge" style="margin-top: 16px;">
+                            💰 Expected: $1M-$10M/month
+                        </div>
+                    </div>
+                </div>
+                <a href="case-studies.html#aviation" class="case-study-link">
+                    📖 View Private Aviation Case Study →
+                </a>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        XBO Sales Hub · Internal Use Only · Last updated: February 2026
+    </footer>
+
+    <script>
+        function filterSegment(segment) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            document.querySelectorAll('.icp-card').forEach(card => {
+                if (segment === 'all' || card.dataset.segment === segment) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

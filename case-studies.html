@@ -492,7 +492,7 @@
         }
 
         .solution-card li::before {
-            content: '✓';
+            content: '';
             position: absolute;
             left: 0;
             color: #6366f1;
@@ -625,6 +625,120 @@
             display: none;
         }
 
+        /* Business Model & Flow of Funds */
+        .flow-section {
+            margin-bottom: 40px;
+        }
+
+        .flow-section .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .flow-section .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .flow-diagram {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .flow-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-box {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 16px 24px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .flow-box.highlight {
+            border-color: #6366f1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        .flow-box .box-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+
+        .flow-box .box-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .flow-box .box-subtitle {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #6366f1;
+            flex-shrink: 0;
+        }
+
+        .flow-label {
+            font-size: 0.75rem;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .business-model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .bm-item {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+        }
+
+        .bm-item h5 {
+            color: #a5b4fc;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .bm-item p {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
         /* Print Styles */
         @media print {
             body {
@@ -735,7 +849,7 @@
             <div class="cards-grid">
                 <!-- CFD Broker Card -->
                 <div class="case-card trading" data-case="cfd" data-industry="trading">
-                    <div class="card-icon">📈</div>
+                    <div class="card-icon"></div>
                     <div class="card-industry">Trading</div>
                     <h3 class="card-title">CFD Trading Broker</h3>
                     <div class="card-metric">+30% Deposits</div>
@@ -744,7 +858,7 @@
 
                 <!-- EMI Card -->
                 <div class="case-card finance" data-case="emi" data-industry="finance">
-                    <div class="card-icon">🏦</div>
+                    <div class="card-icon"></div>
                     <div class="card-industry">Finance</div>
                     <h3 class="card-title">Licensed EMI</h3>
                     <div class="card-metric">8 Week Launch</div>
@@ -753,7 +867,7 @@
 
                 <!-- iGaming Card -->
                 <div class="case-card gaming" data-case="igaming" data-industry="gaming">
-                    <div class="card-icon">🎰</div>
+                    <div class="card-icon"></div>
                     <div class="card-industry">Gaming</div>
                     <h3 class="card-title">Tier-1 iGaming Group</h3>
                     <div class="card-metric">+26% Conversion</div>
@@ -762,7 +876,7 @@
 
                 <!-- Creator Card -->
                 <div class="case-card creator" data-case="creator" data-industry="creator">
-                    <div class="card-icon">📸</div>
+                    <div class="card-icon"></div>
                     <div class="card-industry">Creator Economy</div>
                     <h3 class="card-title">Creator Platform</h3>
                     <div class="card-metric">+51% Revenue</div>
@@ -780,7 +894,7 @@
             <!-- Hero -->
             <div class="cs-hero trading">
                 <div class="cs-hero-content">
-                    <div class="cs-hero-icon">📈</div>
+                    <div class="cs-hero-icon"></div>
                     <div class="cs-hero-text">
                         <h2>CFD Trading Broker</h2>
                         <p class="subtitle">Online Trading Platform • 50,000+ Traders</p>
@@ -792,22 +906,22 @@
             <!-- Client Overview -->
             <div class="client-overview">
                 <div class="overview-item">
-                    <div class="overview-icon">📊</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Client Type</div>
                     <div class="overview-value">CFD/FX Broker</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">👥</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Size</div>
                     <div class="overview-value">50,000+ Traders</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🌍</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Regions</div>
                     <div class="overview-value">EU, Asia, LATAM</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">⏱️</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Deploy Time</div>
                     <div class="overview-value">6 Weeks</div>
                 </div>
@@ -816,33 +930,33 @@
             <!-- Challenge -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon challenge">⚠️</div>
+                    <div class="section-icon challenge"></div>
                     <h3 class="section-title">The Challenge</h3>
                 </div>
                 <div class="challenge-grid">
                     <div class="challenge-item">
-                        <span class="icon">💳</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>High card decline rates</strong>
                             <p>Up to 40% of deposits failed due to bank restrictions on trading platforms</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">🔀</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Fragmented PSP landscape</strong>
                             <p>Managing 8+ payment providers with inconsistent APIs and reporting</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⏱️</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Slow settlements</strong>
                             <p>3-5 day delays tying up working capital and limiting growth</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⚡</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>2.3% chargeback rate</strong>
                             <p>Threatening merchant accounts and processor relationships</p>
@@ -854,12 +968,12 @@
             <!-- Solution -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon solution">💡</div>
+                    <div class="section-icon solution"></div>
                     <h3 class="section-title">The Solution — PayX + Settlement</h3>
                 </div>
                 <div class="solution-grid">
                     <div class="solution-card">
-                        <h4>💳 PayX Processing</h4>
+                        <h4> PayX Processing</h4>
                         <ul>
                             <li>Smart Payment Routing with AI optimization</li>
                             <li>Multi-Currency Acquiring (50+ methods)</li>
@@ -868,7 +982,7 @@
                         </ul>
                     </div>
                     <div class="solution-card">
-                        <h4>🏦 Settlement & Conversion</h4>
+                        <h4> Settlement & Conversion</h4>
                         <ul>
                             <li>T+0 Same-Day Settlements</li>
                             <li>Competitive FX Rates (0.8%)</li>
@@ -882,7 +996,7 @@
             <!-- Results -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon results">🎯</div>
+                    <div class="section-icon results"></div>
                     <h3 class="section-title">The Results</h3>
                 </div>
                 <div class="results-grid">
@@ -911,10 +1025,76 @@
                 <p class="quote-author">— Head of Treasury, CFX Trading Platform</p>
             </div>
 
+            <!-- Business Model & Flow of Funds -->
+            <div class="flow-section">
+                <div class="section-header">
+                    <div class="section-icon"></div>
+                    <h3 class="section-title">Business Model & Flow of Funds</h3>
+                </div>
+                
+                <div class="business-model-grid" style="margin-bottom: 24px;">
+                    <div class="bm-item">
+                        <h5>Client Type</h5>
+                        <p>CFD/Forex Broker</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>Revenue Model</h5>
+                        <p>Spread + Commissions on trades</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>XBO Products Used</h5>
+                        <p>PayX + Settlement + Credit Line</p>
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-label">Deposit Flow</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Trader</div>
+                            <div class="box-subtitle">Card/Crypto</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">XBO PayX</div>
+                            <div class="box-subtitle">Smart Routing</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Broker</div>
+                            <div class="box-subtitle">Trading Account</div>
+                        </div>
+                    </div>
+                    <div class="flow-label" style="margin-top: 24px;">Settlement Flow</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Broker</div>
+                            <div class="box-subtitle">Funds</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">XBO Settlement</div>
+                            <div class="box-subtitle">T+0</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Treasury</div>
+                            <div class="box-subtitle">Multi-Currency</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="action-btn primary" onclick="copyLink('cfd')">📋 Copy Link</button>
-                <a href="downloads/case-study-cfd.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn primary" onclick="copyLink('cfd')"> Copy Link</button>
+                <a href="downloads/case-study-cfd.html" download class="action-btn secondary"> Download PDF</a>
                 <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
             </div>
         </section>
@@ -928,7 +1108,7 @@
             <!-- Hero -->
             <div class="cs-hero finance">
                 <div class="cs-hero-content">
-                    <div class="cs-hero-icon">🏦</div>
+                    <div class="cs-hero-icon"></div>
                     <div class="cs-hero-text">
                         <h2>Licensed EMI</h2>
                         <p class="subtitle">Electronic Money Institution • EU Licensed</p>
@@ -940,22 +1120,22 @@
             <!-- Client Overview -->
             <div class="client-overview">
                 <div class="overview-item">
-                    <div class="overview-icon">🏛️</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Client Type</div>
                     <div class="overview-value">EMI</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">📜</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">License</div>
                     <div class="overview-value">EU E-Money</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🎯</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Segments</div>
                     <div class="overview-value">B2B & B2C</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🌍</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Region</div>
                     <div class="overview-value">EEA</div>
                 </div>
@@ -964,33 +1144,33 @@
             <!-- Challenge -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon challenge">⚠️</div>
+                    <div class="section-icon challenge"></div>
                     <h3 class="section-title">The Challenge</h3>
                 </div>
                 <div class="challenge-grid">
                     <div class="challenge-item">
-                        <span class="icon">📊</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>67% customer demand</strong>
                             <p>Customers wanted crypto buy/sell within existing accounts</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">👨‍💻</span>
+                        <span class="icon">‍</span>
                         <div>
                             <strong>No blockchain expertise</strong>
                             <p>Zero in-house knowledge of wallets, nodes, or custody</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">🔌</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Integration complexity</strong>
                             <p>Would require 6+ vendor relationships to build in-house</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⏳</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>12-18 month timeline</strong>
                             <p>Traditional build too slow for market window</p>
@@ -1002,12 +1182,12 @@
             <!-- Solution -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon solution">💡</div>
+                    <div class="section-icon solution"></div>
                     <h3 class="section-title">The Solution — XBO CaaS</h3>
                 </div>
                 <div class="solution-grid">
                     <div class="solution-card">
-                        <h4>🔧 Core Capabilities</h4>
+                        <h4> Core Capabilities</h4>
                         <ul>
                             <li>Buy/Sell/Swap — 50+ cryptocurrencies</li>
                             <li>Hosted Wallets — Segregated per user</li>
@@ -1016,7 +1196,7 @@
                         </ul>
                     </div>
                     <div class="solution-card">
-                        <h4>⚖️ Compliance Built-In</h4>
+                        <h4> Compliance Built-In</h4>
                         <ul>
                             <li>KYT — Chainalysis-powered monitoring</li>
                             <li>Travel Rule Compliance</li>
@@ -1030,7 +1210,7 @@
             <!-- Results -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon results">🎯</div>
+                    <div class="section-icon results"></div>
                     <h3 class="section-title">The Results</h3>
                 </div>
                 <div class="results-grid">
@@ -1059,10 +1239,62 @@
                 <p class="quote-author">— Chief Product Officer, European EMI</p>
             </div>
 
+            <!-- Business Model & Flow of Funds -->
+            <div class="flow-section">
+                <div class="section-header">
+                    <div class="section-icon"></div>
+                    <h3 class="section-title">Business Model & Flow of Funds</h3>
+                </div>
+                
+                <div class="business-model-grid" style="margin-bottom: 24px;">
+                    <div class="bm-item">
+                        <h5>Client Type</h5>
+                        <p>Licensed EMI / Fintech</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>Revenue Model</h5>
+                        <p>Trading spreads + Account fees</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>XBO Products Used</h5>
+                        <p>CaaS (White-label full stack)</p>
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-label">Crypto Buy Flow</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">EMI Customer</div>
+                            <div class="box-subtitle">EUR Balance</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">EMI App</div>
+                            <div class="box-subtitle">White-label UI</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">XBO CaaS</div>
+                            <div class="box-subtitle">Execution</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Custody</div>
+                            <div class="box-subtitle">User Wallet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="action-btn primary" onclick="copyLink('emi')">📋 Copy Link</button>
-                <a href="downloads/case-study-emi.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn primary" onclick="copyLink('emi')"> Copy Link</button>
+                <a href="downloads/case-study-emi.html" download class="action-btn secondary"> Download PDF</a>
                 <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
             </div>
         </section>
@@ -1076,7 +1308,7 @@
             <!-- Hero -->
             <div class="cs-hero gaming">
                 <div class="cs-hero-content">
-                    <div class="cs-hero-icon">🎰</div>
+                    <div class="cs-hero-icon"></div>
                     <div class="cs-hero-text">
                         <h2>Tier-1 iGaming Group</h2>
                         <p class="subtitle">Online Casino & Sportsbook • 200+ Brands</p>
@@ -1088,22 +1320,22 @@
             <!-- Client Overview -->
             <div class="client-overview">
                 <div class="overview-item">
-                    <div class="overview-icon">🎰</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Client Type</div>
                     <div class="overview-value">iGaming Operator</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🏢</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Scale</div>
                     <div class="overview-value">200+ Brands</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">👥</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Players</div>
                     <div class="overview-value">Millions</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">📜</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Licenses</div>
                     <div class="overview-value">MGA, Curaçao</div>
                 </div>
@@ -1112,33 +1344,33 @@
             <!-- Challenge -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon challenge">⚠️</div>
+                    <div class="section-icon challenge"></div>
                     <h3 class="section-title">The Challenge</h3>
                 </div>
                 <div class="challenge-grid">
                     <div class="challenge-item">
-                        <span class="icon">🚫</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Card blocks</strong>
                             <p>Major issuers declining 35-50% of gaming transactions</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⏱️</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Slow payouts</strong>
                             <p>24-72 hour withdrawal times frustrating VIP players</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">🔀</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>PSP fragmentation</strong>
                             <p>15+ payment providers across different brands</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">📊</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>No unified view</strong>
                             <p>Impossible to get group-wide payment analytics</p>
@@ -1150,12 +1382,12 @@
             <!-- Solution -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon solution">💡</div>
+                    <div class="section-icon solution"></div>
                     <h3 class="section-title">The Solution — CryptoPayX</h3>
                 </div>
                 <div class="solution-grid">
                     <div class="solution-card">
-                        <h4>💰 CryptoPayX Pay-In</h4>
+                        <h4> CryptoPayX Pay-In</h4>
                         <ul>
                             <li>50+ Cryptocurrencies Supported</li>
                             <li>Instant Deposits — No card auth wait</li>
@@ -1164,7 +1396,7 @@
                         </ul>
                     </div>
                     <div class="solution-card">
-                        <h4>⚡ CryptoPayX Pay-Out</h4>
+                        <h4> CryptoPayX Pay-Out</h4>
                         <ul>
                             <li>Instant Processing — Seconds, not days</li>
                             <li>Player Choice — Any crypto wallet</li>
@@ -1178,7 +1410,7 @@
             <!-- Results -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon results">🎯</div>
+                    <div class="section-icon results"></div>
                     <h3 class="section-title">The Results</h3>
                 </div>
                 <div class="results-grid">
@@ -1207,10 +1439,76 @@
                 <p class="quote-author">— VP of Payments, Global Casino Group</p>
             </div>
 
+            <!-- Business Model & Flow of Funds -->
+            <div class="flow-section">
+                <div class="section-header">
+                    <div class="section-icon"></div>
+                    <h3 class="section-title">Business Model & Flow of Funds</h3>
+                </div>
+                
+                <div class="business-model-grid" style="margin-bottom: 24px;">
+                    <div class="bm-item">
+                        <h5>Client Type</h5>
+                        <p>iGaming / Online Casino</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>Revenue Model</h5>
+                        <p>House edge on games + Sports margin</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>XBO Products Used</h5>
+                        <p>CryptoPayX Pay-In + Pay-Out</p>
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-label">Player Deposit</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Player</div>
+                            <div class="box-subtitle">Crypto Wallet</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">CryptoPayX</div>
+                            <div class="box-subtitle">Instant Credit</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Casino</div>
+                            <div class="box-subtitle">Player Balance</div>
+                        </div>
+                    </div>
+                    <div class="flow-label" style="margin-top: 24px;">Player Withdrawal</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Casino</div>
+                            <div class="box-subtitle">Winnings</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">CryptoPayX</div>
+                            <div class="box-subtitle">4 min Payout</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Player</div>
+                            <div class="box-subtitle">Crypto Wallet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="action-btn primary" onclick="copyLink('igaming')">📋 Copy Link</button>
-                <a href="downloads/case-study-igaming.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn primary" onclick="copyLink('igaming')"> Copy Link</button>
+                <a href="downloads/case-study-igaming.html" download class="action-btn secondary"> Download PDF</a>
                 <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
             </div>
         </section>
@@ -1224,7 +1522,7 @@
             <!-- Hero -->
             <div class="cs-hero creator">
                 <div class="cs-hero-content">
-                    <div class="cs-hero-icon">📸</div>
+                    <div class="cs-hero-icon"></div>
                     <div class="cs-hero-text">
                         <h2>Creator Platform</h2>
                         <p class="subtitle">Adult/Creator Economy • 5M+ MAU</p>
@@ -1236,22 +1534,22 @@
             <!-- Client Overview -->
             <div class="client-overview">
                 <div class="overview-item">
-                    <div class="overview-icon">🎭</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Client Type</div>
                     <div class="overview-value">Creator Platform</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">👥</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Scale</div>
                     <div class="overview-value">5M+ MAU</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🎨</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Creators</div>
                     <div class="overview-value">200,000+</div>
                 </div>
                 <div class="overview-item">
-                    <div class="overview-icon">🌍</div>
+                    <div class="overview-icon"></div>
                     <div class="overview-label">Reach</div>
                     <div class="overview-value">Global</div>
                 </div>
@@ -1260,33 +1558,33 @@
             <!-- Challenge -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon challenge">⚠️</div>
+                    <div class="section-icon challenge"></div>
                     <h3 class="section-title">The Challenge</h3>
                 </div>
                 <div class="challenge-grid">
                     <div class="challenge-item">
-                        <span class="icon">🚫</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>40-60% decline rates</strong>
                             <p>Banks blocking adult MCC codes in MENA, Asia</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">😰</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>Payment shame</strong>
                             <p>Users avoiding cards due to statement exposure</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⏳</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>14-30 day creator payouts</strong>
                             <p>Slow payments hurting creator retention</p>
                         </div>
                     </div>
                     <div class="challenge-item">
-                        <span class="icon">⚡</span>
+                        <span class="icon"></span>
                         <div>
                             <strong>3.5% chargeback rate</strong>
                             <p>High "buyer's remorse" disputes threatening accounts</p>
@@ -1298,12 +1596,12 @@
             <!-- Solution -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon solution">💡</div>
+                    <div class="section-icon solution"></div>
                     <h3 class="section-title">The Solution — CryptoPayX</h3>
                 </div>
                 <div class="solution-grid">
                     <div class="solution-card">
-                        <h4>💰 User Pay-In</h4>
+                        <h4> User Pay-In</h4>
                         <ul>
                             <li>BTC, ETH, USDT + 50 coins</li>
                             <li>Instant Credit on Confirmation</li>
@@ -1312,7 +1610,7 @@
                         </ul>
                     </div>
                     <div class="solution-card">
-                        <h4>⚡ Creator Pay-Out</h4>
+                        <h4> Creator Pay-Out</h4>
                         <ul>
                             <li>Daily Automated Payouts</li>
                             <li>Instant On-Demand Withdrawals</li>
@@ -1326,7 +1624,7 @@
             <!-- Results -->
             <div class="cs-section">
                 <div class="section-header">
-                    <div class="section-icon results">🎯</div>
+                    <div class="section-icon results"></div>
                     <h3 class="section-title">The Results</h3>
                 </div>
                 <div class="results-grid">
@@ -1355,10 +1653,76 @@
                 <p class="quote-author">— Chief Revenue Officer, Creator Platform</p>
             </div>
 
+            <!-- Business Model & Flow of Funds -->
+            <div class="flow-section">
+                <div class="section-header">
+                    <div class="section-icon"></div>
+                    <h3 class="section-title">Business Model & Flow of Funds</h3>
+                </div>
+                
+                <div class="business-model-grid" style="margin-bottom: 24px;">
+                    <div class="bm-item">
+                        <h5>Client Type</h5>
+                        <p>Creator Economy Platform</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>Revenue Model</h5>
+                        <p>Platform take rate (10-20%)</p>
+                    </div>
+                    <div class="bm-item">
+                        <h5>XBO Products Used</h5>
+                        <p>CryptoPayX Pay-In + Mass Payouts</p>
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <div class="flow-label">Fan Payment</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Fan</div>
+                            <div class="box-subtitle">Crypto/Card</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">CryptoPayX</div>
+                            <div class="box-subtitle">No Declines</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Platform</div>
+                            <div class="box-subtitle">Takes Fee</div>
+                        </div>
+                    </div>
+                    <div class="flow-label" style="margin-top: 24px;">Creator Payout</div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Platform</div>
+                            <div class="box-subtitle">Earnings</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box highlight">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Mass Payout</div>
+                            <div class="box-subtitle">Daily Auto</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">
+                            <div class="box-icon"></div>
+                            <div class="box-title">Creator</div>
+                            <div class="box-subtitle">Crypto/Fiat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="action-btn primary" onclick="copyLink('creator')">📋 Copy Link</button>
-                <a href="downloads/case-study-creator.html" download class="action-btn secondary">📄 Download PDF</a>
+                <button class="action-btn primary" onclick="copyLink('creator')"> Copy Link</button>
+                <a href="downloads/case-study-creator.html" download class="action-btn secondary"> Download PDF</a>
                 <button class="action-btn secondary" onclick="showCards()">← Back to all case studies</button>
             </div>
         </section>

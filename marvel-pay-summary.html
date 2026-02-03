@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Pay - Business Case Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .card-content {
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+        .card-content ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+        .card-content li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        .card-content li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(99, 102, 241, 0.15));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .highlight-box .amount {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .highlight-box .label {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .step {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 600;
+        }
+        .step-text {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .next-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">💎</div>
+            <h1>Marvel Pay</h1>
+            <p class="subtitle">Crypto as a Service (CaaS) — Business Case</p>
+            <span class="badge">VP Review Summary</span>
+        </div>
+
+        <!-- Client Requirements -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Client Requirements</div>
+            </div>
+            <div class="card-content">
+                Marvel Pay needs XBO portal functionality to:
+                <ul>
+                    <li>Manage client funds</li>
+                    <li>Split transaction flows</li>
+                    <li>Operate segregated wallets for different end clients</li>
+                    <li>Client-level fund segregation</li>
+                    <li>Operational control</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Proposed Solution -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">🚀</div>
+                <div class="card-title">Proposed XBO Solution</div>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>Marvel Pay holds relevant licenses</li>
+                    <li>Applied for MiCA authorization in Bulgaria</li>
+                    <li>Deploy XBO's full CaaS stack</li>
+                    <li>All crypto services offered by XBO</li>
+                    <li>Marvel Pay retains regulatory ownership</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Volume -->
+        <div class="highlight-box">
+            <div class="amount">€5M</div>
+            <div class="label">Initial Expected Transaction Volume<br><small style="color:#10b981;">+ Upside potential as volumes scale</small></div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">📍</div>
+                <div class="card-title">Next Steps</div>
+            </div>
+            <div class="next-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Confirm functional scope<br><small style="color:#64748b;">Wallet architecture, flow segregation, permissions</small></div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Define technical integration approach</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Agree commercial terms<br><small style="color:#64748b;">Across all applicable products</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Marvel Pay × XBO CaaS Partnership
+        </div>
+    </div>
+</body>
+</html>

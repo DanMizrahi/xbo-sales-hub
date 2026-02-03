@@ -81,7 +81,7 @@ function processQuestion(question) {
   // Direct keyword matches
   for (const [keyword, data] of Object.entries(knowledgeBase)) {
     if (q.includes(keyword)) {
-      return data.answer + "\n\n📄 *Source: " + data.source + "*";
+      return data.answer + "\n\n *Source: " + data.source + "*";
     }
   }
   
@@ -108,10 +108,10 @@ function processQuestion(question) {
     for (const kw of match.keywords) {
       if (q.includes(kw)) {
         const data = knowledgeBase[match.key];
-        return data.answer + "\n\n📄 *Source: " + data.source + "*";
+        return data.answer + "\n\n *Source: " + data.source + "*";
       }
     }
   }
   
-  return "🤔 I couldn't find specific information about that in our documentation.\n\nTry asking about:\n• Credit Line\n• Crypto-as-a-Service\n• CryptoPayX (payments)\n• Trading / OTC\n• Compliance / MiCA\n• Security / MFA\n• Cards / Custody\n• Pricing / Fees\n\nOr contact your account manager for detailed information.";
+  return " I couldn't find specific information about that in our documentation.\n\nTry asking about:\n• Credit Line\n• Crypto-as-a-Service\n• CryptoPayX (payments)\n• Trading / OTC\n• Compliance / MiCA\n• Security / MFA\n• Cards / Custody\n• Pricing / Fees\n\nOr contact your account manager for detailed information.";
 }

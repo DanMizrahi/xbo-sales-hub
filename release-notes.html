@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XBO Sales Hub - Release Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-primary: #fff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-primary: #6366f1;
+            --accent-success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 16px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 48px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 30px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .release {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .release-version {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .release-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .release-section {
+            margin-bottom: 16px;
+        }
+
+        .release-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .release-section h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .release-section ul {
+            list-style: none;
+        }
+
+        .release-section li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .release-section li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-success);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .tag-new {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .tag-improved {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">X</div>
+            <h1>XBO Sales Hub</h1>
+            <p>Internal Sales Tool</p>
+            <a href="index.html" class="enter-btn">Enter Sales Hub →</a>
+        </div>
+
+        <!-- Latest Release -->
+        <div class="release">
+            <div class="release-header">
+                <span class="release-version">v2.0</span>
+                <span class="release-date">February 3, 2026</span>
+            </div>
+            
+            <div class="release-section">
+                <h3>New Features</h3>
+                <ul>
+                    <li>Message Templates section with copy button <span class="tag tag-new">NEW</span></li>
+                    <li>Onboarding Follow-up template ready to use</li>
+                    <li>Dark/Light mode toggle on all pages</li>
+                    <li>CRM quick access link added</li>
+                    <li>XBO.com direct link in navigation</li>
+                </ul>
+            </div>
+
+            <div class="release-section">
+                <h3>Improvements</h3>
+                <ul>
+                    <li>Clear visual distinction: clickable (→) vs info-only <span class="tag tag-improved">IMPROVED</span></li>
+                    <li>CryptoPayX pricing split: Money In / Money Out</li>
+                    <li>Spot Trading: "ask your manager" note for custom volumes</li>
+                    <li>Key Differentiators now clickable with links</li>
+                    <li>Clean design without emojis</li>
+                </ul>
+            </div>
+
+            <div class="release-section">
+                <h3>Removed</h3>
+                <ul>
+                    <li>Book Meeting button (use calendar directly)</li>
+                    <li>OTC Pricing section</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Previous Release -->
+        <div class="release">
+            <div class="release-header">
+                <span class="release-version">v1.0</span>
+                <span class="release-date">January 2026</span>
+            </div>
+            
+            <div class="release-section">
+                <h3>Initial Release</h3>
+                <ul>
+                    <li>Products & Pricing reference</li>
+                    <li>Case Studies by client type</li>
+                    <li>Compliance information</li>
+                    <li>Contract templates</li>
+                    <li>Procedures & Flows</li>
+                    <li>AI Chat assistant</li>
+                    <li>PDF Document center</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            XBO Sales Hub · Internal Use Only
+        </div>
+    </div>
+</body>
+</html>

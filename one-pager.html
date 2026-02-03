@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Pager Generator - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #12121f;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-primary: #fff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        /* Controls Bar */
+        .controls-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .controls-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover { background: var(--border-color); }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            gap: 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            width: 350px;
+            flex-shrink: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            position: sticky;
+            top: 80px;
+        }
+
+        .editor-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .section-divider {
+            border-top: 1px solid var(--border-color);
+            margin: 20px 0;
+            padding-top: 20px;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 12px;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* One Pager Document */
+        .one-pager {
+            background: #fff;
+            color: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .op-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .op-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .op-logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .op-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .op-client-info {
+            text-align: right;
+        }
+
+        .op-client-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .op-date {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .op-body {
+            padding: 40px;
+        }
+
+        .op-section {
+            margin-bottom: 32px;
+        }
+
+        .op-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .op-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .op-section-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .op-section-content {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .op-section-content ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .op-section-content li {
+            margin-bottom: 6px;
+        }
+
+        /* Flow of Funds Diagram */
+        .flow-diagram {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 16px;
+        }
+
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .flow-node {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            min-width: 120px;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .flow-node.highlight {
+            border-color: #6366f1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        .flow-node-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .flow-node-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .flow-node-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .flow-arrow {
+            color: #6366f1;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .flow-fee {
+            font-size: 0.7rem;
+            color: #10b981;
+            margin-top: 4px;
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .pricing-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .pricing-table td {
+            font-size: 0.9rem;
+        }
+
+        .pricing-highlight {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .timeline-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 700;
+        }
+
+        .timeline-step-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .timeline-step-duration {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* Case Study Box */
+        .case-study-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .case-study-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .case-study-icon {
+            font-size: 1.5rem;
+        }
+
+        .case-study-title {
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .case-study-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+        }
+
+        .case-study-stat {
+            text-align: center;
+        }
+
+        .case-study-stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .case-study-stat-label {
+            font-size: 0.75rem;
+            color: #4ade80;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .benefit-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .benefit-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .benefit-desc {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* Contacts */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .contact-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .contact-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-role {
+            font-size: 0.8rem;
+            color: #6366f1;
+            margin-bottom: 8px;
+        }
+
+        .contact-email {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* CTA Section */
+        .op-cta {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 32px 40px;
+            text-align: center;
+        }
+
+        .op-cta-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .op-cta-subtitle {
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+
+        .op-cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Print/PDF Styles */
+        @media print {
+            body { background: #fff; }
+            .controls-bar, .editor-panel { display: none; }
+            .main-container { padding: 0; }
+            .one-pager { box-shadow: none; border-radius: 0; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-container { flex-direction: column; }
+            .editor-panel { width: 100%; position: static; max-height: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+        <div class="controls-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">XBO</div>
+                <span class="logo-text">One Pager</span>
+            </a>
+            <div class="control-group">
+                <button class="btn btn-secondary" onclick="window.location.href='call-prep.html'">← Back to Call Prep</button>
+                <button class="btn btn-secondary" id="copy-link-btn">🔗 Copy Link</button>
+                <button class="btn btn-primary" id="download-pdf-btn">📄 Download PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <h3 class="editor-title">✏️ Edit One Pager</h3>
+
+            <div class="form-group">
+                <label class="form-label">Client Name</label>
+                <input type="text" class="form-input" id="edit-client" placeholder="Client Company">
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">1. The Problem</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-textarea" id="edit-problem" placeholder="Describe the client's pain points..."></textarea>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">2. The Solution</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-textarea" id="edit-solution" placeholder="How XBO solves this..."></textarea>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">3. Flow of Funds</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Flow Type</label>
+                <select class="form-select" id="edit-flow-type">
+                    <option value="fiat-crypto">Fiat → Crypto</option>
+                    <option value="crypto-fiat">Crypto → Fiat</option>
+                    <option value="igaming">iGaming Pay-in/Pay-out</option>
+                    <option value="creator">Creator Pay-in/Pay-out</option>
+                    <option value="emi">EMI CaaS</option>
+                    <option value="credit">Credit Line</option>
+                    <option value="otc">OTC Trading</option>
+                    <option value="earn">Earn</option>
+                    <option value="card">Card Issuing</option>
+                    <option value="viban">VIBAN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Example Amount ($)</label>
+                <input type="number" class="form-input" id="edit-amount" value="100000">
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">4. Pricing</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Processing Fee (%)</label>
+                <input type="number" class="form-input" id="edit-fee" value="1.5" step="0.1">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Setup Fee ($)</label>
+                <input type="number" class="form-input" id="edit-setup" value="0">
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">5. Timeline</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Onboarding Duration</label>
+                <select class="form-select" id="edit-timeline">
+                    <option value="1-2">1-2 weeks</option>
+                    <option value="2-3">2-3 weeks</option>
+                    <option value="3-4" selected>3-4 weeks</option>
+                    <option value="4-6">4-6 weeks</option>
+                    <option value="6-8">6-8 weeks</option>
+                </select>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">6. Case Study</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Industry</label>
+                <select class="form-select" id="edit-case-study">
+                    <option value="igaming">iGaming Operator</option>
+                    <option value="crypto">Crypto Exchange</option>
+                    <option value="emi">EMI/PSP</option>
+                    <option value="creator">Creator Platform</option>
+                    <option value="forex">Forex Broker</option>
+                </select>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">7. Why XBO</div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-textarea" id="edit-why" placeholder="Key differentiators..."></textarea>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-label">9. Next Step</div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" id="edit-cta" value="Schedule a Technical Call">
+            </div>
+
+            <button class="btn btn-success" style="width: 100%; margin-top: 20px;" id="update-preview-btn">
+                🔄 Update Preview
+            </button>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <div class="one-pager" id="one-pager">
+                <!-- Header -->
+                <div class="op-header">
+                    <div class="op-logo">
+                        <div class="op-logo-icon">XBO</div>
+                        <div class="op-logo-text">XBO.com</div>
+                    </div>
+                    <div class="op-client-info">
+                        <div class="op-client-name" id="preview-client">Client Name</div>
+                        <div class="op-date" id="preview-date"></div>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="op-body">
+                    <!-- 1. The Problem -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">1</span>
+                            The Problem
+                        </h3>
+                        <div class="op-section-content" id="preview-problem">
+                            Your current challenges in processing payments and managing crypto-fiat conversions are costing you time, money, and business opportunities.
+                        </div>
+                    </div>
+
+                    <!-- 2. The Solution -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">2</span>
+                            The Solution
+                        </h3>
+                        <div class="op-section-content" id="preview-solution">
+                            XBO provides a comprehensive payment infrastructure that enables seamless fiat-to-crypto and crypto-to-fiat conversions with competitive rates and fast settlement.
+                        </div>
+                    </div>
+
+                    <!-- 3. Flow of Funds -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">3</span>
+                            Flow of Funds
+                        </h3>
+                        <div class="flow-diagram" id="flow-diagram">
+                            <!-- Flow diagram will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- 4. Pricing -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">4</span>
+                            Pricing
+                        </h3>
+                        <table class="pricing-table" id="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Rate</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Processing Fee</td>
+                                    <td class="pricing-highlight">1.5%</td>
+                                    <td>Per transaction</td>
+                                </tr>
+                                <tr>
+                                    <td>Setup Fee</td>
+                                    <td>$0</td>
+                                    <td>One-time</td>
+                                </tr>
+                                <tr>
+                                    <td>Monthly Minimum</td>
+                                    <td>$500</td>
+                                    <td>Waived first 3 months</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 5. Timeline -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">5</span>
+                            Timeline
+                        </h3>
+                        <div class="timeline-grid" id="timeline-grid">
+                            <div class="timeline-step">
+                                <div class="timeline-step-number">1</div>
+                                <div class="timeline-step-title">Agreement</div>
+                                <div class="timeline-step-duration">Day 1-3</div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-step-number">2</div>
+                                <div class="timeline-step-title">KYB/Compliance</div>
+                                <div class="timeline-step-duration">Day 4-10</div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-step-number">3</div>
+                                <div class="timeline-step-title">Integration</div>
+                                <div class="timeline-step-duration">Day 11-20</div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-step-number">4</div>
+                                <div class="timeline-step-title">Testing</div>
+                                <div class="timeline-step-duration">Day 21-25</div>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="timeline-step-number">5</div>
+                                <div class="timeline-step-title">Go Live</div>
+                                <div class="timeline-step-duration">Day 26-28</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Case Study -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">6</span>
+                            Case Study
+                        </h3>
+                        <div class="case-study-box" id="case-study-box">
+                            <div class="case-study-header">
+                                <span class="case-study-icon">🎮</span>
+                                <span class="case-study-title">Leading iGaming Operator</span>
+                            </div>
+                            <div class="op-section-content">
+                                Integrated XBO's payment solution to enable crypto deposits and withdrawals for their global player base.
+                            </div>
+                            <div class="case-study-stats">
+                                <div class="case-study-stat">
+                                    <div class="case-study-stat-value">$5M+</div>
+                                    <div class="case-study-stat-label">Monthly Volume</div>
+                                </div>
+                                <div class="case-study-stat">
+                                    <div class="case-study-stat-value">40%</div>
+                                    <div class="case-study-stat-label">Cost Reduction</div>
+                                </div>
+                                <div class="case-study-stat">
+                                    <div class="case-study-stat-value">2 hrs</div>
+                                    <div class="case-study-stat-label">Avg. Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Why XBO -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">7</span>
+                            Why XBO
+                        </h3>
+                        <div class="benefits-grid" id="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">⚡</div>
+                                <div class="benefit-title">Fast Settlement</div>
+                                <div class="benefit-desc">Same-day settlement on most transactions</div>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🔒</div>
+                                <div class="benefit-title">Fully Licensed</div>
+                                <div class="benefit-desc">EU & global regulatory compliance</div>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💰</div>
+                                <div class="benefit-title">Best Rates</div>
+                                <div class="benefit-desc">Competitive pricing, no hidden fees</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Contacts -->
+                    <div class="op-section">
+                        <h3 class="op-section-title">
+                            <span class="op-section-number">8</span>
+                            Contacts
+                        </h3>
+                        <div class="contacts-grid">
+                            <div class="contact-card">
+                                <div class="contact-name">Sales Team</div>
+                                <div class="contact-role">Business Development</div>
+                                <div class="contact-email">sales@xbo.com</div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-name">Support</div>
+                                <div class="contact-role">24/7 Technical Support</div>
+                                <div class="contact-email">support@xbo.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Footer -->
+                <div class="op-cta">
+                    <div class="op-cta-title" id="preview-cta">Schedule a Technical Call</div>
+                    <div class="op-cta-subtitle">Let's discuss your specific requirements</div>
+                    <a href="mailto:sales@xbo.com" class="op-cta-button">Contact Us →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api/flow-diagrams.js"></script>
+    <script>
+        // Flow Diagram Templates
+        const flowTemplates = {
+            'fiat-crypto': {
+                title: 'Fiat → Crypto Conversion',
+                nodes: [
+                    { icon: '🏦', label: 'Client Bank', key: 'start' },
+                    { icon: '💳', label: 'XBO Platform', key: 'xbo', highlight: true },
+                    { icon: '💰', label: 'Crypto Wallet', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'crypto-fiat': {
+                title: 'Crypto → Fiat Conversion',
+                nodes: [
+                    { icon: '💰', label: 'Crypto Wallet', key: 'start' },
+                    { icon: '💳', label: 'XBO Platform', key: 'xbo', highlight: true },
+                    { icon: '🏦', label: 'Client Bank', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'igaming': {
+                title: 'iGaming Pay-in/Pay-out',
+                nodes: [
+                    { icon: '🎮', label: 'Player', key: 'start' },
+                    { icon: '💳', label: 'XBO Gateway', key: 'xbo', highlight: true },
+                    { icon: '🎰', label: 'Operator', key: 'mid' },
+                    { icon: '💳', label: 'XBO Gateway', key: 'xbo2', highlight: true },
+                    { icon: '🎮', label: 'Player', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'creator': {
+                title: 'Creator Pay-in/Pay-out',
+                nodes: [
+                    { icon: '👤', label: 'Fan', key: 'start' },
+                    { icon: '💳', label: 'XBO', key: 'xbo', highlight: true },
+                    { icon: '⭐', label: 'Creator', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'emi': {
+                title: 'EMI CaaS Flow',
+                nodes: [
+                    { icon: '🏢', label: 'Your Platform', key: 'start' },
+                    { icon: '💳', label: 'XBO EMI', key: 'xbo', highlight: true },
+                    { icon: '🏦', label: 'SEPA/SWIFT', key: 'mid' },
+                    { icon: '👤', label: 'End User', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'credit': {
+                title: 'Credit Line Flow',
+                nodes: [
+                    { icon: '💰', label: 'Crypto Collateral', key: 'start' },
+                    { icon: '💳', label: 'XBO', key: 'xbo', highlight: true },
+                    { icon: '💵', label: 'Fiat Credit', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'otc': {
+                title: 'OTC Trading Flow',
+                nodes: [
+                    { icon: '📊', label: 'Trade Request', key: 'start' },
+                    { icon: '💳', label: 'XBO OTC Desk', key: 'xbo', highlight: true },
+                    { icon: '✅', label: 'Settlement', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'earn': {
+                title: 'Earn Program Flow',
+                nodes: [
+                    { icon: '💰', label: 'Deposit Crypto', key: 'start' },
+                    { icon: '💳', label: 'XBO Earn', key: 'xbo', highlight: true },
+                    { icon: '📈', label: 'Yield Generated', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'card': {
+                title: 'Card Issuing Flow',
+                nodes: [
+                    { icon: '💰', label: 'Crypto Balance', key: 'start' },
+                    { icon: '💳', label: 'XBO Card', key: 'xbo', highlight: true },
+                    { icon: '🛒', label: 'Merchant', key: 'end' }
+                ],
+                feeStep: 1
+            },
+            'viban': {
+                title: 'VIBAN Flow',
+                nodes: [
+                    { icon: '🏢', label: 'Your Client', key: 'start' },
+                    { icon: '🏦', label: 'Unique IBAN', key: 'xbo', highlight: true },
+                    { icon: '💳', label: 'Your Platform', key: 'end' }
+                ],
+                feeStep: 1
+            }
+        };
+
+        // Case Study Templates
+        const caseStudies = {
+            'igaming': {
+                icon: '🎮',
+                title: 'Leading iGaming Operator',
+                description: 'Integrated XBO\'s payment solution to enable crypto deposits and withdrawals for their global player base.',
+                stats: [
+                    { value: '$5M+', label: 'Monthly Volume' },
+                    { value: '40%', label: 'Cost Reduction' },
+                    { value: '2 hrs', label: 'Avg. Settlement' }
+                ]
+            },
+            'crypto': {
+                icon: '₿',
+                title: 'Top 20 Crypto Exchange',
+                description: 'Partnered with XBO for fiat on/off ramps across 15+ currencies, enabling seamless user experience.',
+                stats: [
+                    { value: '$20M+', label: 'Monthly Volume' },
+                    { value: '99.9%', label: 'Uptime' },
+                    { value: '< 1hr', label: 'Avg. Settlement' }
+                ]
+            },
+            'emi': {
+                icon: '🏦',
+                title: 'European EMI',
+                description: 'White-labeled XBO\'s crypto infrastructure to offer crypto services to their existing customer base.',
+                stats: [
+                    { value: '50K+', label: 'End Users' },
+                    { value: '8', label: 'Countries' },
+                    { value: '3 weeks', label: 'Go-Live' }
+                ]
+            },
+            'creator': {
+                icon: '⭐',
+                title: 'Creator Economy Platform',
+                description: 'Enabled creators to receive payments in crypto with instant fiat conversion and same-day bank transfers.',
+                stats: [
+                    { value: '10K+', label: 'Creators' },
+                    { value: '35%', label: 'Fee Savings' },
+                    { value: 'Same Day', label: 'Payouts' }
+                ]
+            },
+            'forex': {
+                icon: '📈',
+                title: 'Forex/CFD Broker',
+                description: 'Integrated XBO for crypto deposits, expanding their deposit options and reaching new trader demographics.',
+                stats: [
+                    { value: '$8M+', label: 'Monthly Deposits' },
+                    { value: '25%', label: 'New Traders' },
+                    { value: '24/7', label: 'Processing' }
+                ]
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set date
+            document.getElementById('preview-date').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Load data from URL params
+            loadFromParams();
+
+            // Initial render
+            updateFlowDiagram();
+            updateCaseStudy();
+        });
+
+        // Load data from URL parameters
+        function loadFromParams() {
+            const params = new URLSearchParams(window.location.search);
+            const client = params.get('client');
+            const source = params.get('source');
+            const dataStr = params.get('data');
+
+            if (client) {
+                document.getElementById('edit-client').value = client;
+                document.getElementById('preview-client').textContent = client;
+            }
+
+            if (dataStr) {
+                try {
+                    const data = JSON.parse(atob(dataStr));
+                    
+                    if (source === 'gong' && data.aggregated) {
+                        // Pre-fill from Gong analysis
+                        if (data.aggregated.painPoints?.length) {
+                            document.getElementById('edit-problem').value = data.aggregated.painPoints.join('\n• ');
+                            document.getElementById('preview-problem').innerHTML = '<ul>' + 
+                                data.aggregated.painPoints.map(p => `<li>${p}</li>`).join('') + '</ul>';
+                        }
+                        
+                        if (data.aggregated.productsDiscussed?.length) {
+                            const product = data.aggregated.productsDiscussed[0].toLowerCase();
+                            // Try to match flow type
+                            for (const [key, _] of Object.entries(flowTemplates)) {
+                                if (product.includes(key.replace('-', ' '))) {
+                                    document.getElementById('edit-flow-type').value = key;
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (source === 'questionnaire') {
+                        // Pre-fill from questionnaire
+                        if (data.goal) {
+                            document.getElementById('edit-problem').value = data.goal;
+                            document.getElementById('preview-problem').textContent = data.goal;
+                        }
+
+                        if (data.products?.length) {
+                            const firstProduct = data.products[0];
+                            document.getElementById('edit-flow-type').value = firstProduct;
+                        }
+
+                        if (data.clientType) {
+                            document.getElementById('edit-case-study').value = data.clientType;
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error parsing data:', e);
+                }
+            }
+        }
+
+        // Update Flow Diagram
+        function updateFlowDiagram() {
+            const flowType = document.getElementById('edit-flow-type').value;
+            const amount = parseFloat(document.getElementById('edit-amount').value) || 100000;
+            const fee = parseFloat(document.getElementById('edit-fee').value) || 1.5;
+
+            const template = flowTemplates[flowType];
+            const feeAmount = amount * (fee / 100);
+            const netAmount = amount - feeAmount;
+
+            let html = '<div class="flow-container">';
+            
+            template.nodes.forEach((node, i) => {
+                const isFirst = i === 0;
+                const isLast = i === template.nodes.length - 1;
+                const isFeeNode = i === template.feeStep;
+
+                let value = isFirst ? `$${amount.toLocaleString()}` : 
+                           (isLast ? `$${netAmount.toLocaleString()}` : '');
+                
+                html += `
+                    <div class="flow-node ${node.highlight ? 'highlight' : ''}">
+                        <div class="flow-node-icon">${node.icon}</div>
+                        <div class="flow-node-label">${node.label}</div>
+                        ${value ? `<div class="flow-node-value">${value}</div>` : ''}
+                        ${isFeeNode ? `<div class="flow-fee">Fee: $${feeAmount.toLocaleString()} (${fee}%)</div>` : ''}
+                    </div>
+                `;
+
+                if (!isLast) {
+                    html += '<div class="flow-arrow">→</div>';
+                }
+            });
+
+            html += '</div>';
+            document.getElementById('flow-diagram').innerHTML = html;
+        }
+
+        // Update Case Study
+        function updateCaseStudy() {
+            const caseType = document.getElementById('edit-case-study').value;
+            const cs = caseStudies[caseType];
+
+            document.getElementById('case-study-box').innerHTML = `
+                <div class="case-study-header">
+                    <span class="case-study-icon">${cs.icon}</span>
+                    <span class="case-study-title">${cs.title}</span>
+                </div>
+                <div class="op-section-content">${cs.description}</div>
+                <div class="case-study-stats">
+                    ${cs.stats.map(s => `
+                        <div class="case-study-stat">
+                            <div class="case-study-stat-value">${s.value}</div>
+                            <div class="case-study-stat-label">${s.label}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Update Preview
+        document.getElementById('update-preview-btn').addEventListener('click', () => {
+            // Client
+            document.getElementById('preview-client').textContent = 
+                document.getElementById('edit-client').value || 'Client Name';
+
+            // Problem
+            const problem = document.getElementById('edit-problem').value;
+            document.getElementById('preview-problem').innerHTML = problem ? 
+                problem.replace(/\n/g, '<br>') : 
+                'Your current challenges in processing payments...';
+
+            // Solution
+            const solution = document.getElementById('edit-solution').value;
+            document.getElementById('preview-solution').innerHTML = solution ? 
+                solution.replace(/\n/g, '<br>') : 
+                'XBO provides a comprehensive payment infrastructure...';
+
+            // Flow
+            updateFlowDiagram();
+
+            // Pricing
+            const fee = document.getElementById('edit-fee').value;
+            const setup = document.getElementById('edit-setup').value;
+            document.querySelector('#pricing-table tbody').innerHTML = `
+                <tr>
+                    <td>Processing Fee</td>
+                    <td class="pricing-highlight">${fee}%</td>
+                    <td>Per transaction</td>
+                </tr>
+                <tr>
+                    <td>Setup Fee</td>
+                    <td>${setup > 0 ? '$' + parseInt(setup).toLocaleString() : '$0'}</td>
+                    <td>One-time</td>
+                </tr>
+                <tr>
+                    <td>Monthly Minimum</td>
+                    <td>$500</td>
+                    <td>Waived first 3 months</td>
+                </tr>
+            `;
+
+            // Case Study
+            updateCaseStudy();
+
+            // CTA
+            document.getElementById('preview-cta').textContent = 
+                document.getElementById('edit-cta').value || 'Schedule a Technical Call';
+        });
+
+        // Download PDF
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            const element = document.getElementById('one-pager');
+            const clientName = document.getElementById('edit-client').value || 'client';
+            
+            const opt = {
+                margin: 0,
+                filename: `XBO-OnePager-${clientName.replace(/\s+/g, '-')}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+
+        // Copy Link
+        document.getElementById('copy-link-btn').addEventListener('click', () => {
+            const client = document.getElementById('edit-client').value;
+            const data = {
+                problem: document.getElementById('edit-problem').value,
+                solution: document.getElementById('edit-solution').value,
+                flowType: document.getElementById('edit-flow-type').value,
+                amount: document.getElementById('edit-amount').value,
+                fee: document.getElementById('edit-fee').value,
+                timeline: document.getElementById('edit-timeline').value,
+                caseStudy: document.getElementById('edit-case-study').value,
+                cta: document.getElementById('edit-cta').value
+            };
+
+            const params = new URLSearchParams({
+                client: client,
+                source: 'shared',
+                data: btoa(JSON.stringify(data))
+            });
+
+            const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-link-btn');
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '🔗 Copy Link';
+                }, 2000);
+            });
+        });
+
+        // Event listeners for live updates
+        document.getElementById('edit-flow-type').addEventListener('change', updateFlowDiagram);
+        document.getElementById('edit-amount').addEventListener('input', updateFlowDiagram);
+        document.getElementById('edit-fee').addEventListener('input', updateFlowDiagram);
+        document.getElementById('edit-case-study').addEventListener('change', updateCaseStudy);
+    </script>
+</body>
+</html>

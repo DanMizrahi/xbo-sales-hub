@@ -1,16 +1,81 @@
-// XBO Sales Hub - AI Chat Engine
-// Smart conversational responses for sales team
+// XBO Sales Hub - AI Chat Engine (Anthropic Claude Powered)
+// Smart conversational AI for sales team
 
-const aiResponses = {
-  // ============================================
-  // PRICING & FEES
-  // ============================================
-  
-  patterns: [
-    // OTC Pricing
-    {
-      triggers: ["otc fee", "otc price", "otc rate", "otc pricing", "עמלת otc", "מחיר otc"],
-      response: `**OTC Fee Structure:**
+class XBOChat {
+  constructor() {
+    this.conversationHistory = [];
+    this.isLoading = false;
+    this.isInternalOnly = true; // Default to internal mode
+  }
+
+  async sendMessage(userMessage) {
+    if (this.isLoading) return null;
+    
+    this.isLoading = true;
+    
+    // Add user message to history
+    this.conversationHistory.push({
+      role: 'user',
+      content: userMessage
+    });
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          context: this.conversationHistory.slice(-6), // Last 3 exchanges for context
+          isInternalOnly: this.isInternalOnly
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.response) {
+        // Add assistant response to history
+        this.conversationHistory.push({
+          role: 'assistant',
+          content: data.response
+        });
+        
+        return {
+          text: data.response,
+          model: data.model,
+          usage: data.usage
+        };
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      
+      // Fallback to local responses if API fails
+      const fallbackResponse = this.getFallbackResponse(userMessage);
+      return {
+        text: fallbackResponse,
+        fallback: true
+      };
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  clearHistory() {
+    this.conversationHistory = [];
+  }
+
+  // Fallback responses when API is unavailable
+  getFallbackResponse(query) {
+    const q = query.toLowerCase();
+    
+    // Quick pattern matches for common questions
+    const patterns = [
+      {
+        keywords: ['otc', 'fee', 'otc price', 'otc rate'],
+        response: `**OTC Fee Structure:**
 
 | Deal Size | Rate |
 |-----------|------|
@@ -18,16 +83,11 @@ const aiResponses = {
 | $2M – $5M | 1.00% – 1.50% |
 | $5M+ | 0.50% – 0.75% (case-by-case) |
 
-**Default rate:** 2%
-
-💡 Large volume clients can negotiate better rates.`,
-      copyText: "OTC Fees:\n• $500K-$2M: 2%\n• $2M-$5M: 1-1.5%\n• $5M+: 0.5-0.75% (negotiable)"
-    },
-    
-    // Spot Pricing
-    {
-      triggers: ["spot fee", "spot price", "trading fee", "exchange fee", "עמלת מסחר"],
-      response: `**Spot Exchange Fee Structure:**
+*Default rate: 2%. Final pricing requires Dan's approval.*`
+      },
+      {
+        keywords: ['spot', 'exchange fee', 'trading fee'],
+        response: `**Spot Exchange Fee Structure:**
 
 | Monthly Volume | Rate |
 |----------------|------|
@@ -35,16 +95,11 @@ const aiResponses = {
 | $500K – $2M | 0.50% |
 | $2M+ | 0.25% |
 
-**Default rate:** 0.8%
-
-💡 Volume-based discounts apply automatically.`,
-      copyText: "Spot Trading Fees:\n• <$500K: 0.8%\n• $500K-$2M: 0.5%\n• $2M+: 0.25%"
-    },
-    
-    // CryptoPayX Pricing
-    {
-      triggers: ["cryptopayx fee", "cryptopayx price", "processing fee", "payment processing", "עמלת עיבוד"],
-      response: `**CryptoPayX Processing Fees:**
+*Default rate: 0.8%. Volume discounts apply automatically.*`
+      },
+      {
+        keywords: ['cryptopayx', 'processing', 'payx fee', 'payment fee'],
+        response: `**CryptoPayX Processing Fees:**
 
 | Monthly Flow | Rate |
 |--------------|------|
@@ -53,22 +108,13 @@ const aiResponses = {
 | $5M – $10M | 0.75% |
 | $10M+ | 0.50% (enterprise) |
 
-**Default rate:** 1.5%
+*Default rate: 1.5%. Final pricing requires Dan's approval.*`
+      },
+      {
+        keywords: ['credit line', 'cl', 'trade without'],
+        response: `**XBO Credit Line**
 
-💡 Enterprise clients get custom pricing.`,
-      copyText: "CryptoPayX Fees:\n• Up to $1M: 1.5%\n• $1M-$5M: 1%\n• $5M-$10M: 0.75%\n• $10M+: 0.5%"
-    },
-
-    // ============================================
-    // PRODUCT EXPLANATIONS
-    // ============================================
-    
-    // Credit Line
-    {
-      triggers: ["what is credit line", "explain credit line", "credit line work", "מה זה קרדיט ליין", "איך עובד קרדיט"],
-      response: `**Credit Line - Trade Without Upfront Funds** 💰
-
-XBO Credit Line lets institutional clients execute trades without holding funds first.
+Trade without upfront funds!
 
 **How it works:**
 1. Client gets approved credit limit (fiat or crypto)
@@ -77,461 +123,559 @@ XBO Credit Line lets institutional clients execute trades without holding funds 
 4. Track usage in real-time
 
 **Example:**
-→ €1M Credit Line approved
-→ Client sells €200K (no balance needed)
-→ Buys 220K USDC
-→ Deposits €200K within 24h
-→ USDC becomes withdrawable
+• €1M Credit Line approved
+• Client sells €200K (no balance needed)
+• Buys 220K USDC
+• Deposits €200K within 24h
+• USDC becomes withdrawable
 
-**Best for:** CFD Brokers, Trading Platforms, Market Makers, OTC Desks`,
-      copyText: "XBO Credit Line enables trading without upfront funds. Execute trades first, settle later. Perfect for brokers and trading platforms needing liquidity flexibility."
-    },
-    
-    // CaaS
-    {
-      triggers: ["what is caas", "explain caas", "crypto as a service", "מה זה קאס", "מה זה caas"],
-      response: `**CaaS - Crypto-as-a-Service** ⚙️
+**Best for:** CFD Brokers, Trading Platforms, Market Makers`
+      },
+      {
+        keywords: ['caas', 'crypto as a service', 'white label'],
+        response: `**CaaS - Crypto-as-a-Service**
 
 White-label crypto infrastructure for banks, EMIs, and fintechs.
 
-**What's included:**
-• 🌊 **Liquidity** - 50+ exchanges, best execution
-• 🔐 **Custody** - SOC 2, insured cold storage
-• ⚖️ **Compliance** - MiCA & AML built-in
-• 📱 **White-label UI** - Your branding
-• 💹 **Earn Products** - Staking, yields
-• 🔌 **Full API** - REST & WebSocket
+**Includes:**
+• ✅ Trading (Spot + OTC)
+• ✅ Custody (SOC 2, insured)
+• ✅ Compliance (MiCA & AML)
+• ✅ White-label UI
+• ✅ Earn & Staking
+• ✅ Full API
 
 **Time to market:** 4-6 weeks
 
-**Best for:** Banks, EMIs, Neobanks, Fintechs`,
-      copyText: "XBO CaaS: Launch your own crypto offering in 4-6 weeks. Complete white-label solution with liquidity, custody, compliance, and UI. Perfect for banks and fintechs."
-    },
-    
-    // CryptoPayX
-    {
-      triggers: ["what is cryptopayx", "explain cryptopayx", "crypto payments", "מה זה קריפטופייקס"],
-      response: `**CryptoPayX - Crypto Payment Processing** 💳
+**See:** EMI Case Study (€1.2M revenue Year 1)`
+      },
+      {
+        keywords: ['igaming', 'casino', 'gaming pitch'],
+        response: `**iGaming Sales Pitch** 🎰
 
-Accept crypto deposits instantly from anywhere in the world.
-
-**Features:**
-• ⚡ Real-time processing
-• 🌍 Global coverage
-• 💱 Fiat/stablecoin settlement options
-• 🔒 Dedicated wallet per client
-• 📊 Full transaction visibility
-
-**How it works:**
-1. Client gets unique deposit address
-2. Sends crypto
-3. Auto-detected & credited instantly
-4. Settle to fiat or keep in crypto
-
-**Best for:** iGaming, Forex Brokers, Creator Platforms, E-commerce`,
-      copyText: "CryptoPayX: Instant crypto payment processing. Accept deposits globally, real-time settlement, dedicated wallets. Perfect for iGaming and digital platforms."
-    },
-    
-    // IBAN
-    {
-      triggers: ["what is iban", "what is emoney", "explain iban", "corporate iban", "מה זה איבן", "מה זה אימאני"],
-      response: `**eMoney / Corporate IBAN** 🏦
-
-Dedicated IBAN accounts with full banking rails.
-
-**Features:**
-• 🇪🇺 **SEPA** - Fast EUR transfers across Europe
-• 🌐 **SWIFT** - International (30+ currencies)
-• 🇬🇧 **Faster Payments** - Instant UK GBP
-• 💱 **Multi-currency** - Hold & convert
-• 🔗 **Crypto bridge** - Easy on/off ramp
-
-**Powered by:** Equals Money (FCA regulated)
-
-**Best for:** Corporate Treasury, Trading Firms, Exchanges, Payment Providers
-
-💡 **Pro tip:** IBAN clients often benefit from our Credit Line for added liquidity.`,
-      copyText: "XBO Corporate IBAN: Dedicated accounts with SEPA, SWIFT & Faster Payments. Multi-currency support with crypto bridge. Powered by Equals Money."
-    },
-
-    // ============================================
-    // SALES PITCHES
-    // ============================================
-    
-    {
-      triggers: ["pitch for igaming", "igaming pitch", "casino pitch", "gambling client"],
-      response: `**iGaming Sales Pitch** 🎰
-
-*"Looking for a reliable crypto payment solution for your gaming platform?"*
+*"Looking for reliable crypto payments for your gaming platform?"*
 
 **Why XBO for iGaming:**
+• ✅ Instant deposits - Players fund in seconds
+• ✅ Global reach - No banking restrictions
+• ✅ Lower fees - 1-1.5% vs 3-5% cards
+• ✅ No chargebacks - Crypto is final
+• ✅ Privacy - Player discretion
 
-✅ **Instant deposits** - Players fund accounts in seconds
-✅ **Global reach** - Accept crypto from restricted banking regions  
-✅ **Lower fees** - 1-1.5% vs 3-5% card processing
-✅ **No chargebacks** - Crypto is final
-✅ **Privacy** - Players prefer crypto discretion
-
-**Our iGaming clients see:**
-• 40% increase in deposit conversion
-• 60% lower payment costs
-• New player acquisition from crypto-native audience
-
-📊 *See our Tier-1 iGaming case study for details.*`,
-      copyText: "XBO CryptoPayX for iGaming:\n\n• Instant crypto deposits\n• Global reach (no banking restrictions)\n• 1-1.5% fees (vs 3-5% cards)\n• Zero chargebacks\n• Player privacy\n\nOur iGaming clients see 40% better deposit conversion and 60% lower costs."
-    },
-    
-    {
-      triggers: ["pitch for broker", "broker pitch", "cfd pitch", "forex pitch", "trading platform pitch"],
-      response: `**Broker/Trading Platform Pitch** 📈
-
-*"Need liquidity flexibility for your trading operations?"*
+**Results from Tier-1 iGaming client:**
+• +26% deposit conversion
+• 4-minute payouts (was 36h)
+• +$29M annual impact`
+      },
+      {
+        keywords: ['broker', 'cfd', 'forex', 'trading platform'],
+        response: `**Broker/Trading Platform Pitch** 📈
 
 **Why XBO for Brokers:**
+• ✅ Credit Line - Trade without upfront capital
+• ✅ Deep liquidity - Best execution across 50+ venues
+• ✅ Real-time settlement - Same-day options
+• ✅ API-first - Seamless integration
 
-✅ **Credit Line** - Trade without upfront capital
-✅ **Deep liquidity** - Best execution across 50+ venues
-✅ **Fiat & Crypto** - Full asset coverage
-✅ **Real-time settlement** - Same-day options
-✅ **API-first** - Seamless integration
+**Results from CFD Broker client:**
+• +30% deposit approvals
+• T+0 settlement (was T+3-5)
+• -62% FX costs
+• -61% chargebacks`
+      },
+      {
+        keywords: ['compliance', 'prohibited', 'restricted', 'countries'],
+        response: `**Compliance - Jurisdictions**
 
-**Our broker clients achieve:**
-• Improved capital efficiency
-• Faster client onboarding
-• 24/7 trading capability
-• Reduced operational overhead
-
-📊 *See our CFD Broker case study for details.*`,
-      copyText: "XBO for Trading Platforms:\n\n• Credit Line - trade without upfront funds\n• Deep liquidity across 50+ venues\n• Fiat & crypto coverage\n• Real-time settlement\n• Full API integration\n\nImprove capital efficiency and enable 24/7 trading."
-    },
-    
-    {
-      triggers: ["pitch for bank", "bank pitch", "emi pitch", "fintech pitch"],
-      response: `**Bank/EMI/Fintech Pitch** 🏛️
-
-*"Want to offer crypto services without building from scratch?"*
-
-**Why XBO CaaS:**
-
-✅ **4-6 weeks** to launch (not 12+ months)
-✅ **Full compliance** - MiCA, AML built-in
-✅ **Your brand** - Complete white-label
-✅ **No crypto expertise needed** - We handle everything
-✅ **Revenue share** - New profit center
-
-**What you get:**
-• Trading (Spot + OTC)
-• Custody
-• Staking/Earn products
-• Cards
-• Full API
-
-📊 *See our Licensed EMI case study - launched in 6 weeks.*`,
-      copyText: "XBO CaaS for Banks & Fintechs:\n\n• Launch crypto in 4-6 weeks\n• Full MiCA & AML compliance\n• Complete white-label solution\n• Trading, custody, staking, cards\n• No crypto expertise needed\n\nNew revenue stream without the build cost."
-    },
-
-    // ============================================
-    // OBJECTION HANDLING
-    // ============================================
-    
-    {
-      triggers: ["too expensive", "price too high", "cheaper", "discount", "יקר מדי", "הנחה"],
-      response: `**Handling Price Objections** 💬
-
-**Response framework:**
-
-1. **Acknowledge:** "I understand cost is a key factor..."
-
-2. **Compare value, not just price:**
-   • "Our all-in rate includes custody, compliance, and support"
-   • "Competitors often add hidden fees for..."
-   • "Calculate total cost of ownership, not just transaction fee"
-
-3. **Volume incentives:**
-   • "With your expected volume, you'd qualify for Tier X pricing"
-   • "We can revisit rates after 3 months based on actual volume"
-
-4. **Risk reduction:**
-   • "Factor in the cost of compliance violations"
-   • "Our insurance and security reduce your risk exposure"
-
-**Tiered pricing reminder:**
-Higher volume = Lower rates (automatically)`,
-      copyText: null
-    },
-    
-    {
-      triggers: ["not ready", "maybe later", "need to think", "לא מוכן", "אולי אחר כך"],
-      response: `**Handling "Not Ready" Objections** 💬
-
-**Response framework:**
-
-1. **Understand the blocker:**
-   "What specifically would need to change for this to make sense?"
-
-2. **Offer a pilot:**
-   "Would a limited pilot help you evaluate without full commitment?"
-
-3. **Create urgency (genuine):**
-   • "Our onboarding queue is currently X weeks"
-   • "Pricing is locked for clients who sign by [date]"
-
-4. **Stay in touch:**
-   "Let me send you our monthly product updates so you see what's new"
-
-5. **Plant seeds:**
-   "Your competitors [X] and [Y] are already using crypto payments..."`,
-      copyText: null
-    },
-
-    // ============================================
-    // COMPLIANCE
-    // ============================================
-    
-    {
-      triggers: ["prohibited countries", "restricted countries", "can't work with", "blocked countries", "מדינות חסומות"],
-      response: `**Prohibited & Restricted Jurisdictions** ⚖️
-
-**🚫 Prohibited (No service):**
-Afghanistan, Belarus, Central African Republic, Cuba, DR Congo, Iran, Iraq, Libya, Mali, Myanmar, Nicaragua, North Korea, Russia, Somalia, South Sudan, Sudan, Syria, Ukraine (occupied), Venezuela, Yemen, Zimbabwe
+**🚫 Prohibited (Cannot serve):**
+China (People's Republic), Macao
 
 **⚠️ Restricted (Extra due diligence):**
-Albania, Bahamas, Barbados, Burkina Faso, Cambodia, Cayman Islands, Gibraltar, Haiti, Jamaica, Jordan, Nigeria, Pakistan, Panama, Philippines, Senegal, South Africa, Tanzania, Trinidad, Turkey, UAE, Uganda, Vietnam
+Afghanistan, Algeria, Bangladesh, Belarus, Bolivia, Burkina Faso, Burundi, Cambodia, Congo, Crimea, Donetsk, Gabon, Haiti, Iran, Iraq, Jamaica, Kherson, North Korea, Lesotho, Libya, Luhansk, Mali, Myanmar, Palestine, Russia, Syria, UAE
 
-📋 Full list: compliance.html`,
-      copyText: null
-    },
-    
-    {
-      triggers: ["kyc requirements", "kyb requirements", "onboarding documents", "what documents", "מסמכים נדרשים"],
-      response: `**KYC/KYB Requirements** 📋
+*Always verify current status with compliance team: compliance@xbo.com*`
+      },
+      {
+        keywords: ['kyc', 'kyb', 'document', 'onboard'],
+        response: `**KYC/KYB Requirements**
 
-**Corporate Onboarding:**
+**Documents needed:**
 • Certificate of Incorporation
 • Memorandum & Articles
 • Shareholder Register
 • Director ID & Proof of Address
-• UBO Documentation (25%+ owners)
-• Source of Funds declaration
+• UBO docs (25%+ owners)
+• Source of Funds
 • Business description
 
-**Timeline:** 3-5 business days (standard)
+**Timeline:** 3-5 business days
 
-**Process:**
-1. Submit documents
-2. Compliance review
-3. Video verification (if needed)
-4. Account activation`,
-      copyText: "KYC/KYB Documents:\n• Certificate of Incorporation\n• Memorandum & Articles\n• Shareholder Register\n• Director ID + Address proof\n• UBO docs (25%+ owners)\n• Source of Funds\n• Business description\n\nTimeline: 3-5 business days"
-    },
-
-    // ============================================
-    // PROCESSES
-    // ============================================
-    
-    {
-      triggers: ["onboarding process", "client onboarding", "how to onboard", "תהליך הצטרפות"],
-      response: `**Client Onboarding Process** 🔄
-
-**Step 1: Initial Contact**
-• Discovery call
-• Identify needs & products
-• Pipedrive: Create deal
-
-**Step 2: Documentation**
-• Send KYB checklist
-• Collect documents
-• Compliance review (3-5 days)
-
-**Step 3: Agreement**
-• Send Insertion Order
-• Negotiate terms if needed
-• Sign digitally
-
-**Step 4: Technical Setup**
-• Create Telegram group
-• API credentials (if needed)
-• Test transactions
-
-**Step 5: Go Live**
-• First real transaction
-• Move to "Client" stage
-• Hand to Success team`,
-      copyText: null
-    },
-    
-    {
-      triggers: ["telegram group", "create telegram", "telegram setup", "קבוצת טלגרם"],
-      response: `**Telegram Group Setup** 💬
-
-**Naming:** "XBO ↔ [Client Name]"
-
-**Required members:**
-• Client contacts
-• XBO Account Manager
-• Support representative
-• Compliance (for onboarding)
-
-**Checklist:**
-☐ Create group with correct name
-☐ Add all participants
-☐ Pin welcome message with contacts
-☐ Set group photo (XBO logo)
-☐ Link in Pipedrive deal`,
-      copyText: "Telegram Group: \"XBO ↔ [Client Name]\"\n\nMembers needed:\n• Client contacts\n• Account Manager\n• Support rep\n• Compliance (for onboarding)"
-    },
-
-    // ============================================
-    // COMPARISONS
-    // ============================================
-    
-    {
-      triggers: ["vs competitor", "compared to", "difference between", "why xbo", "למה xbo", "בהשוואה ל"],
-      response: `**Why XBO vs Competitors** 🏆
-
-**vs Traditional Crypto Exchanges:**
-• ✅ Credit Line (unique)
-• ✅ Dedicated account management
-• ✅ White-label options
-• ✅ Corporate-grade compliance
-
-**vs Other B2B Providers:**
-• ✅ Faster onboarding (days, not months)
-• ✅ More flexible pricing
-• ✅ Full-stack solution (not just one product)
-• ✅ European regulated (MiCA ready)
-
-**XBO Unique Advantages:**
-1. Trade without upfront funds (Credit Line)
-2. 4-6 week CaaS deployment
-3. Combined crypto + fiat (IBAN)
-4. Single provider for all crypto needs`,
-      copyText: "Why XBO:\n\n1. Credit Line - trade without upfront funds\n2. 4-6 week white-label deployment\n3. Crypto + fiat in one place\n4. European regulated (MiCA)\n5. Dedicated support & fast onboarding"
-    },
-
-    // ============================================
-    // QUICK ANSWERS
-    // ============================================
-    
-    {
-      triggers: ["settlement time", "how long settlement", "when settled", "זמן סליקה"],
-      response: `**Settlement Times:**
-
-• **Crypto deposits:** Instant (after confirmations)
-• **Crypto withdrawals:** Minutes to hours
-• **SEPA:** Same-day or T+1
-• **SWIFT:** 1-3 business days
-• **Faster Payments (UK):** Instant
-• **Credit Line settlement:** As agreed (usually T+1)`,
-      copyText: "Settlement:\n• Crypto: Instant\n• SEPA: Same-day/T+1\n• SWIFT: 1-3 days\n• UK Faster Payments: Instant"
-    },
-    
-    {
-      triggers: ["supported coins", "which crypto", "what coins", "currencies supported", "מטבעות נתמכים"],
-      response: `**Supported Cryptocurrencies:**
-
-**Major:** BTC, ETH, USDT, USDC, XRP, SOL, ADA, DOT, LINK, AVAX
-
-**Stablecoins:** USDT, USDC, DAI, TUSD, BUSD
-
-**600+ trading pairs** available
-
-**Networks:** Ethereum, BSC, Polygon, Solana, Tron, Arbitrum, Optimism, and more
-
-💡 New assets added regularly based on demand.`,
-      copyText: "Supported: BTC, ETH, USDT, USDC, XRP, SOL, ADA + 600 pairs\n\nNetworks: Ethereum, BSC, Polygon, Solana, Tron, Arbitrum, Optimism"
-    },
-    
-    {
-      triggers: ["api documentation", "api docs", "developer docs", "תיעוד api"],
-      response: `**API Documentation:**
-
-📚 **Docs:** docs.xbo.com
-
-**Available APIs:**
-• **Client API** - Trading, deposits, withdrawals
-• **Public API** - Market data, prices
-• **CryptoPayX API** - Payment processing
-• **Webhooks** - Real-time notifications
-
-**Authentication:** API Key + Secret
-**Format:** REST (JSON)
-**WebSocket:** Available for real-time data`,
-      copyText: "API Docs: docs.xbo.com\n\nAPIs: Client, Public, CryptoPayX, Webhooks\nAuth: API Key + Secret\nFormat: REST + WebSocket"
-    }
-  ],
-
-  // Fallback responses
-  fallback: [
-    "🤔 לא מצאתי מידע ספציפי על זה. נסה לשאול על:\n\n• **מוצרים:** Credit Line, CaaS, CryptoPayX, IBAN\n• **תמחור:** OTC fees, Spot fees, Processing fees\n• **פיץ'ים:** iGaming pitch, Broker pitch, Bank pitch\n• **תהליכים:** Onboarding, Telegram setup, KYC\n• **Compliance:** Prohibited countries, Documents\n\nאו פנה למנהל החשבון שלך.",
-    
-    "I couldn't find specific info about that. Try asking about:\n\n• **Products:** Credit Line, CaaS, CryptoPayX, IBAN\n• **Pricing:** OTC fees, Spot fees, Processing fees  \n• **Pitches:** iGaming pitch, Broker pitch, Bank pitch\n• **Processes:** Onboarding, Telegram setup, KYC\n• **Compliance:** Prohibited countries, Documents\n\nOr contact your account manager."
-  ]
-};
-
-// Smart matching function
-function findBestMatch(input) {
-  const query = input.toLowerCase().trim();
-  
-  // Check each pattern
-  for (const pattern of aiResponses.patterns) {
-    for (const trigger of pattern.triggers) {
-      if (query.includes(trigger)) {
-        return pattern;
+**Process:** Collect docs → Compliance review → Video verification (if needed) → Activation`
       }
-    }
-  }
-  
-  // Fuzzy matching for common misspellings and variations
-  const fuzzyMatches = {
-    "קרדיט": "credit line",
-    "אייבן": "iban",
-    "קריפטו": "cryptopayx",
-    "איגיימינג": "igaming",
-    "גיימינג": "igaming",
-    "ברוקר": "broker",
-    "בנק": "bank",
-    "עמלה": "fee",
-    "מחיר": "price",
-    "תמחור": "pricing"
-  };
-  
-  for (const [fuzzy, target] of Object.entries(fuzzyMatches)) {
-    if (query.includes(fuzzy)) {
-      for (const pattern of aiResponses.patterns) {
-        for (const trigger of pattern.triggers) {
-          if (trigger.includes(target)) {
-            return pattern;
-          }
+    ];
+
+    // Check patterns
+    for (const pattern of patterns) {
+      for (const keyword of pattern.keywords) {
+        if (q.includes(keyword)) {
+          return pattern.response;
         }
       }
     }
+
+    // Default fallback
+    return `⚠️ AI Chat is temporarily using offline mode. 
+
+Try asking about:
+• **Pricing:** OTC fees, Spot fees, CryptoPayX fees
+• **Products:** Credit Line, CaaS, CryptoPayX, eMoney
+• **Pitches:** iGaming pitch, Broker pitch, Bank pitch
+• **Compliance:** Prohibited countries, KYC requirements
+• **Procedures:** Onboarding, Pipedrive, Telegram setup
+
+Or check the full documentation in the sidebar.`;
   }
-  
-  return null;
 }
 
-function getAIResponse(input) {
-  const match = findBestMatch(input);
+// Markdown parser for chat responses
+function parseMarkdown(text) {
+  if (!text) return '';
   
-  if (match) {
-    return {
-      text: match.response,
-      copyText: match.copyText,
-      hasCopy: !!match.copyText
-    };
+  let html = text;
+  
+  // Escape HTML first
+  html = html.replace(/&/g, '&amp;')
+             .replace(/</g, '&lt;')
+             .replace(/>/g, '&gt;');
+  
+  // Headers
+  html = html.replace(/^### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^## (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+  
+  // Bold and italic
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  
+  // Code blocks
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  
+  // Tables
+  html = html.replace(/\|(.+)\|/g, (match, content) => {
+    const cells = content.split('|').map(c => c.trim());
+    if (cells.every(c => c.match(/^[-:]+$/))) {
+      return ''; // Skip separator row
+    }
+    const cellHtml = cells.map(c => `<td>${c}</td>`).join('');
+    return `<tr>${cellHtml}</tr>`;
+  });
+  
+  // Wrap consecutive table rows
+  html = html.replace(/(<tr>.*<\/tr>\n?)+/g, '<table class="chat-table">$&</table>');
+  
+  // Lists
+  html = html.replace(/^[•\-\*] (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  
+  // Numbered lists
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+  
+  // Line breaks
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
+  
+  // Wrap in paragraphs
+  if (!html.startsWith('<')) {
+    html = '<p>' + html + '</p>';
   }
   
-  // Return random fallback
-  const fallback = aiResponses.fallback[Math.floor(Math.random() * aiResponses.fallback.length)];
-  return {
-    text: fallback,
-    copyText: null,
-    hasCopy: false
-  };
+  return html;
 }
 
-// Export for use
+// Copy text to clipboard
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (err) {
+    console.error('Copy failed:', err);
+    return false;
+  }
+}
+
+// Initialize chat instance
+const xboChat = new XBOChat();
+
+// Chat UI Controller
+const ChatUI = {
+  chatContainer: null,
+  inputField: null,
+  sendButton: null,
+  quickButtons: null,
+  
+  init() {
+    this.chatContainer = document.getElementById('ai-chat-messages');
+    this.inputField = document.getElementById('ai-chat-input');
+    this.sendButton = document.getElementById('ai-chat-send');
+    this.quickButtons = document.querySelectorAll('.quick-question-btn');
+    
+    if (!this.chatContainer || !this.inputField) {
+      console.warn('Chat UI elements not found');
+      return;
+    }
+    
+    this.bindEvents();
+    this.addWelcomeMessage();
+  },
+  
+  bindEvents() {
+    // Send button
+    if (this.sendButton) {
+      this.sendButton.addEventListener('click', () => this.handleSend());
+    }
+    
+    // Enter key
+    if (this.inputField) {
+      this.inputField.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          this.handleSend();
+        }
+      });
+    }
+    
+    // Quick question buttons
+    this.quickButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const question = btn.dataset.question || btn.textContent;
+        this.inputField.value = question;
+        this.handleSend();
+      });
+    });
+  },
+  
+  addWelcomeMessage() {
+    const welcomeHtml = `
+      <div class="chat-message assistant-message">
+        <div class="message-content">
+          <strong>👋 Hey! I'm your XBO Sales Assistant.</strong><br><br>
+          I can help you with:
+          <ul>
+            <li>📊 <strong>Pricing</strong> - OTC, Spot, CryptoPayX fees</li>
+            <li>🎯 <strong>Pitches</strong> - iGaming, Broker, EMI tailored pitches</li>
+            <li>💡 <strong>Solutions</strong> - Match products to client needs</li>
+            <li>📝 <strong>Content</strong> - One-pagers, flow-of-funds</li>
+            <li>🔒 <strong>Compliance</strong> - Jurisdictions, KYC requirements</li>
+          </ul>
+          <em>Try: "What's the price for PayX at $3M/month?" or "Pitch for iGaming client"</em>
+        </div>
+      </div>
+    `;
+    this.chatContainer.innerHTML = welcomeHtml;
+  },
+  
+  async handleSend() {
+    const message = this.inputField.value.trim();
+    if (!message || xboChat.isLoading) return;
+    
+    // Clear input
+    this.inputField.value = '';
+    
+    // Add user message to UI
+    this.addMessage(message, 'user');
+    
+    // Show loading
+    this.showLoading();
+    
+    // Get AI response
+    const response = await xboChat.sendMessage(message);
+    
+    // Remove loading
+    this.hideLoading();
+    
+    // Add response to UI
+    if (response) {
+      this.addMessage(response.text, 'assistant', response.fallback);
+    }
+    
+    // Scroll to bottom
+    this.scrollToBottom();
+  },
+  
+  addMessage(text, role, isFallback = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${role}-message`;
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    
+    if (role === 'user') {
+      contentDiv.textContent = text;
+    } else {
+      contentDiv.innerHTML = parseMarkdown(text);
+      
+      // Add copy button for assistant messages
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-response-btn';
+      copyBtn.innerHTML = '📋 Copy';
+      copyBtn.title = 'Copy to clipboard';
+      copyBtn.onclick = async () => {
+        const success = await copyToClipboard(text);
+        copyBtn.innerHTML = success ? '✓ Copied!' : '❌ Failed';
+        setTimeout(() => { copyBtn.innerHTML = '📋 Copy'; }, 2000);
+      };
+      contentDiv.appendChild(copyBtn);
+      
+      // Add fallback indicator if applicable
+      if (isFallback) {
+        const indicator = document.createElement('div');
+        indicator.className = 'fallback-indicator';
+        indicator.innerHTML = '<small>⚡ Offline response</small>';
+        contentDiv.appendChild(indicator);
+      }
+    }
+    
+    messageDiv.appendChild(contentDiv);
+    this.chatContainer.appendChild(messageDiv);
+    this.scrollToBottom();
+  },
+  
+  showLoading() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'chat-message assistant-message loading-message';
+    loadingDiv.innerHTML = `
+      <div class="message-content">
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+        <small>Thinking...</small>
+      </div>
+    `;
+    loadingDiv.id = 'chat-loading';
+    this.chatContainer.appendChild(loadingDiv);
+    this.scrollToBottom();
+  },
+  
+  hideLoading() {
+    const loading = document.getElementById('chat-loading');
+    if (loading) {
+      loading.remove();
+    }
+  },
+  
+  scrollToBottom() {
+    this.chatContainer.scrollTop = this.chatContainer.scrollHeight;
+  },
+  
+  clearChat() {
+    xboChat.clearHistory();
+    this.addWelcomeMessage();
+  }
+};
+
+// CSS for chat UI
+const chatStyles = `
+<style>
+.chat-message {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 90%;
+  position: relative;
+}
+
+.user-message {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+  background: #f3f4f6;
+  color: #1f2937;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+}
+
+.message-content {
+  line-height: 1.6;
+}
+
+.message-content h2, .message-content h3, .message-content h4 {
+  margin: 8px 0 4px 0;
+  color: #1f2937;
+}
+
+.message-content ul, .message-content ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.message-content li {
+  margin: 4px 0;
+}
+
+.message-content code {
+  background: #e5e7eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.message-content pre {
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.message-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.chat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 0.9em;
+}
+
+.chat-table td {
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+}
+
+.chat-table tr:first-child {
+  background: #e5e7eb;
+  font-weight: 600;
+}
+
+.copy-response-btn {
+  display: block;
+  margin-top: 12px;
+  padding: 6px 12px;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background 0.2s;
+}
+
+.copy-response-btn:hover {
+  background: #d1d5db;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #9ca3af;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.fallback-indicator {
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: #fef3c7;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.loading-message {
+  opacity: 0.8;
+}
+
+/* Quick question buttons */
+.quick-question-btn {
+  padding: 6px 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.2s;
+}
+
+.quick-question-btn:hover {
+  background: #e5e7eb;
+  border-color: #6366f1;
+}
+
+/* Chat input area */
+#ai-chat-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1em;
+  resize: none;
+}
+
+#ai-chat-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+#ai-chat-send {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#ai-chat-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+#ai-chat-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+</style>
+`;
+
+// Inject styles when DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+  // Add styles
+  document.head.insertAdjacentHTML('beforeend', chatStyles);
+  
+  // Initialize chat UI
+  ChatUI.init();
+});
+
+// Export for external use
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { getAIResponse, findBestMatch };
+  module.exports = { XBOChat, ChatUI, parseMarkdown, copyToClipboard };
 }

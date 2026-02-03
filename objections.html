@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objection Handling | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 30px;
+            background: radial-gradient(ellipse at top, rgba(239, 68, 68, 0.15) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Filter */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #6366f1;
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Objection Card */
+        .objection-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            border: 1px solid #334155;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .objection-card:hover {
+            border-color: #475569;
+            transform: translateY(-2px);
+        }
+
+        .objection-header {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .objection-category {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-price { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .category-regulation { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; }
+        .category-tech { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .category-timing { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .category-decision { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+
+        .objection-question {
+            flex: 1;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .objection-toggle {
+            color: #64748b;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .objection-card.open .objection-toggle {
+            transform: rotate(45deg);
+        }
+
+        .objection-content {
+            display: none;
+            padding: 0 24px 24px;
+            border-top: 1px solid #334155;
+        }
+
+        .objection-card.open .objection-content {
+            display: block;
+        }
+
+        .response-section {
+            padding-top: 20px;
+        }
+
+        .response-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .response-text {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .response-text strong {
+            color: #a5b4fc;
+        }
+
+        .response-text ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .response-text li {
+            margin-bottom: 8px;
+        }
+
+        .copy-response {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #334155;
+            border: none;
+            color: #94a3b8;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .copy-response:hover {
+            background: #475569;
+            color: #fff;
+        }
+
+        .copy-response.copied {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .tips-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #6366f1;
+        }
+
+        .tips-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 8px;
+        }
+
+        .tips-text {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .section-count {
+            margin-left: auto;
+            background: #334155;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .objection-header {
+                flex-wrap: wrap;
+            }
+            
+            .objection-question {
+                width: 100%;
+                order: 2;
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo-img">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            <a href="index.html" class="back-link">← Back to Hub</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>🛡️ Objection Handling</h1>
+        <p>Turn objections into opportunities. Copy-paste responses for common client concerns.</p>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterCategory('all')">All Objections</button>
+        <button class="filter-btn" onclick="filterCategory('price')">💰 Price</button>
+        <button class="filter-btn" onclick="filterCategory('regulation')">📋 Regulation</button>
+        <button class="filter-btn" onclick="filterCategory('tech')">⚙️ Tech</button>
+        <button class="filter-btn" onclick="filterCategory('timing')">⏰ Timing</button>
+        <button class="filter-btn" onclick="filterCategory('decision')">🤝 Decision</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Price Objections -->
+        <div class="objection-card" data-category="price">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-price">Price</span>
+                <span class="objection-question">"Your fees are too high compared to [Competitor]"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        I understand price is important. Let me share what's included in our pricing:
+                        <ul>
+                            <li><strong>All-in-one pricing</strong> — No hidden custody, withdrawal, or API fees</li>
+                            <li><strong>Deep liquidity</strong> — Better execution saves 0.1-0.3% on slippage</li>
+                            <li><strong>MiCA compliance</strong> — Built-in regulatory coverage for EU operations</li>
+                            <li><strong>Personal support</strong> — Dedicated account manager included</li>
+                        </ul>
+                        When clients compare total cost of ownership, we're typically <strong>15-20% cheaper</strong> than assembling multiple providers.
+                        <br><br>
+                        What volume are you looking at? Our tiered pricing gets very competitive at scale.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">Ask what competitor they're comparing to. If it's Fireblocks, emphasize our simpler pricing and included compliance. If it's a smaller provider, emphasize reliability and EU licensing.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="price">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-price">Price</span>
+                <span class="objection-question">"We can't justify the setup/integration cost"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        I hear you. Let me clarify — there's <strong>no setup fee</strong> for standard integrations.
+                        <br><br>
+                        Our API integration typically takes <strong>5-10 business days</strong>, and our integration team (Mark and team) handles most of the heavy lifting.
+                        <br><br>
+                        For CaaS white-label deployments, there is a one-time setup fee, but it includes:
+                        <ul>
+                            <li>Custom branding and UI configuration</li>
+                            <li>Compliance framework setup</li>
+                            <li>Dedicated integration support</li>
+                            <li>Training for your team</li>
+                        </ul>
+                        The setup pays for itself within 2-3 months based on what our clients typically see.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="price">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-price">Price</span>
+                <span class="objection-question">"Can you match [lower price]?"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        We're always open to discussing pricing based on volume and commitment. A few questions:
+                        <ul>
+                            <li>What's your expected monthly volume?</li>
+                            <li>Is that quote for the same scope (custody, compliance, support included)?</li>
+                            <li>What contract length are they offering?</li>
+                        </ul>
+                        Our pricing tiers are designed to reward volume:
+                        <ul>
+                            <li><strong>Spot:</strong> 0.80% → 0.50% → 0.25% (volume-based)</li>
+                            <li><strong>OTC:</strong> 2% → 1-1.5% → 0.5-0.75% ($5M+)</li>
+                            <li><strong>CryptoPayX:</strong> 1.5% → down to 0.5% at $10M+</li>
+                        </ul>
+                        Let me see what I can do for your specific case.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">Always involve your manager for pricing negotiations below standard tiers. Never discount without getting something in return (longer term, higher volume commitment, case study rights).</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regulation Objections -->
+        <div class="objection-card" data-category="regulation">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-regulation">Regulation</span>
+                <span class="objection-question">"We're worried about crypto regulation uncertainty"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        That's exactly why working with XBO gives you peace of mind.
+                        <br><br>
+                        <strong>We're fully MiCA licensed</strong> — the most comprehensive crypto regulation in the world. This means:
+                        <ul>
+                            <li>You're working with a fully regulated EU entity</li>
+                            <li>Travel Rule compliance is built-in</li>
+                            <li>All AML/KYC is handled</li>
+                            <li>Regular audits and reporting to regulators</li>
+                        </ul>
+                        The regulatory landscape is actually <strong>getting clearer</strong>, not more uncertain. MiCA sets the global standard, and we're already compliant.
+                        <br><br>
+                        Would you like me to share our compliance documentation?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="regulation">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-regulation">Regulation</span>
+                <span class="objection-question">"Our compliance team won't approve crypto"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        I completely understand — compliance teams need to be thorough.
+                        <br><br>
+                        Would it help if we arranged a <strong>call between our compliance teams</strong>? Elina (our Compliance Officer) regularly does these calls and can address:
+                        <ul>
+                            <li>Our licensing and regulatory status</li>
+                            <li>KYT (Know Your Transaction) processes</li>
+                            <li>Chainalysis integration for transaction monitoring</li>
+                            <li>Travel Rule compliance</li>
+                            <li>Audit trails and reporting capabilities</li>
+                        </ul>
+                        We work with several banks and EMIs who had the same concerns initially. Happy to connect you with references who've been through compliance approval.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">Offer to send our compliance documentation package upfront. Ask who the specific decision-maker in compliance is and whether we can include them in the next meeting.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="regulation">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-regulation">Regulation</span>
+                <span class="objection-question">"We can't serve customers in [restricted country]"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        We maintain a clear <strong>prohibited and restricted jurisdictions list</strong>.
+                        <br><br>
+                        <strong>Prohibited (cannot serve):</strong> China, Russia, Iran, North Korea, Cuba, Syria, Belarus, Myanmar, Venezuela, Afghanistan
+                        <br><br>
+                        <strong>Restricted (extra DD required):</strong> UAE, Turkey, Nigeria, Pakistan, Philippines, Panama, and others
+                        <br><br>
+                        For restricted jurisdictions, we can often work together — it just requires additional documentation and compliance review.
+                        <br><br>
+                        Which specific markets are you concerned about? Let me check with our compliance team.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Objections -->
+        <div class="objection-card" data-category="tech">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-tech">Tech</span>
+                <span class="objection-question">"Our dev team is overloaded, we can't do another integration"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        I totally get it — dev resources are precious.
+                        <br><br>
+                        The good news: Our integration is <strong>surprisingly lightweight</strong>. Most clients are live in 5-10 business days with minimal dev effort.
+                        <br><br>
+                        Options to minimize your dev load:
+                        <ul>
+                            <li><strong>CryptoPayX Iframe</strong> — Drop-in payment widget, 1-2 hours to implement</li>
+                            <li><strong>Hosted checkout</strong> — Redirect solution, almost no integration needed</li>
+                            <li><strong>Full API</strong> — 5-10 days, but our team handles most config</li>
+                        </ul>
+                        Mark (our Integration Lead) can jump on a quick call with your tech team to scope exactly what's needed. Often it's less than expected.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="tech">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-tech">Tech</span>
+                <span class="objection-question">"What's your uptime / reliability like?"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        Great question — reliability is critical.
+                        <br><br>
+                        Our platform maintains <strong>99.9%+ uptime</strong>, and our infrastructure is:
+                        <ul>
+                            <li>Multi-region deployed for redundancy</li>
+                            <li>Real-time monitoring 24/7</li>
+                            <li>Automatic failover capabilities</li>
+                            <li>SOC 2 compliant custody infrastructure</li>
+                        </ul>
+                        For CryptoPayX specifically, we route through multiple liquidity providers, so even if one venue has issues, transactions continue processing.
+                        <br><br>
+                        Want me to share our technical documentation and SLA terms?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="tech">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-tech">Tech</span>
+                <span class="objection-question">"We need custom features that you might not support"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        Customization is one of our strengths.
+                        <br><br>
+                        What specific features do you need? Common customizations we support:
+                        <ul>
+                            <li><strong>White-labeling</strong> — Full UI customization</li>
+                            <li><strong>Custom settlement</strong> — Specific payout schedules</li>
+                            <li><strong>API webhooks</strong> — Custom event notifications</li>
+                            <li><strong>Multi-currency</strong> — Specific coin/fiat pairs</li>
+                            <li><strong>Reporting</strong> — Custom dashboard and exports</li>
+                        </ul>
+                        For enterprise clients, we've built custom features when there's a strong business case. Let's discuss what you need — chances are we either have it or can build it.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timing Objections -->
+        <div class="objection-card" data-category="timing">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-timing">Timing</span>
+                <span class="objection-question">"We're not ready yet / need to wait until next quarter"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        That's completely fair. A few things to consider:
+                        <br><br>
+                        <strong>What's blocking the timeline?</strong> If it's:
+                        <ul>
+                            <li><strong>Budget cycle</strong> — We can start onboarding now so you're ready to go live when budget opens</li>
+                            <li><strong>Dev resources</strong> — Our integration is minimal; won't block your roadmap</li>
+                            <li><strong>Internal approvals</strong> — We can help prepare materials for your stakeholders</li>
+                        </ul>
+                        The <strong>crypto market moves fast</strong>. Clients who waited often tell us they wish they'd started sooner.
+                        <br><br>
+                        What if we did a low-commitment pilot? Start small, prove the value, then scale when timing is right.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">Always try to understand the REAL reason for the delay. "Next quarter" often means something specific is blocking them. Find it and address it.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="timing">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-timing">Timing</span>
+                <span class="objection-question">"The crypto market is too volatile right now"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        I understand the concern. Here's the thing though:
+                        <br><br>
+                        <strong>You don't need to hold crypto exposure.</strong> With XBO:
+                        <ul>
+                            <li><strong>Instant conversion</strong> — Receive crypto, instantly convert to EUR/USD/stablecoin</li>
+                            <li><strong>Zero market risk</strong> — You never hold volatile assets</li>
+                            <li><strong>Fiat settlement</strong> — Get paid in your preferred currency</li>
+                        </ul>
+                        Think of crypto as a <strong>payment rail</strong>, not an investment. Your customers pay in crypto, you receive fiat. Volatility doesn't affect you.
+                        <br><br>
+                        Our iGaming clients love this — they saw +26% conversion while taking zero crypto risk.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="timing">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-timing">Timing</span>
+                <span class="objection-question">"We just signed with another provider"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        No problem at all! A few thoughts:
+                        <br><br>
+                        <strong>Many of our clients use multiple providers</strong> — either for redundancy or to compare performance. Would it make sense to:
+                        <ul>
+                            <li>Run a parallel pilot to compare conversion rates?</li>
+                            <li>Keep us as a backup/failover option?</li>
+                            <li>Revisit when your current contract is up for renewal?</li>
+                        </ul>
+                        When does your current agreement come up for review? I'd love to stay in touch and show you what we can offer when timing is right.
+                        <br><br>
+                        Mind if I add you to our quarterly updates list?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decision Process Objections -->
+        <div class="objection-card" data-category="decision">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-decision">Decision</span>
+                <span class="objection-question">"I need to check with my manager/board"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        Of course! Let me help you make a strong case.
+                        <br><br>
+                        <strong>What will be their main concerns?</strong>
+                        <ul>
+                            <li><strong>ROI</strong> — I can prepare a projected impact analysis</li>
+                            <li><strong>Risk</strong> — We're MiCA licensed, fully regulated</li>
+                            <li><strong>Effort</strong> — Integration is 5-10 days, minimal resources</li>
+                        </ul>
+                        I can send you a <strong>one-pager</strong> summarizing:
+                        <ul>
+                            <li>Business case and expected benefits</li>
+                            <li>Pricing overview</li>
+                            <li>Timeline and next steps</li>
+                            <li>Risk mitigation (licensing, compliance)</li>
+                        </ul>
+                        Would it help if I joined the call with your manager? I'm happy to present and answer questions directly.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">Always try to get invited to the internal meeting or at least understand the decision criteria. Ask: "What will make this a 'yes' for them?"</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="decision">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-decision">Decision</span>
+                <span class="objection-question">"Send me more info and I'll get back to you"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        Happy to! Before I do, I want to make sure I send the <strong>right information</strong>.
+                        <br><br>
+                        A few quick questions:
+                        <ul>
+                            <li>What's most important to you — pricing, compliance, or technical specs?</li>
+                            <li>Who else will be reviewing this?</li>
+                            <li>What would make this a clear yes or no for you?</li>
+                        </ul>
+                        I'll put together a <strong>tailored package</strong> and can we schedule a 15-minute follow-up for [specific date] to go through any questions?
+                        <br><br>
+                        That way the info doesn't just sit in your inbox — I can actually help you evaluate it.
+                    </div>
+                </div>
+                <div class="tips-section">
+                    <div class="tips-label">💡 Pro Tip</div>
+                    <div class="tips-text">"Send me info" is often a polite brush-off. Always get a follow-up meeting on the calendar before ending the call. If they won't commit to a follow-up, qualify whether they're a real opportunity.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="objection-card" data-category="decision">
+            <div class="objection-header" onclick="toggleCard(this)">
+                <span class="objection-category category-decision">Decision</span>
+                <span class="objection-question">"We're talking to several providers"</span>
+                <span class="objection-toggle">+</span>
+            </div>
+            <div class="objection-content">
+                <div class="response-section">
+                    <div class="response-label">Suggested Response</div>
+                    <div class="response-text">
+                        <button class="copy-response" onclick="copyResponse(this)">📋 Copy</button>
+                        That's smart — you should compare options.
+                        <br><br>
+                        <strong>Here's what makes XBO different:</strong>
+                        <ul>
+                            <li>✅ <strong>MiCA Licensed</strong> — Not many can say this yet</li>
+                            <li>✅ <strong>Full stack</strong> — Exchange, custody, payments, cards, banking in one</li>
+                            <li>✅ <strong>Credit Line</strong> — Unique offering, trade without upfront funds</li>
+                            <li>✅ <strong>Fast launch</strong> — CaaS in 4-6 weeks vs 12+ months</li>
+                            <li>✅ <strong>Real support</strong> — Dedicated account manager, not a ticket queue</li>
+                        </ul>
+                        What are the top 3 criteria you're evaluating on? I want to make sure we address what matters most to you.
+                        <br><br>
+                        Also, who else are you talking to? (Knowing helps me highlight relevant differentiators.)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        XBO Sales Hub · Internal Use Only · Last updated: February 2026
+    </footer>
+
+    <script>
+        function toggleCard(header) {
+            const card = header.parentElement;
+            card.classList.toggle('open');
+        }
+
+        function filterCategory(category) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            document.querySelectorAll('.objection-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copyResponse(btn) {
+            const responseText = btn.parentElement.innerText.replace('📋 Copy', '').trim();
+            navigator.clipboard.writeText(responseText).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '✅ Copied';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '📋 Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -789,7 +789,7 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
 • EUR and GBP VIBANs available
 • 24/7 processing for amounts under €100K
 
-**⚠️ CRITICAL: Create Transaction First!**
+** CRITICAL: Create Transaction First!**
 1. Log in to XBO
 2. Go to Wallet → Deposit → Bank Transfer (VIBAN)
 3. Enter exact amount you will send
@@ -809,11 +809,11 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
 • SWIFT: 1-3 business days
 
 **Important Rules:**
-✅ Always create deposit transaction FIRST
-✅ Include exact reference code
-✅ Add fee to transfer amount
-✅ Use your own bank account (name must match)
-❌ No third-party payments allowed`,
+ Always create deposit transaction FIRST
+ Include exact reference code
+ Add fee to transfer amount
+ Use your own bank account (name must match)
+ No third-party payments allowed`,
     source: "product-viban-guide.md"
   },
 
@@ -845,14 +845,14 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
     answer: `**VIBAN Deposit Checklist**
 
 **Before sending any bank transfer:**
-☐ Create deposit transaction in XBO
-☐ Note your unique reference code
-☐ Calculate amount + fee
-☐ Initiate bank transfer with:
+ Create deposit transaction in XBO
+ Note your unique reference code
+ Calculate amount + fee
+ Initiate bank transfer with:
   - Correct VIBAN
   - Amount + fee
   - YOUR REFERENCE CODE (mandatory!)
-☐ Wait for processing
+ Wait for processing
 
 **Fees to add:**
 • SEPA: €1.00
@@ -860,7 +860,7 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
 • Faster Payments: £1.00
 • SWIFT: €15.00
 
-**⚠️ Warnings:**
+** Warnings:**
 • NO REFERENCE = DELAYED DEPOSIT
 • WRONG AMOUNT = MANUAL REVIEW
 • THIRD PARTY = RETURNED + FEES
@@ -895,7 +895,7 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
 • SEPA Normal: 1-2 hours
 • SWIFT: 1-3 business days
 
-**⚠️ Reference is mandatory!** Without it, deposit may be delayed 3-5 business days.`,
+** Reference is mandatory!** Without it, deposit may be delayed 3-5 business days.`,
     source: "product-viban-guide.md"
   },
 
@@ -906,29 +906,29 @@ A dedicated account identifier for receiving bank transfers to your XBO wallet.
   "pipedrive": {
     answer: `**Pipedrive Usage Manual — Key Rules**
 
-**📌 Client Notes Policy:**
+** Client Notes Policy:**
 Every deal MUST have a pinned note with client profile and status.
 
-**🏢 One Deal per Company:**
+** One Deal per Company:**
 • Single service → "Company Name"
 • PAY service → "Company – PAY"
 • No duplicates allowed
 
-**👤 Assigned Ownership Only:**
+** Assigned Ownership Only:**
 • Sales reps do NOT self-assign deals
 • CRM/Management assigns all deals
 
-**🚫 Pipedrive = Single Source of Truth:**
+** Pipedrive = Single Source of Truth:**
 • No Excel, Teams, personal notes
 • If it's not in Pipedrive, it doesn't exist
 • Clients tracked outside = no commission
 
-**📅 Touchpoint Policy: Every 14 Days**
+** Touchpoint Policy: Every 14 Days**
 • Must contact client minimum every 14 days
 • Log ALL activities (calls, emails, meetings)
 • Internal notes only do NOT count
 
-**⚠️ Inactivity Rules:**
+** Inactivity Rules:**
 • 7 days: Yellow flag (self-review)
 • 14 days: Automatic review triggered
 • 14+ days: Subject to reassignment
@@ -948,12 +948,12 @@ Every deal MUST have a pinned note with client profile and status.
 5. **Pipedrive only** — no shadow tracking
 
 **What counts as a touchpoint:**
-✅ Phone calls (logged)
-✅ Email exchanges
-✅ Video/in-person meetings
-✅ WhatsApp/Telegram messages
-❌ Internal notes only
-❌ "I thought about them"
+ Phone calls (logged)
+ Email exchanges
+ Video/in-person meetings
+ WhatsApp/Telegram messages
+ Internal notes only
+ "I thought about them"
 
 **Consequences:**
 • Clients outside Pipedrive = no commission
@@ -982,11 +982,11 @@ Every deal MUST have a pinned note with client profile and status.
 • Set next activity date
 
 **Daily Checklist:**
-☐ Check deals for 14-day touchpoints
-☐ Update pinned notes on contacted deals
-☐ Log all activities from today
-☐ Set next activity dates
-☐ Verify mandatory fields complete`,
+ Check deals for 14-day touchpoints
+ Update pinned notes on contacted deals
+ Log all activities from today
+ Set next activity dates
+ Verify mandatory fields complete`,
     source: "pipedrive-usage-manual.md"
   },
 
@@ -1050,9 +1050,9 @@ NOTES:
 \`\`\`
 
 **Common Mistakes:**
-❌ Volume as "250000" → Use "250K"
-❌ Fee as "0.25%" → Enter 0.25 (number only)
-❌ Money Flow as "Standard" → Document actual flow`,
+ Volume as "250000" → Use "250K"
+ Fee as "0.25%" → Enter 0.25 (number only)
+ Money Flow as "Standard" → Document actual flow`,
     source: "pipedrive-mandatory-fields.md"
   },
 
@@ -1197,9 +1197,9 @@ Negotiation → Integration → Post Integration → Pending Momentum → Moment
 7. Transfer ownership to @XBOADMIN
 
 **Naming Format:**
-✅ "XBO X Acme Corp"
-❌ "Acme Corp Group"
-❌ "XBO - TechStart"
+ "XBO X Acme Corp"
+ "Acme Corp Group"
+ "XBO - TechStart"
 
 **@XBOADMIN Permissions (all ON):**
 • Change group info
@@ -1245,16 +1245,16 @@ Send welcome message with:
   "telegram procedure": {
     answer: `**Telegram Group Procedure — Checklist**
 
-☐ Group created with correct members
-☐ Name follows format: XBO X [Company Name]
-☐ Official XBO group image set
-☐ @XBOADMIN added to group
-☐ @XBOADMIN has full admin rights
-☐ Ownership transferred to @XBOADMIN
-☐ Welcome message sent
+ Group created with correct members
+ Name follows format: XBO X [Company Name]
+ Official XBO group image set
+ @XBOADMIN added to group
+ @XBOADMIN has full admin rights
+ Ownership transferred to @XBOADMIN
+ Welcome message sent
 
 **Welcome Message Template:**
-"👋 Welcome to your XBO support group!
+" Welcome to your XBO support group!
 
 This is your dedicated channel for:
 • Quick questions and support
@@ -1328,11 +1328,11 @@ Response time: Business hours (Mon-Fri, 9:00-18:00 CET)"`,
 **Permission:** "Can view all details"
 
 This allows viewing:
-✅ Meeting titles
-✅ Times and durations
-✅ Locations
-✅ Attendees
-✅ Meeting descriptions
+ Meeting titles
+ Times and durations
+ Locations
+ Attendees
+ Meeting descriptions
 
 **Why:**
 • Maria can schedule without back-and-forth
@@ -1358,11 +1358,11 @@ This allows viewing:
 • Pipedrive note: Same day as meeting
 
 **Post-Meeting Requirements:**
-☐ Send follow-up email (within 24h)
-☐ Share feedback with team
-☐ Add Pipedrive note (same day)
-☐ Update pinned note
-☐ Set next activity date
+ Send follow-up email (within 24h)
+ Share feedback with team
+ Add Pipedrive note (same day)
+ Update pinned note
+ Set next activity date
 
 **Calendar Requirement:**
 All sales must share calendars with Maria for scheduling.`,
@@ -1463,12 +1463,12 @@ All sales must share calendars with Maria for scheduling.`,
 • Data verification
 
 **Required Documents:**
-☐ Corporate registration
-☐ Ownership structure / UBO declaration
-☐ Director identification
-☐ Proof of address
-☐ Source of funds
-☐ Intended use case
+ Corporate registration
+ Ownership structure / UBO declaration
+ Director identification
+ Proof of address
+ Source of funds
+ Intended use case
 
 **Parallel Processing:**
 Onboarding and Integration can run simultaneously after initial documents received.`,
@@ -1626,7 +1626,7 @@ Contact XBO to discuss alternatives.
 
 New **Mass Payment** feature for bulk cryptocurrency withdrawals via CSV upload.
 
-**⚠️ Desktop Only** — Currently available on desktop web only.
+** Desktop Only** — Currently available on desktop web only.
 
 **How It Works:**
 1. Upload CSV file
@@ -1709,7 +1709,7 @@ Mass crypto withdrawals via CSV upload.
   "release notes": {
     answer: `**Latest Release: Sprint 157.2 (July 2025)**
 
-**🚀 Mass Crypto Withdrawals**
+** Mass Crypto Withdrawals**
 New Mass Payment feature for bulk cryptocurrency withdrawals via CSV upload.
 
 **Features:**

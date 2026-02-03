@@ -583,14 +583,14 @@
                 <a href="procedures.html" class="nav-link">Internal</a>
             </nav>
 
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"></button>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-badge">
-            <span>🏦</span>
+            <span></span>
             <span>Powered by Equals Money</span>
         </div>
         <h1 class="hero-title">eMoney FAQ</h1>
@@ -598,7 +598,7 @@
         
         <div class="search-container">
             <div class="search-box">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon"></span>
                 <input type="text" id="faqSearch" placeholder="Search FAQs... (e.g., SEPA, cards, roles)" autocomplete="off">
             </div>
             <div class="search-stats" id="searchStats">Showing all <span id="totalCount">0</span> FAQs across 8 categories</div>
@@ -614,35 +614,35 @@
                 <span class="category-count" id="countAll">0</span>
             </button>
             <button class="category-tab" data-category="account">
-                🔐 Account & Setup
+                 Account & Setup
                 <span class="category-count" id="countAccount">0</span>
             </button>
             <button class="category-tab" data-category="currencies">
-                💱 Currencies & Payments
+                 Currencies & Payments
                 <span class="category-count" id="countCurrencies">0</span>
             </button>
             <button class="category-tab" data-category="cards">
-                💳 Cards
+                 Cards
                 <span class="category-count" id="countCards">0</span>
             </button>
             <button class="category-tab" data-category="balances">
-                💰 Balances
+                 Balances
                 <span class="category-count" id="countBalances">0</span>
             </button>
             <button class="category-tab" data-category="people">
-                👥 People & Roles
+                 People & Roles
                 <span class="category-count" id="countPeople">0</span>
             </button>
             <button class="category-tab" data-category="security">
-                🔒 Security
+                 Security
                 <span class="category-count" id="countSecurity">0</span>
             </button>
             <button class="category-tab" data-category="integrations">
-                🔗 Integrations
+                 Integrations
                 <span class="category-count" id="countIntegrations">0</span>
             </button>
             <button class="category-tab" data-category="approvals">
-                ✅ Approvals
+                 Approvals
                 <span class="category-count" id="countApprovals">0</span>
             </button>
         </div>
@@ -654,7 +654,7 @@
 
         <!-- No Results -->
         <div class="no-results hidden" id="noResults">
-            <div class="no-results-icon">🔍</div>
+            <div class="no-results-icon"></div>
             <h3>No FAQs found</h3>
             <p>Try adjusting your search terms or browse by category</p>
         </div>
@@ -673,7 +673,7 @@
         // FAQ Data Structure
         const faqData = {
             account: {
-                icon: '🔐',
+                icon: '',
                 title: 'Account & Setup',
                 items: [
                     {
@@ -688,7 +688,7 @@
                             <li><strong>Activation:</strong> Set up MFA and start using your account</li>
                         </ol>
                         <div class="info-box">
-                            <strong>💡 Tip:</strong> Having all documentation ready can speed up the process significantly.
+                            <strong> Tip:</strong> Having all documentation ready can speed up the process significantly.
                         </div>`
                     },
                     {
@@ -709,7 +709,7 @@
                             <li>Proof of address (dated within 3 months)</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Note:</strong> Additional documents may be requested based on your business activities and risk assessment.
+                            <strong> Note:</strong> Additional documents may be requested based on your business activities and risk assessment.
                         </div>`
                     },
                     {
@@ -728,7 +728,7 @@
                             <li>Responsive to any additional information requests</li>
                         </ul>
                         <div class="info-box success">
-                            <strong>✅ Pro tip:</strong> Applications with XBO referral typically receive priority processing.
+                            <strong> Pro tip:</strong> Applications with XBO referral typically receive priority processing.
                         </div>`
                     },
                     {
@@ -742,7 +742,7 @@
                             <li><strong>Confirmation:</strong> You'll receive confirmation once the account is closed</li>
                         </ol>
                         <div class="info-box warning">
-                            <strong>⚠️ Important:</strong> Account closure is permanent. Ensure you've downloaded all statements and transaction history before closing.
+                            <strong> Important:</strong> Account closure is permanent. Ensure you've downloaded all statements and transaction history before closing.
                         </div>`
                     },
                     {
@@ -779,7 +779,7 @@
                 ]
             },
             currencies: {
-                icon: '💱',
+                icon: '',
                 title: 'Currencies & Payments',
                 items: [
                     {
@@ -790,7 +790,7 @@
                         <p><strong>European:</strong> DKK, NOK, SEK, PLN, CZK, HUF, RON, BGN, HRK</p>
                         <p><strong>Others:</strong> AED, ZAR, THB, MXN, ILS, TRY, BRL, and more</p>
                         <div class="info-box">
-                            <strong>💡 Note:</strong> Availability may vary based on your account type and jurisdiction.
+                            <strong> Note:</strong> Availability may vary based on your account type and jurisdiction.
                         </div>`
                     },
                     {
@@ -832,7 +832,7 @@
                             <li>Fee: Small premium over standard SEPA</li>
                         </ul>
                         <div class="info-box success">
-                            <strong>✅ Best for:</strong> Regular EUR payments to European suppliers, payroll, and B2B transactions.
+                            <strong> Best for:</strong> Regular EUR payments to European suppliers, payroll, and B2B transactions.
                         </div>`
                     },
                     {
@@ -864,7 +864,7 @@
                             <li><strong>Cost:</strong> Typically included or minimal fee</li>
                         </ul>
                         <div class="info-box">
-                            <strong>💡 Note:</strong> Not all banks support the maximum limit. Check recipient bank limits.
+                            <strong> Note:</strong> Not all banks support the maximum limit. Check recipient bank limits.
                         </div>`
                     },
                     {
@@ -885,7 +885,7 @@
                             <li>No upside participation (rate is fixed)</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Margin requirement:</strong> A deposit (typically 5-10%) may be required.
+                            <strong> Margin requirement:</strong> A deposit (typically 5-10%) may be required.
                         </div>`
                     },
                     {
@@ -952,13 +952,13 @@
                             <li>SWIFT details for international transfers</li>
                         </ul>
                         <div class="info-box">
-                            <strong>💡 Tip:</strong> Share your account details from the platform to ensure accuracy.
+                            <strong> Tip:</strong> Share your account details from the platform to ensure accuracy.
                         </div>`
                     }
                 ]
             },
             cards: {
-                icon: '💳',
+                icon: '',
                 title: 'Cards',
                 items: [
                     {
@@ -998,7 +998,7 @@
                             <li>Contactless enabled</li>
                         </ul>
                         <div class="info-box success">
-                            <strong>✅ Recommendation:</strong> Start with virtual cards for immediate use, order physical cards for frequent travelers.
+                            <strong> Recommendation:</strong> Start with virtual cards for immediate use, order physical cards for frequent travelers.
                         </div>`
                     },
                     {
@@ -1020,7 +1020,7 @@
                             <li><strong>Physical Cards (International):</strong> 7-14 business days</li>
                         </ul>
                         <div class="info-box">
-                            <strong>💡 Express Delivery:</strong> Available for urgent requests at additional cost.
+                            <strong> Express Delivery:</strong> Available for urgent requests at additional cost.
                         </div>`
                     },
                     {
@@ -1076,7 +1076,7 @@
                             <li>Start using immediately</li>
                         </ol>
                         <div class="info-box success">
-                            <strong>✅ Pro tip:</strong> Virtual cards can be added to digital wallets instantly - no need to wait for physical card delivery!
+                            <strong> Pro tip:</strong> Virtual cards can be added to digital wallets instantly - no need to wait for physical card delivery!
                         </div>`
                     },
                     {
@@ -1097,7 +1097,7 @@
                             <li>Enter new PIN (twice to confirm)</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Security:</strong> Never share your PIN with anyone, including support staff.
+                            <strong> Security:</strong> Never share your PIN with anyone, including support staff.
                         </div>`
                     },
                     {
@@ -1116,7 +1116,7 @@
                             <li>FX conversion if withdrawing foreign currency</li>
                         </ul>
                         <div class="info-box">
-                            <strong>💡 Tip:</strong> When prompted, always choose to be charged in the local currency to get the best exchange rate.
+                            <strong> Tip:</strong> When prompted, always choose to be charged in the local currency to get the best exchange rate.
                         </div>`
                     },
                     {
@@ -1156,7 +1156,7 @@
                 ]
             },
             balances: {
-                icon: '💰',
+                icon: '',
                 title: 'Balances',
                 items: [
                     {
@@ -1284,7 +1284,7 @@
                 ]
             },
             people: {
-                icon: '👥',
+                icon: '',
                 title: 'People & Roles',
                 items: [
                     {
@@ -1353,7 +1353,7 @@
                             <li>Once verified, they gain access</li>
                         </ul>
                         <div class="info-box">
-                            <strong>💡 Note:</strong> Users must be from an approved email domain if domain restriction is enabled.
+                            <strong> Note:</strong> Users must be from an approved email domain if domain restriction is enabled.
                         </div>`
                     },
                     {
@@ -1374,7 +1374,7 @@
                             <li>Any pending approvals are cancelled</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Important:</strong> Consider card balances before removing users.
+                            <strong> Important:</strong> Consider card balances before removing users.
                         </div>`
                     },
                     {
@@ -1420,13 +1420,13 @@
                             <li>New owner accepts the transfer</li>
                         </ol>
                         <div class="info-box warning">
-                            <strong>⚠️ Important:</strong> The new owner must already be an Owner on the account and complete identity verification.
+                            <strong> Important:</strong> The new owner must already be an Owner on the account and complete identity verification.
                         </div>`
                     }
                 ]
             },
             security: {
-                icon: '🔒',
+                icon: '',
                 title: 'Security',
                 items: [
                     {
@@ -1444,7 +1444,7 @@
                             <li>Save backup codes securely</li>
                         </ol>
                         <div class="info-box success">
-                            <strong>✅ Recommended:</strong> Use an authenticator app (Google Authenticator, Authy) for better security than SMS.
+                            <strong> Recommended:</strong> Use an authenticator app (Google Authenticator, Authy) for better security than SMS.
                         </div>`
                     },
                     {
@@ -1482,7 +1482,7 @@
                             <li>Phone: 24/7 fraud hotline (see app for number)</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Time is critical:</strong> Report fraud immediately for the best chance of recovery.
+                            <strong> Time is critical:</strong> Report fraud immediately for the best chance of recovery.
                         </div>`
                     },
                     {
@@ -1495,7 +1495,7 @@
                             <li>Protected in case of insolvency</li>
                         </ul>
                         <div class="info-box warning">
-                            <strong>⚠️ Not FSCS Protected:</strong> eMoney accounts are NOT covered by the Financial Services Compensation Scheme (FSCS). However, safeguarding provides strong protection.
+                            <strong> Not FSCS Protected:</strong> eMoney accounts are NOT covered by the Financial Services Compensation Scheme (FSCS). However, safeguarding provides strong protection.
                         </div>
                         <p><strong>Safeguarding explained:</strong></p>
                         <ul>
@@ -1545,7 +1545,7 @@
                 ]
             },
             integrations: {
-                icon: '🔗',
+                icon: '',
                 title: 'Integrations',
                 items: [
                     {
@@ -1568,7 +1568,7 @@
                             <li>Map accounts and categories</li>
                         </ol>
                         <div class="info-box success">
-                            <strong>✅ Pro tip:</strong> Enable auto-reconciliation to save hours on bookkeeping.
+                            <strong> Pro tip:</strong> Enable auto-reconciliation to save hours on bookkeeping.
                         </div>`
                     },
                     {
@@ -1663,7 +1663,7 @@
                 ]
             },
             approvals: {
-                icon: '✅',
+                icon: '',
                 title: 'Funds Requests & Approvals',
                 items: [
                     {
@@ -1755,7 +1755,7 @@
                             <li>Confirm with authentication</li>
                         </ol>
                         <div class="info-box">
-                            <strong>💡 Tip:</strong> Use filters to view specific payment types or amounts before bulk actions.
+                            <strong> Tip:</strong> Use filters to view specific payment types or amounts before bulk actions.
                         </div>`
                     },
                     {
@@ -1894,7 +1894,7 @@
                         <span class="faq-question-text">${question}</span>
                         <div class="faq-actions">
                             <button class="faq-copy-btn" onclick="copyFAQLink(event, '${item.id}')" title="Copy link">
-                                🔗
+                                
                             </button>
                             <div class="faq-toggle">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1969,7 +1969,7 @@
             const nav = document.getElementById('nav');
             mobileMenuBtn.addEventListener('click', () => {
                 nav.classList.toggle('open');
-                mobileMenuBtn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+                mobileMenuBtn.textContent = nav.classList.contains('open') ? '' : '';
             });
 
             // Back to top
@@ -2027,11 +2027,11 @@
             navigator.clipboard.writeText(url).then(() => {
                 const btn = event.currentTarget;
                 btn.classList.add('copied');
-                btn.textContent = '✓';
+                btn.textContent = '';
                 
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    btn.textContent = '🔗';
+                    btn.textContent = '';
                 }, 2000);
             });
         }

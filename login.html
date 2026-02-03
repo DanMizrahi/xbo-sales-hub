@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #12121f;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --border-hover: #475569;
+            --text-primary: #fff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dimmed: #64748b;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-dimmed);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent-primary);
+        }
+
+        .remember-me span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .forgot-link {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-google {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            margin-top: 12px;
+        }
+
+        .btn-google:hover {
+            background: var(--border-color);
+        }
+
+        .btn-google svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider-text {
+            font-size: 0.85rem;
+            color: var(--text-dimmed);
+        }
+
+        .switch-mode {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .switch-mode a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .switch-mode a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: var(--bg-tertiary);
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-primary);
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <div class="logo-icon">XBO</div>
+                <span class="logo-text">Sales Hub</span>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Sign In</button>
+                <button class="tab-btn" data-tab="signup">Sign Up</button>
+            </div>
+
+            <div id="alert" class="alert"></div>
+
+            <!-- Login Form -->
+            <div id="login-tab" class="tab-content active">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="login-email" placeholder="you@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-actions">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link" id="forgot-btn">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="login-btn">
+                        <span>Sign In</span>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <span class="divider-text">or continue with</span>
+                    <div class="divider-line"></div>
+                </div>
+
+                <button class="btn btn-google" id="google-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <button class="btn btn-google" id="magic-link-btn" style="margin-top: 8px;">
+                    ✉️ Send Magic Link
+                </button>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-tab" class="tab-content">
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="signup-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="signup-email" placeholder="you@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" id="signup-password" placeholder="••••••••" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-input" id="signup-confirm" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="signup-btn">
+                        <span>Create Account</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="switch-mode" id="switch-text">
+                New to XBO Sales Hub? <a href="#" id="switch-link">Create an account</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="api/auth.js"></script>
+    <script>
+        // Tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const switchText = document.getElementById('switch-text');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+                
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(`${tab}-tab`).classList.add('active');
+                
+                if (tab === 'login') {
+                    switchText.innerHTML = 'New to XBO Sales Hub? <a href="#" id="switch-link">Create an account</a>';
+                } else {
+                    switchText.innerHTML = 'Already have an account? <a href="#" id="switch-link">Sign in</a>';
+                }
+            });
+        });
+
+        // Switch link
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'switch-link') {
+                e.preventDefault();
+                const currentTab = document.querySelector('.tab-btn.active').dataset.tab;
+                const newTab = currentTab === 'login' ? 'signup' : 'login';
+                document.querySelector(`.tab-btn[data-tab="${newTab}"]`).click();
+            }
+        });
+
+        // Alert helper
+        function showAlert(message, type = 'error') {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert alert-${type}`;
+            alert.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function hideAlert() {
+            document.getElementById('alert').style.display = 'none';
+        }
+
+        function setLoading(btn, loading) {
+            if (loading) {
+                btn.disabled = true;
+                btn.innerHTML = '<div class="spinner"></div>';
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = `<span>${btn.dataset.text || 'Submit'}</span>`;
+            }
+        }
+
+        // Get redirect URL
+        function getRedirectUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('redirect') || 'index.html';
+        }
+
+        // Login form
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideAlert();
+            
+            const btn = document.getElementById('login-btn');
+            btn.dataset.text = 'Sign In';
+            setLoading(btn, true);
+
+            try {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                await xboAuth.signIn(email, password);
+                
+                showAlert('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = getRedirectUrl();
+                }, 1000);
+            } catch (error) {
+                showAlert(error.message);
+            } finally {
+                setLoading(btn, false);
+            }
+        });
+
+        // Signup form
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideAlert();
+
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+
+            if (password !== confirm) {
+                showAlert('Passwords do not match');
+                return;
+            }
+
+            const btn = document.getElementById('signup-btn');
+            btn.dataset.text = 'Create Account';
+            setLoading(btn, true);
+
+            try {
+                const email = document.getElementById('signup-email').value;
+                const name = document.getElementById('signup-name').value;
+                
+                await xboAuth.signUp(email, password, { full_name: name });
+                
+                showAlert('Account created! Check your email to verify your account.', 'success');
+                setTimeout(() => {
+                    document.querySelector('.tab-btn[data-tab="login"]').click();
+                }, 3000);
+            } catch (error) {
+                showAlert(error.message);
+            } finally {
+                setLoading(btn, false);
+            }
+        });
+
+        // Google sign in
+        document.getElementById('google-btn').addEventListener('click', async () => {
+            try {
+                await xboAuth.signInWithGoogle();
+            } catch (error) {
+                showAlert(error.message);
+            }
+        });
+
+        // Magic link
+        document.getElementById('magic-link-btn').addEventListener('click', async () => {
+            hideAlert();
+            const email = document.getElementById('login-email').value;
+            
+            if (!email) {
+                showAlert('Please enter your email first');
+                return;
+            }
+
+            const btn = document.getElementById('magic-link-btn');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                await xboAuth.signInWithMagicLink(email);
+                showAlert('Magic link sent! Check your email.', 'success');
+            } catch (error) {
+                showAlert(error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '✉️ Send Magic Link';
+            }
+        });
+
+        // Forgot password
+        document.getElementById('forgot-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            hideAlert();
+            
+            const email = document.getElementById('login-email').value;
+            
+            if (!email) {
+                showAlert('Please enter your email first');
+                return;
+            }
+
+            try {
+                await xboAuth.resetPassword(email);
+                showAlert('Password reset email sent! Check your inbox.', 'success');
+            } catch (error) {
+                showAlert(error.message);
+            }
+        });
+
+        // Check if already logged in
+        (async () => {
+            await xboAuth.init();
+            const isAuth = await xboAuth.isAuthenticated();
+            if (isAuth) {
+                window.location.href = getRedirectUrl();
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitor Analysis | XBO Sales Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: #12121f;
+            border-bottom: 1px solid #2a2a4a;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .internal-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 30px;
+            background: radial-gradient(ellipse at top, rgba(239, 68, 68, 0.12) 0%, transparent 50%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .warning-banner {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin: 24px auto;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fca5a5;
+            font-size: 0.9rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid #334155;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .comparison-table th:first-child {
+            min-width: 180px;
+        }
+
+        .comparison-table th.xbo {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-left: 3px solid #6366f1;
+        }
+
+        .comparison-table tbody tr {
+            background: #1e293b;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #0f172a;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .comparison-table td.xbo {
+            background: rgba(99, 102, 241, 0.08);
+            border-left: 3px solid #6366f1;
+        }
+
+        .comparison-table .feature-name {
+            font-weight: 500;
+            color: #f1f5f9;
+        }
+
+        .yes {
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .no {
+            color: #f87171;
+        }
+
+        .partial {
+            color: #fbbf24;
+        }
+
+        .company-logo {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .company-logo.xbo {
+            color: #a5b4fc;
+        }
+
+        /* Competitor Cards */
+        .competitors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .competitor-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #334155;
+            transition: all 0.3s;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-4px);
+            border-color: #475569;
+        }
+
+        .competitor-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .competitor-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .competitor-logo.fireblocks { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        .competitor-logo.bcb { background: linear-gradient(135deg, #065f46 0%, #10b981 100%); }
+        .competitor-logo.mercuryo { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .competitor-logo.bitpay { background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%); }
+
+        .competitor-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .competitor-info .tagline {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .competitor-section {
+            margin-bottom: 20px;
+        }
+
+        .competitor-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .strengths-list,
+        .weaknesses-list {
+            list-style: none;
+        }
+
+        .strengths-list li,
+        .weaknesses-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .strengths-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #34d399;
+            font-weight: 700;
+        }
+
+        .weaknesses-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #f87171;
+            font-weight: 700;
+        }
+
+        .win-strategy {
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 3px solid #6366f1;
+        }
+
+        .win-strategy-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .win-strategy p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Quick Reference */
+        .quick-ref-section {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid #334155;
+            margin-bottom: 48px;
+        }
+
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .quick-ref-item {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .quick-ref-item h4 {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .quick-ref-item .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #a5b4fc;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.8rem;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .competitors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo-img">X</div>
+                <span class="logo-text">XBO Sales Hub</span>
+            </a>
+            <div class="header-right">
+                <span class="internal-badge">🔒 Internal Only</span>
+                <a href="index.html" class="back-link">← Back to Hub</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>⚔️ Competitor Analysis</h1>
+        <p>Know your competition. Understand their strengths, weaknesses, and how to win against them.</p>
+        <div class="warning-banner">
+            <span>⚠️</span>
+            <span>This information is strictly confidential. Do not share with clients or external parties.</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Quick Reference -->
+        <section class="quick-ref-section">
+            <h2 class="section-title">🎯 XBO Key Differentiators</h2>
+            <div class="quick-ref-grid">
+                <div class="quick-ref-item">
+                    <h4>Licensing</h4>
+                    <div class="value">MiCA Licensed</div>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>CaaS Launch Time</h4>
+                    <div class="value">4-6 Weeks</div>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Unique Feature</h4>
+                    <div class="value">Credit Line</div>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Support Model</h4>
+                    <div class="value">Dedicated AM</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison-section">
+            <h2 class="section-title">📊 Feature Comparison</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="xbo"><span class="company-logo xbo">XBO</span></th>
+                            <th><span class="company-logo">Fireblocks</span></th>
+                            <th><span class="company-logo">BCB Group</span></th>
+                            <th><span class="company-logo">Mercuryo</span></th>
+                            <th><span class="company-logo">BitPay</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">MiCA Licensed</td>
+                            <td class="xbo"><span class="yes">✓ Yes</span></td>
+                            <td><span class="partial">In progress</span></td>
+                            <td><span class="partial">UK FCA</span></td>
+                            <td><span class="partial">Lithuania</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Spot Exchange</td>
+                            <td class="xbo"><span class="yes">✓ Yes</span></td>
+                            <td><span class="no">✗ No (custody only)</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="partial">Limited</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">OTC Desk</td>
+                            <td class="xbo"><span class="yes">✓ Yes ($500K+)</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="partial">Via partners</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Credit Line</td>
+                            <td class="xbo"><span class="yes">✓ Unique!</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Crypto Payments (PayX)</td>
+                            <td class="xbo"><span class="yes">✓ Full suite</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="partial">Basic</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">White-label (CaaS)</td>
+                            <td class="xbo"><span class="yes">✓ 4-6 weeks</span></td>
+                            <td><span class="yes">✓ 12+ months</span></td>
+                            <td><span class="partial">Limited</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Corporate IBAN</td>
+                            <td class="xbo"><span class="yes">✓ 30+ currencies</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="partial">Limited</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Crypto Cards</td>
+                            <td class="xbo"><span class="yes">✓ Apple/Google Pay</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="partial">Via partner</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Earn/Staking</td>
+                            <td class="xbo"><span class="yes">✓ Up to 15% APR</span></td>
+                            <td><span class="partial">Staking only</span></td>
+                            <td><span class="no">✗ No</span></td>
+                            <td><span class="yes">✓ Yes</span></td>
+                            <td><span class="no">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Pricing Model</td>
+                            <td class="xbo"><span class="yes">Simple, all-in</span></td>
+                            <td><span class="no">Complex, per-tx</span></td>
+                            <td><span class="partial">Negotiated</span></td>
+                            <td><span class="yes">Transparent</span></td>
+                            <td><span class="yes">Simple</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Support Model</td>
+                            <td class="xbo"><span class="yes">Dedicated AM</span></td>
+                            <td><span class="partial">Tiered</span></td>
+                            <td><span class="yes">Dedicated</span></td>
+                            <td><span class="partial">Shared</span></td>
+                            <td><span class="no">Self-service</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Competitor Deep Dives -->
+        <section class="comparison-section">
+            <h2 class="section-title">🔍 Competitor Deep Dives</h2>
+            <div class="competitors-grid">
+
+                <!-- Fireblocks -->
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <div class="competitor-logo fireblocks">F</div>
+                        <div class="competitor-info">
+                            <h3>Fireblocks</h3>
+                            <span class="tagline">Enterprise custody & infrastructure</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Strengths</div>
+                        <ul class="strengths-list">
+                            <li>Enterprise-grade custody (MPC technology)</li>
+                            <li>Strong brand recognition</li>
+                            <li>Extensive DeFi integrations</li>
+                            <li>Large customer base (1800+ institutions)</li>
+                        </ul>
+                    </div>
+
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Weaknesses</div>
+                        <ul class="weaknesses-list">
+                            <li>NO exchange — custody only</li>
+                            <li>Complex, expensive pricing</li>
+                            <li>Long implementation (6-12 months)</li>
+                            <li>No payment processing</li>
+                            <li>No credit line offering</li>
+                        </ul>
+                    </div>
+
+                    <div class="win-strategy">
+                        <div class="win-strategy-title">🎯 How to Win</div>
+                        <p>Position XBO as the <strong>all-in-one alternative</strong>. Fireblocks requires multiple vendors (exchange, payments, banking). We provide everything. Emphasize <strong>faster time-to-market</strong> (4-6 weeks vs 6-12 months) and <strong>simpler pricing</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- BCB Group -->
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <div class="competitor-logo bcb">BCB</div>
+                        <div class="competitor-info">
+                            <h3>BCB Group</h3>
+                            <span class="tagline">Crypto-focused banking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Strengths</div>
+                        <ul class="strengths-list">
+                            <li>UK FCA authorized</li>
+                            <li>Strong fiat banking rails (BLINC)</li>
+                            <li>Good OTC desk</li>
+                            <li>Institutional focus</li>
+                        </ul>
+                    </div>
+
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Weaknesses</div>
+                        <ul class="weaknesses-list">
+                            <li>UK-centric (Brexit complications for EU)</li>
+                            <li>No MiCA license yet</li>
+                            <li>Limited white-label options</li>
+                            <li>No credit line</li>
+                            <li>No earn/staking products</li>
+                        </ul>
+                    </div>
+
+                    <div class="win-strategy">
+                        <div class="win-strategy-title">🎯 How to Win</div>
+                        <p>For EU clients: <strong>MiCA compliance</strong> is the key differentiator. BCB's UK focus creates friction post-Brexit. Also highlight our <strong>Credit Line</strong> for CFD brokers and <strong>CaaS white-label</strong> for EMIs wanting to launch fast.</p>
+                    </div>
+                </div>
+
+                <!-- Mercuryo -->
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <div class="competitor-logo mercuryo">M</div>
+                        <div class="competitor-info">
+                            <h3>Mercuryo</h3>
+                            <span class="tagline">Crypto payment gateway</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Strengths</div>
+                        <ul class="strengths-list">
+                            <li>Easy widget integration</li>
+                            <li>Good fiat on-ramp</li>
+                            <li>Cards available</li>
+                            <li>Competitive for small volumes</li>
+                        </ul>
+                    </div>
+
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Weaknesses</div>
+                        <ul class="weaknesses-list">
+                            <li>No OTC desk</li>
+                            <li>No institutional trading</li>
+                            <li>Limited liquidity for large volumes</li>
+                            <li>No credit line</li>
+                            <li>Basic white-label only</li>
+                        </ul>
+                    </div>
+
+                    <div class="win-strategy">
+                        <div class="win-strategy-title">🎯 How to Win</div>
+                        <p>Mercuryo is <strong>retail-focused</strong>. For B2B clients needing institutional features (OTC, Credit Line, deep liquidity), XBO is the clear choice. Emphasize our <strong>$5M per transaction capability</strong> and dedicated dealing desk.</p>
+                    </div>
+                </div>
+
+                <!-- BitPay -->
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <div class="competitor-logo bitpay">B</div>
+                        <div class="competitor-info">
+                            <h3>BitPay</h3>
+                            <span class="tagline">Legacy crypto payments</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Strengths</div>
+                        <ul class="strengths-list">
+                            <li>Long track record (2011)</li>
+                            <li>Good brand recognition</li>
+                            <li>Simple merchant integration</li>
+                            <li>BitPay card popular with consumers</li>
+                        </ul>
+                    </div>
+
+                    <div class="competitor-section">
+                        <div class="competitor-section-title">Their Weaknesses</div>
+                        <ul class="weaknesses-list">
+                            <li>US-centric, limited EU support</li>
+                            <li>No MiCA, no EU license</li>
+                            <li>No OTC or institutional services</li>
+                            <li>No banking (IBAN)</li>
+                            <li>Aging technology, slow innovation</li>
+                            <li>No white-label options</li>
+                        </ul>
+                    </div>
+
+                    <div class="win-strategy">
+                        <div class="win-strategy-title">🎯 How to Win</div>
+                        <p>BitPay is <strong>legacy technology</strong> with US focus. For any EU client or anyone needing institutional features, XBO wins easily. Highlight <strong>MiCA compliance</strong>, <strong>full product suite</strong>, and <strong>modern API</strong>. They're not really competing in the same segment.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Battlecard Quick Reference -->
+        <section class="quick-ref-section">
+            <h2 class="section-title">⚡ Quick Battlecard</h2>
+            <div style="background: #0f172a; border-radius: 12px; padding: 24px; margin-top: 20px;">
+                <p style="color: #e2e8f0; line-height: 1.8; font-size: 0.95rem;">
+                    <strong style="color: #a5b4fc;">vs Fireblocks:</strong> "They're custody only. We're a complete ecosystem — exchange, payments, banking, cards, AND custody. Plus we launch in 4-6 weeks, not 6-12 months."<br><br>
+                    <strong style="color: #a5b4fc;">vs BCB Group:</strong> "For EU, we're MiCA licensed — they're UK FCA which creates friction post-Brexit. Plus we offer Credit Line and CaaS white-label."<br><br>
+                    <strong style="color: #a5b4fc;">vs Mercuryo:</strong> "Great for small retail volumes. But for institutional needs — OTC, $5M+ trades, Credit Line — we're in a different league."<br><br>
+                    <strong style="color: #a5b4fc;">vs BitPay:</strong> "Legacy US player. No EU license, no institutional services, no banking. We're the modern, EU-regulated alternative."
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        XBO Sales Hub · 🔒 Internal Use Only · Last updated: February 2026
+    </footer>
+</body>
+</html>

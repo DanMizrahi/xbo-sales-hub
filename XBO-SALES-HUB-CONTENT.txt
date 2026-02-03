@@ -1,0 +1,528 @@
+================================================================================
+                    XBO SALES HUB - COMPLETE CONTENT FILE
+================================================================================
+Edit this file and send it back. I'll update the site.
+Last updated: February 1, 2026
+
+================================================================================
+                              TABLE OF CONTENTS
+================================================================================
+1. HOME PAGE
+2. PRODUCTS & PRICING
+3. CASE STUDIES
+4. COMPLIANCE (Prohibited Countries)
+5. AI CHAT RESPONSES
+
+================================================================================
+                              1. HOME PAGE
+================================================================================
+
+--- QUICK LINKS (Top Bar) ---
+Registration Link: https://xbo.com/register?ref=sales
+Pipedrive: https://xbo.pipedrive.com
+Book Meeting: https://cal.com/xbo
+
+--- ON A CALL - CLIENT TYPES ---
+(These buttons appear when you're on a call - quick access to relevant material)
+
+🎰 iGaming / Casino
+   Subtitle: CryptoPayX + Case Study
+   Links to: case-studies.html#igaming
+
+📈 CFD / Forex Broker
+   Subtitle: Liquidity + Credit Line
+   Links to: case-studies.html#cfd
+
+🏦 Bank / EMI / Fintech
+   Subtitle: CaaS White-Label
+   Links to: case-studies.html#emi
+
+💳 Needs Banking
+   Subtitle: eMoney + IBAN
+   Links to: products.html#emoney
+
+🎨 Creator / Marketplace
+   Subtitle: Mass Payouts
+   Links to: case-studies.html#creator
+
+💰 High Volume Trader
+   Subtitle: OTC Desk
+   Links to: products.html#otc
+
+--- WHAT'S NEW (Updates Section) ---
+COMING: 🏦 eMoney Full Launch - February 6, 2026
+NEW: Sprint 198 - Google Pay, Virtual IBAN, SWIFT - February 2, 2026
+FEATURE: Sprint 197 - Margin/Risk Switcher, In-App Messaging - January 15, 2026
+
+================================================================================
+                           2. PRODUCTS & PRICING
+================================================================================
+
+----------------------
+💱 SPOT EXCHANGE
+----------------------
+Tagline: Fiat ↔ Crypto conversion
+Description: The foundation of XBO's services. Convert between major fiat currencies and crypto instantly. Competitive rates, deep liquidity, and seamless execution for all your trading needs.
+
+Supported Currencies: EUR, USD, GBP, AUD, CHF ↔ USDT, USDC, BTC, ETH, +more
+
+Features:
+• Instant Execution - Real-time conversion at market rates
+• Competitive Rates - Tight spreads across all pairs
+• API & Platform - Trade via web, mobile, or API
+• Full Reporting - Complete transaction history & exports
+
+Credit Line Value Add:
+Clients depositing fiat and buying crypto don't need to wait for fiat to land. With Credit Line, they get crypto immediately — fiat settles when it arrives. No extra cost — included as a value-add for qualified clients.
+
+Use Cases: Treasury Operations, Trading Firms, Brokers, Payment Providers
+
+PRICING:
+| Monthly Volume | Rate  |
+|----------------|-------|
+| < $500K        | 0.80% |
+| $500K – $2M    | 0.50% |
+| $2M+           | 0.25% |
+
+----------------------
+🏦 OTC SERVICES
+----------------------
+Tagline: Large volume trading ($500K+)
+Description: Competitive pricing for large trades. Work directly with our dealing desk via WhatsApp — lock in prices and execute with zero slippage. Perfect for institutional volumes.
+
+Features:
+• Dedicated Dealing Desk - Direct access via WhatsApp group
+• Price Locking - Lock rate, then execute — no slippage
+• Better Rates - Competitive pricing for $500K+ trades
+• Fast Settlement - Same-day execution and settlement
+
+Use Cases: Institutional Traders, Hedge Funds, Family Offices, Corporate Treasury
+
+PRICING:
+| Deal Size    | Rate             |
+|--------------|------------------|
+| $500K – $2M  | 2.00%            |
+| $2M – $5M    | 1.00% – 1.50%    |
+| $5M+         | 0.50% – 0.75%    |
+(Default rate: 2%. Large volume clients can negotiate.)
+
+----------------------
+📈 EARN & STAKING
+----------------------
+Tagline: Up to 15% APR on crypto holdings
+Description: Crypto savings accounts with attractive yields. Clients can earn passive income on their holdings while maintaining flexibility. Multiple term options available.
+
+Features:
+• Up to 15% APR - Competitive yields on major assets
+• Flexible Terms - Various lock periods or flexible withdrawal
+• Multiple Assets - Stablecoins, BTC, ETH, and more
+• Daily Accrual - See earnings grow in real-time
+
+Use Cases: Corporate Treasury, Holding Companies, Crypto Funds
+
+----------------------
+🌊 CRYPTO LIQUIDITY (API)
+----------------------
+Tagline: Deep liquidity via API — up to $5M per transaction
+Description: Access deep crypto liquidity programmatically. Connect via API and execute large trades with minimal slippage. Ideal for platforms that need to offer crypto services to their users.
+
+Features:
+• Deep Liquidity - Up to $5M per single transaction
+• Full API Access - REST + WebSocket for real-time
+• Low Latency - Fast execution, minimal slippage
+• Best Execution - Smart routing across venues
+
+Use Cases: Trading Platforms, Brokers, Fintech Apps, Payment Providers
+
+----------------------
+💳 CRYPTOPAYX
+----------------------
+Tagline: Crypto payment processing — pay-in & pay-out
+Description: Automated crypto payment processing for businesses receiving payments from customers. Accept crypto globally, settle to fiat or stablecoin, and handle mass refunds with ease.
+
+Features:
+• Automated Pay-In - Unique addresses, auto-credit on receipt
+• Pay-Out & Mass Refunds - Bulk payments to multiple recipients
+• Settlement Options - Keep crypto or auto-convert to fiat
+• Global Coverage - Accept from anywhere, no banking restrictions
+
+Best For: 🎰 iGaming, 📈 Forex Brokers, 🎨 Creator Platforms, 🛒 E-commerce
+
+PRICING:
+| Monthly Flow  | Rate  |
+|---------------|-------|
+| Up to $1M     | 1.50% |
+| $1M – $5M     | 1.00% |
+| $5M – $10M    | 0.75% |
+| $10M+         | 0.50% |
+
+----------------------
+🏛️ CORPORATE ACCOUNTS & BANKING (eMoney)
+----------------------
+Tagline: Named IBANs with 30+ currencies
+Description: Fast onboarding with flexible funding. Get multicurrency named IBANs under your company name for first-party and third-party payment flows. Full banking rails: SEPA, SWIFT, Faster Payments.
+
+Features:
+• Named IBANs - Accounts in your company name
+• 30+ Currencies - EUR, USD, GBP, and many more
+• SEPA Transfers - Fast EUR across Europe
+• SWIFT International - Global transfers to any bank
+• UK Faster Payments - Instant GBP transfers
+• Crypto Bridge - Seamless fiat ↔ crypto on/off ramp
+
+Use Cases: Corporate Treasury, Trading Firms, Exchanges, Payment Providers
+
+----------------------
+💎 CRYPTO CARD
+----------------------
+Tagline: Instant spending via Apple Pay & Google Pay
+Description: Let clients spend crypto anywhere. Instant virtual and physical cards with Apple Pay and Google Pay support. Real-time crypto-to-fiat conversion at point of sale.
+
+Features:
+• Apple Pay & Google Pay - Instant mobile wallet integration
+• Virtual & Physical - Use online instantly, physical ships fast
+• Real-Time Conversion - Crypto converts to fiat at POS
+• Global Acceptance - Use anywhere cards are accepted
+
+Use Cases: Corporate Expenses, Travel, Everyday Spending
+
+----------------------
+⚙️ CAAS (CRYPTO-AS-A-SERVICE)
+----------------------
+Tagline: White-label crypto infrastructure — launch in 4-6 weeks
+Target: EMIs, Banks, Fintechs
+Description: Complete turnkey solution for EMIs, banks, and fintechs who want to offer crypto services to their customers. We provide the infrastructure — you keep the relationship and revenue.
+
+What's Included:
+• 💱 Trading (Spot + OTC)
+• 🔐 Custody (SOC 2, Insured)
+• 📈 Earn & Staking
+• 💳 Cards
+• ⚖️ MiCA Compliance
+• 📱 White-label UI
+• 🔌 Full API
+
+Features:
+• 4-6 Week Launch - Not 12+ months — we move fast
+• Your Brand - Fully customized look and feel
+• Built-in Compliance - MiCA, AML, KYC — all handled
+• Institutional Custody - SOC 2, insured, multi-sig
+
+Best For: 🏛️ EMIs, 🏦 Banks, 📱 Neobanks, 💳 Fintechs
+
+================================================================================
+                            3. CASE STUDIES
+================================================================================
+
+----------------------
+📈 CFD TRADING BROKER
+----------------------
+Industry: Trading
+Headline Metric: +30% Deposit Approvals
+
+Client Profile:
+• Type: CFD/FX Broker
+• Size: 50,000+ Traders
+• Regions: EU, Asia, LATAM
+• Deploy Time: 6 Weeks
+
+The Challenge:
+• High card decline rates - Up to 40% of deposits failed due to bank restrictions
+• Fragmented PSP landscape - Managing 8+ payment providers
+• Slow settlements - 3-5 day delays tying up working capital
+• 2.3% chargeback rate - Threatening merchant accounts
+
+The Solution (PayX + Settlement):
+• Smart Payment Routing with AI optimization
+• Multi-Currency Acquiring (50+ methods)
+• 3DS2 Optimization for higher approvals
+• T+0 Same-Day Settlements
+• Competitive FX Rates (0.8%)
+
+Results:
+• +30% Card Approval Rate
+• 4× APM Coverage
+• T+0 Settlement Time
+• -61% Chargeback Rate
+
+Quote: "We saw a 30% increase in deposit approvals within the first month. XBO transformed how we handle payments across all our regions." — Head of Treasury
+
+----------------------
+🏦 LICENSED EMI
+----------------------
+Industry: Finance
+Headline Metric: 8 Week Launch
+
+Client Profile:
+• Type: EMI (Electronic Money Institution)
+• License: EU E-Money
+• Segments: B2B & B2C
+• Region: EEA
+
+The Challenge:
+• 67% customer demand for crypto buy/sell
+• No blockchain expertise in-house
+• Would require 6+ vendor relationships to build
+• 12-18 month traditional timeline
+
+The Solution (XBO CaaS):
+• Buy/Sell/Swap — 50+ cryptocurrencies
+• Hosted Wallets — Segregated per user
+• Fiat Rails — Seamless on/off ramp
+• KYT — Chainalysis-powered monitoring
+• Travel Rule Compliance
+• MiCA-ready Audit Trails
+
+Results:
+• 8 weeks Time-to-Market (vs 18 months)
+• €1.2M New Revenue (Year 1)
+• +18% Customer Retention
+• 0 New Hires Needed
+
+Quote: "XBO's CaaS solution let us launch crypto services in 8 weeks instead of 18 months. No blockchain hires, no infrastructure headaches." — Chief Product Officer
+
+----------------------
+🎰 TIER-1 iGAMING GROUP
+----------------------
+Industry: Gaming
+Headline Metric: +26% Conversion / $29M Annual Impact
+
+Client Profile:
+• Type: iGaming Operator
+• Scale: 200+ Brands
+• Players: Millions
+• Licenses: MGA, Curaçao
+
+The Challenge:
+• Card blocks - Major issuers declining 35-50% of gaming transactions
+• Slow payouts - 24-72 hour withdrawal times frustrating VIP players
+• PSP fragmentation - 15+ payment providers across brands
+• No unified view - Impossible to get group-wide analytics
+
+The Solution (CryptoPayX):
+Pay-In:
+• 50+ Cryptocurrencies Supported
+• Instant Deposits — No card auth wait
+• Zero Declines — Crypto doesn't get blocked
+• 70% Lower Fees vs. Card Processing
+
+Pay-Out:
+• Instant Processing — Seconds, not days
+• Player Choice — Any crypto wallet
+• Batch Processing — Mass payouts
+• Zero Chargeback Risk
+
+Results:
+• +26% Overall Conversion
+• 4min Avg Payout Time
+• -99% Chargeback Reduction
+• $29M Net Annual Impact
+
+Quote: "CryptoPayX unified payments across all 200+ brands. Higher conversion, faster withdrawals, and finally — one dashboard to rule them all." — VP of Payments
+
+----------------------
+📸 CREATOR PLATFORM
+----------------------
+Industry: Creator Economy
+Headline Metric: +51% Monthly Revenue
+
+Client Profile:
+• Type: Creator Platform (Adult)
+• Scale: 5M+ MAU
+• Creators: 200,000+
+• Reach: Global
+
+The Challenge:
+• 40-60% decline rates - Banks blocking adult MCC codes
+• Payment shame - Users avoiding cards due to statement exposure
+• 14-30 day creator payouts - Slow payments hurting retention
+• 3.5% chargeback rate - "Buyer's remorse" disputes
+
+The Solution (CryptoPayX):
+User Pay-In:
+• BTC, ETH, USDT + 50 coins
+• Instant Credit on Confirmation
+• Zero Declines — Bypass card blocks
+• Privacy-Friendly — No statement exposure
+
+Creator Pay-Out:
+• Daily Automated Payouts
+• Instant On-Demand Withdrawals
+• Multi-Currency — Crypto or local fiat
+• $10 Minimum, Zero Fees
+
+Results:
+• +48% Global Completion
+• +154% MENA Completion
+• 4min Creator Payout Time
+• +51% Monthly Revenue
+
+Quote: "Card declines were killing us in our biggest growth markets. CryptoPayX unlocked MENA, SEA, and LATAM — regions where we'd basically given up." — Chief Revenue Officer
+
+================================================================================
+                     4. COMPLIANCE (Prohibited Countries)
+================================================================================
+
+--- PROHIBITED (Cannot serve at all) ---
+🇨🇳 China (People's Republic)
+🇲🇴 Macao (China)
+
+--- RESTRICTED (Limited service, extra DD required) ---
+🇦🇫 Afghanistan
+🇩🇿 Algeria
+🇧🇩 Bangladesh
+🇧🇾 Belarus
+🇧🇴 Bolivia
+🇧🇫 Burkina Faso
+🇧🇮 Burundi
+🇰🇭 Cambodia
+🇨🇬 Congo (Brazzaville)
+🇨🇩 Congo (Kinshasa/DRC)
+🏴 Crimea Region
+🏴 Donetsk Region
+🇬🇦 Gabon
+🇭🇹 Haiti
+🇮🇷 Iran
+🇮🇶 Iraq
+🇯🇲 Jamaica
+🏴 Kherson Region
+🇰🇵 North Korea
+🇱🇸 Lesotho
+🇱🇾 Libya
+🏴 Luhansk Region
+🇲🇱 Mali
+🇲🇲 Myanmar/Burma
+🇵🇸 Palestine
+🇷🇺 Russia
+🇸🇾 Syria
+🇦🇪 United Arab Emirates
+
+--- NOTES ---
+• Prohibited = XBO cannot provide any services
+• Restricted = Limited service, requires additional compliance review
+• For restricted jurisdictions, additional DD and documentation required
+• Contact compliance@xbo.com for questions
+
+================================================================================
+                         5. AI CHAT RESPONSES
+================================================================================
+
+These are the quick answers the AI chatbot gives. Edit them to update responses.
+
+--- OTC PRICING QUESTION ---
+Triggers: "otc fee", "otc price", "otc rate", "otc pricing"
+
+Response:
+OTC Fee Structure:
+| Deal Size    | Rate             |
+|--------------|------------------|
+| $500K – $2M  | 2.00%            |
+| $2M – $5M    | 1.00% – 1.50%    |
+| $5M+         | 0.50% – 0.75%    |
+Default rate: 2%. Large volume clients can negotiate.
+
+Copy Text:
+OTC Fees:
+• $500K-$2M: 2%
+• $2M-$5M: 1-1.5%
+• $5M+: 0.5-0.75% (negotiable)
+
+--- SPOT PRICING QUESTION ---
+Triggers: "spot fee", "spot price", "trading fee"
+
+Response:
+Spot Exchange Fees:
+| Monthly Volume | Rate  |
+|----------------|-------|
+| < $500K        | 0.80% |
+| $500K – $2M    | 0.50% |
+| $2M+           | 0.25% |
+Default: 0.8%. Volume discounts apply automatically.
+
+Copy Text:
+Spot Trading Fees:
+• <$500K: 0.8%
+• $500K-$2M: 0.5%
+• $2M+: 0.25%
+
+--- CRYPTOPAYX PRICING ---
+Triggers: "cryptopayx", "payment processing"
+
+Response:
+CryptoPayX Processing Fees:
+| Monthly Flow  | Rate  |
+|---------------|-------|
+| Up to $1M     | 1.50% |
+| $1M – $5M     | 1.00% |
+| $5M – $10M    | 0.75% |
+| $10M+         | 0.50% |
+
+Copy Text:
+CryptoPayX Fees:
+• Up to $1M: 1.5%
+• $1M-$5M: 1%
+• $5M-$10M: 0.75%
+• $10M+: 0.5%
+
+--- iGAMING PITCH ---
+Triggers: "igaming", "casino", "gambling", "igaming pitch"
+
+Response:
+🎰 iGaming Sales Pitch
+
+Why XBO:
+✅ Instant deposits - players fund in seconds
+✅ Global reach - accept from restricted regions
+✅ 1-1.5% fees (vs 3-5% cards)
+✅ Zero chargebacks
+✅ Player privacy
+
+Results: 40% better conversion, 60% lower costs
+
+Copy Text:
+XBO CryptoPayX for iGaming:
+
+• Instant crypto deposits
+• Global reach (no banking restrictions)
+• 1-1.5% fees (vs 3-5% cards)
+• Zero chargebacks
+• Player privacy
+
+Our iGaming clients see 40% better deposit conversion and 60% lower costs.
+
+--- CREDIT LINE ---
+Triggers: "credit line", "credit"
+
+Response:
+💰 Credit Line
+
+Trade without holding funds upfront.
+
+How it works:
+1. Get approved credit limit (fiat/crypto)
+2. Execute trades using the credit
+3. Settle within agreed timeframe
+4. Track usage in real-time
+
+Best for: CFD Brokers, Trading Platforms, Market Makers
+
+Copy Text:
+XBO Credit Line enables trading without upfront funds. Execute trades first, settle later. Perfect for brokers and trading platforms needing liquidity flexibility.
+
+--- COMPLIANCE / PROHIBITED ---
+Triggers: "prohibited", "restricted", "blocked", "compliance"
+
+Response:
+⚖️ Prohibited & Restricted
+
+🚫 Prohibited:
+China, Macao
+
+⚠️ Restricted (extra DD):
+Russia, Iran, North Korea, Cuba, Syria, Belarus, Myanmar, Venezuela, UAE, and others.
+
+Full list: compliance.html
+
+================================================================================
+                              END OF CONTENT FILE
+================================================================================
